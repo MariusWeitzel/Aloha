@@ -19,7 +19,15 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    @IBAction func ladeVC2(Sender: UIButton!) {
+        let secondViewController = self.storyboard?.instantiateViewControllerWithIdentifier("LocationView") as UIViewController
+        
+        self.presentViewController(secondViewController, animated: true, completion: nil)
+        
+        println("lade 2ten ViewController")
+        
+    }
 
 }
 

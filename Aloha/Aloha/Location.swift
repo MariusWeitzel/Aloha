@@ -7,3 +7,7 @@
 //
 
 import Foundation
+
+public struct Location {
+    var name: String
+}

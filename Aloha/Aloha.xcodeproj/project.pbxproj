@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DE54748D1A110BF800AAE49F /* Location_Plist_test.plist in Resources */ = {isa = PBXBuildFile; fileRef = DE54748C1A110BF800AAE49F /* Location_Plist_test.plist */; };
 		DE7B4B261A0D0EF100FF1140 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7B4B251A0D0EF100FF1140 /* AppDelegate.swift */; };
 		DE7B4B281A0D0EF100FF1140 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7B4B271A0D0EF100FF1140 /* ViewController.swift */; };
 		DE7B4B2B1A0D0EF100FF1140 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE7B4B291A0D0EF100FF1140 /* Main.storyboard */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DE54748C1A110BF800AAE49F /* Location_Plist_test.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Location_Plist_test.plist; sourceTree = "<group>"; };
 		DE7B4B201A0D0EF100FF1140 /* Aloha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Aloha.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE7B4B241A0D0EF100FF1140 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE7B4B251A0D0EF100FF1140 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				DEA8C9391A10F8FA003C5761 /* MapController.swift */,
 				DEA8C93B1A10F903003C5761 /* LocationEditorController.swift */,
 				DEA8C93D1A10F90A003C5761 /* LocationEditorView.swift */,
+				DE54748C1A110BF800AAE49F /* Location_Plist_test.plist */,
 				DEA8C93F1A10F914003C5761 /* LocationEditorModel.swift */,
 				DEA8C9411A10F91F003C5761 /* SidebarController.swift */,
 				DEA8C9451A10F92D003C5761 /* SidebarView.swift */,
@@ -227,6 +230,7 @@
 			files = (
 				DE7B4B2B1A0D0EF100FF1140 /* Main.storyboard in Resources */,
 				DE7B4B301A0D0EF100FF1140 /* LaunchScreen.xib in Resources */,
+				DE54748D1A110BF800AAE49F /* Location_Plist_test.plist in Resources */,
 				DE7B4B2D1A0D0EF100FF1140 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
