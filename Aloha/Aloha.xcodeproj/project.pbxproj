@@ -13,6 +13,17 @@
 		DE7B4B2D1A0D0EF100FF1140 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE7B4B2C1A0D0EF100FF1140 /* Images.xcassets */; };
 		DE7B4B301A0D0EF100FF1140 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE7B4B2E1A0D0EF100FF1140 /* LaunchScreen.xib */; };
 		DE7B4B3C1A0D0EF100FF1140 /* AlohaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7B4B3B1A0D0EF100FF1140 /* AlohaTests.swift */; };
+		DEA8C9321A10F8C3003C5761 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA8C9311A10F8C3003C5761 /* Location.swift */; };
+		DEA8C9341A10F8E1003C5761 /* Vault.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA8C9331A10F8E1003C5761 /* Vault.swift */; };
+		DEA8C9361A10F8E7003C5761 /* MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA8C9351A10F8E7003C5761 /* MapModel.swift */; };
+		DEA8C9381A10F8F2003C5761 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA8C9371A10F8F2003C5761 /* MapView.swift */; };
+		DEA8C93A1A10F8FA003C5761 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA8C9391A10F8FA003C5761 /* MapController.swift */; };
+		DEA8C93C1A10F903003C5761 /* LocationEditorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA8C93B1A10F903003C5761 /* LocationEditorController.swift */; };
+		DEA8C93E1A10F90A003C5761 /* LocationEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA8C93D1A10F90A003C5761 /* LocationEditorView.swift */; };
+		DEA8C9401A10F914003C5761 /* LocationEditorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA8C93F1A10F914003C5761 /* LocationEditorModel.swift */; };
+		DEA8C9421A10F91F003C5761 /* SidebarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA8C9411A10F91F003C5761 /* SidebarController.swift */; };
+		DEA8C9441A10F928003C5761 /* SiderbarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA8C9431A10F928003C5761 /* SiderbarModel.swift */; };
+		DEA8C9461A10F92D003C5761 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA8C9451A10F92D003C5761 /* SidebarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +47,17 @@
 		DE7B4B351A0D0EF100FF1140 /* AlohaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AlohaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE7B4B3A1A0D0EF100FF1140 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE7B4B3B1A0D0EF100FF1140 /* AlohaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlohaTests.swift; sourceTree = "<group>"; };
+		DEA8C9311A10F8C3003C5761 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		DEA8C9331A10F8E1003C5761 /* Vault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vault.swift; sourceTree = "<group>"; };
+		DEA8C9351A10F8E7003C5761 /* MapModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapModel.swift; sourceTree = "<group>"; };
+		DEA8C9371A10F8F2003C5761 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		DEA8C9391A10F8FA003C5761 /* MapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
+		DEA8C93B1A10F903003C5761 /* LocationEditorController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationEditorController.swift; sourceTree = "<group>"; };
+		DEA8C93D1A10F90A003C5761 /* LocationEditorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationEditorView.swift; sourceTree = "<group>"; };
+		DEA8C93F1A10F914003C5761 /* LocationEditorModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationEditorModel.swift; sourceTree = "<group>"; };
+		DEA8C9411A10F91F003C5761 /* SidebarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarController.swift; sourceTree = "<group>"; };
+		DEA8C9431A10F928003C5761 /* SiderbarModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SiderbarModel.swift; sourceTree = "<group>"; };
+		DEA8C9451A10F92D003C5761 /* SidebarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +105,17 @@
 				DE7B4B2C1A0D0EF100FF1140 /* Images.xcassets */,
 				DE7B4B2E1A0D0EF100FF1140 /* LaunchScreen.xib */,
 				DE7B4B231A0D0EF100FF1140 /* Supporting Files */,
+				DEA8C9311A10F8C3003C5761 /* Location.swift */,
+				DEA8C9331A10F8E1003C5761 /* Vault.swift */,
+				DEA8C9351A10F8E7003C5761 /* MapModel.swift */,
+				DEA8C9371A10F8F2003C5761 /* MapView.swift */,
+				DEA8C9391A10F8FA003C5761 /* MapController.swift */,
+				DEA8C93B1A10F903003C5761 /* LocationEditorController.swift */,
+				DEA8C93D1A10F90A003C5761 /* LocationEditorView.swift */,
+				DEA8C93F1A10F914003C5761 /* LocationEditorModel.swift */,
+				DEA8C9411A10F91F003C5761 /* SidebarController.swift */,
+				DEA8C9451A10F92D003C5761 /* SidebarView.swift */,
+				DEA8C9431A10F928003C5761 /* SiderbarModel.swift */,
 			);
 			path = Aloha;
 			sourceTree = "<group>";
@@ -213,7 +246,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE7B4B281A0D0EF100FF1140 /* ViewController.swift in Sources */,
+				DEA8C93A1A10F8FA003C5761 /* MapController.swift in Sources */,
+				DEA8C9381A10F8F2003C5761 /* MapView.swift in Sources */,
+				DEA8C9361A10F8E7003C5761 /* MapModel.swift in Sources */,
+				DEA8C9321A10F8C3003C5761 /* Location.swift in Sources */,
+				DEA8C93C1A10F903003C5761 /* LocationEditorController.swift in Sources */,
+				DEA8C9341A10F8E1003C5761 /* Vault.swift in Sources */,
+				DEA8C9441A10F928003C5761 /* SiderbarModel.swift in Sources */,
+				DEA8C93E1A10F90A003C5761 /* LocationEditorView.swift in Sources */,
 				DE7B4B261A0D0EF100FF1140 /* AppDelegate.swift in Sources */,
+				DEA8C9421A10F91F003C5761 /* SidebarController.swift in Sources */,
+				DEA8C9461A10F92D003C5761 /* SidebarView.swift in Sources */,
+				DEA8C9401A10F914003C5761 /* LocationEditorModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,6 +449,7 @@
 				DE7B4B411A0D0EF100FF1140 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DE7B4B421A0D0EF100FF1140 /* Build configuration list for PBXNativeTarget "AlohaTests" */ = {
 			isa = XCConfigurationList;
@@ -413,6 +458,7 @@
 				DE7B4B441A0D0EF100FF1140 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
