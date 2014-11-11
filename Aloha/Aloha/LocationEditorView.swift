@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LocationViewEditor: UIViewController {
+class LocationEditorView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,9 +20,9 @@ class LocationViewEditor: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func bla(Sender: UIButton!) {
-        let secondViewController = self.storyboard?.instantiateViewControllerWithIdentifier("LocationView") as UIViewController
-        
+    @IBAction func back2initialViewController(Sender: UIButton) {
+        let secondViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MapView") as UIViewController
+            
         self.presentViewController(secondViewController, animated: true, completion: nil)
         
         println("zurück zum ersten ViewController")
