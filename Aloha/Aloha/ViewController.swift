@@ -28,6 +28,15 @@ class ViewController: UIViewController {
         println("lade 2ten ViewController")
         
     }
-
+    
+    @IBAction func mapView(Sender: UIButton!) {
+        let mapViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MapView") as UIViewController
+        
+        self.presentViewController(mapViewController, animated: true, completion: nil)
+        
+        println("lade mapViewController")
+        
+    }
+    
 }
 
