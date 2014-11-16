@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    let alohaAppKey = "AIzaSyCAcI5_HvoR-FOVJu9Cm2uaziQnRtL_RvE"
+  let alohaAppKey = "AIzaSyBpOK_DnoR4ABPkfy8F6mpB0KK9upuW4HQ"//"AIzaSyCAcI5_HvoR-FOVJu9Cm2uaziQnRtL_RvE"
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
