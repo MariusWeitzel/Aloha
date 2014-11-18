@@ -8,6 +8,11 @@
       "idiom" : "universal",
       "scale" : "2x",
       "filename" : "icon_me@2x.png"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x",
+      "filename" : "powered-by-google-on-white@2x.png"
     }
   ],
   "info" : {

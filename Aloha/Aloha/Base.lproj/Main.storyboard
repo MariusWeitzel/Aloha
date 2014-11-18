@@ -23,7 +23,26 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yIR-2Y-LO4" customClass="GMSMapView">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="ahc-J4-D1E" appends="YES" id="mPE-6c-AN5"/>
+                                </connections>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Fi-O9-n79">
+                                <rect key="frame" x="0.0" y="1003" width="768" height="21"/>
+                                <color key="backgroundColor" red="1" green="0.98215370342330266" blue="0.99491958290180182" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="600" id="Xw0-6T-IsB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Xw0-6T-IsB"/>
+                                    </mask>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -32,9 +51,12 @@
                             <constraint firstAttribute="centerY" secondItem="LD1-cT-bWR" secondAttribute="centerY" id="EuT-8W-L2c"/>
                             <constraint firstAttribute="trailing" secondItem="yIR-2Y-LO4" secondAttribute="trailing" id="Hd3-o4-ZTb"/>
                             <constraint firstAttribute="bottom" secondItem="yIR-2Y-LO4" secondAttribute="bottom" id="JFV-le-bhH"/>
+                            <constraint firstAttribute="trailing" secondItem="8Fi-O9-n79" secondAttribute="trailing" id="LhR-H0-qhk"/>
                             <constraint firstAttribute="centerX" secondItem="LD1-cT-bWR" secondAttribute="centerX" id="Met-Ts-P4v"/>
                             <constraint firstItem="yIR-2Y-LO4" firstAttribute="leading" secondItem="beV-GD-qgn" secondAttribute="leading" id="jvN-Ti-F2o"/>
                             <constraint firstAttribute="trailing" secondItem="yIR-2Y-LO4" secondAttribute="trailing" id="koU-bZ-PLG"/>
+                            <constraint firstItem="8Fi-O9-n79" firstAttribute="leading" secondItem="beV-GD-qgn" secondAttribute="leading" id="lof-sO-ppv"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="8Fi-O9-n79" secondAttribute="bottom" id="p79-0L-7gt"/>
                             <constraint firstAttribute="centerY" secondItem="LD1-cT-bWR" secondAttribute="centerY" constant="-30" id="qXR-QY-z4d"/>
                             <constraint firstItem="yIR-2Y-LO4" firstAttribute="top" secondItem="beV-GD-qgn" secondAttribute="top" id="tFn-ae-i81"/>
                             <constraint firstItem="LD1-cT-bWR" firstAttribute="top" secondItem="yIR-2Y-LO4" secondAttribute="top" id="xX9-pq-cps"/>
@@ -75,14 +97,25 @@
                                 <action selector="mapTypeChoice:" destination="vXZ-lx-hvc" eventType="valueChanged" id="E1Y-oh-MHt"/>
                             </connections>
                         </segmentedControl>
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="UoY-h2-wPQ">
+                            <connections>
+                                <action selector="refreshPlaces:" destination="vXZ-lx-hvc" id="Xgf-dg-Q9Q"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
+                        <outlet property="adressLabel" destination="8Fi-O9-n79" id="xYU-Va-SDK"/>
                         <outlet property="mapPin" destination="LD1-cT-bWR" id="Fd0-sC-xP1"/>
                         <outlet property="mapView" destination="yIR-2Y-LO4" id="GJk-Au-sy6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.99999999999999967" id="ahc-J4-D1E">
+                    <connections>
+                        <action selector="longPressForNewPlace:" destination="vXZ-lx-hvc" id="z4z-DM-kIw"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1296" y="-565"/>
         </scene>
