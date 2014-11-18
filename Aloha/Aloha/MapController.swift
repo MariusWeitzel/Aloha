@@ -53,15 +53,7 @@ class MapController: UIViewController, CLLocationManagerDelegate,  GMSMapViewDel
         marker.appearAnimation = kGMSMarkerAnimationPop
         marker.map = mapView
         
-        // registriert langes drücken zum erzeugen eines neuen Markers - TUT ABER NOCH NIX
-       
         
-        var lgpr = UILongPressGestureRecognizer(target: mapView, action: "actionMarker")
-        lgpr.minimumPressDuration = 1.0;
-        lgpr.numberOfTouchesRequired = 1
-        lgpr.allowableMovement = 100
-        mapView.addGestureRecognizer(lgpr)
-       
         // Do any additional setup after loading the view, typically from a nib.
     }
     // aktualisiert die Adresse im Label sobald sich die map bewegt und gestoppt hat
@@ -122,7 +114,7 @@ class MapController: UIViewController, CLLocationManagerDelegate,  GMSMapViewDel
     func mapView(mapView: GMSMapView!, willMove gesture: Bool){
         adressLabel.lock()
     }
-    
+     // registriert langes drücken zum erzeugen eines neuen Markers
     func mapView(mapView: GMSMapView!, didLongPressAtCoordinate longPressCoordinate: CLLocationCoordinate2D){
         var surfMarker = GMSMarker()
         surfMarker.position = longPressCoordinate //mapView.camera.target
