@@ -24,9 +24,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="ahc-J4-D1E" appends="YES" id="mPE-6c-AN5"/>
-                                </connections>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Fi-O9-n79">
                                 <rect key="frame" x="0.0" y="1003" width="768" height="21"/>
@@ -73,18 +70,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="Cbj-WE-ggm">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="pdj-hC-2x8">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8GH-gQ-APd">
-                                <rect key="frame" x="63" y="280" width="43" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Laden">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="ladeVC2:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="oyu-fF-RkZ"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="bye-7u-soR">
                             <rect key="frame" x="231" y="7" width="307" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -111,11 +96,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
-                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.99999999999999967" id="ahc-J4-D1E">
-                    <connections>
-                        <action selector="longPressForNewPlace:" destination="vXZ-lx-hvc" id="z4z-DM-kIw"/>
-                    </connections>
-                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1296" y="-565"/>
         </scene>

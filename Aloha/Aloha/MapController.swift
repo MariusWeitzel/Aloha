@@ -122,6 +122,9 @@ class MapController: UIViewController, CLLocationManagerDelegate,  GMSMapViewDel
         surfMarker.icon = UIImage(named: "icon_me")
         surfMarker.appearAnimation = kGMSMarkerAnimationPop
         surfMarker.map = mapView
+        let secondViewController = self.storyboard?.instantiateViewControllerWithIdentifier("LocationView") as UIViewController
+        
+        self.presentViewController(secondViewController, animated: true, completion: nil)
 
         println("long press")
     }
