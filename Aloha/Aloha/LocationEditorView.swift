@@ -126,6 +126,10 @@ class LocationEditorView: UIViewController, UITableViewDelegate, UITableViewData
     }
 */
     @IBAction func back2initialViewController(Sender: UIButton) {
+        // erst mal Daten speichern
+        Vault.saveLocation()
+        
+        // View wechseln
         let secondViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MapView") as MapController
         navigationController?.popViewControllerAnimated(true)
         //self.presentViewController(secondViewController, animated: true, completion: nil)
