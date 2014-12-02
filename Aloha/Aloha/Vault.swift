@@ -20,7 +20,7 @@ class Vault {
         
         let dirs = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true) as? [String]
         
-        let path = dirs?[0].stringByAppendingPathExtension("points.csv")
+        let path = dirs?[0].stringByAppendingPathExtension("locations.csv")
         
         if (path != nil) {
             tempStr.writeToFile(path!, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
@@ -32,7 +32,7 @@ class Vault {
     class func loadLocations() {
         let dirs = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true) as? [String]
         
-        let path = dirs?[0].stringByAppendingPathExtension("points.csv")
+        let path = dirs?[0].stringByAppendingPathExtension("locations.csv")
         
         if (path != nil) {
             var tempStr = String(contentsOfFile: path!, encoding: NSUTF8StringEncoding, error: nil)
