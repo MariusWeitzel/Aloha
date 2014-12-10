@@ -127,7 +127,9 @@ class LocationEditorView: UIViewController, UITableViewDelegate, UITableViewData
 */
     @IBAction func back2initialViewController(Sender: UIButton) {
         // erst mal Daten speichern
-        var testPunkt: Location
+        //TODO: gegen echte Werte aus den Feldern ersetzen!
+        //FIXME: das is nur zu Testzwecken!
+        var testPunkt = Location()
         testPunkt.name = "Hier wird ein Name stehen"
         testPunkt.favorite = false
         testPunkt.adress = "dummy Straße 12"
