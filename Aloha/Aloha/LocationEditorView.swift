@@ -24,8 +24,7 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
     var surfSpotName:String = "surfSpotName"
     var spotDescription:String = "Spot Beschreibung"
     
-    let pickerData = watertemperature()
-//    let pickerData = ["hoch", "mittel", "niedrig"]
+    let pickerData = [watertemperature(), waterdepth(), watertemperature(), watertype()]
     
     var currentCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
    

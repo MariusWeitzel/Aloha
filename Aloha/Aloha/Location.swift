@@ -19,8 +19,11 @@ public struct Location {
     //FIXME: welche Form hat das genau?
     var tags: [String]
     
-    //FIXME: welche Form hat das genau?
-    var waterproperties: [String]
+    //FIXME: all waterproperties
+    var _wavetype: wavetype
+    var _waterdepth: waterdepth
+    var _watertemperature: watertemperature
+    var _watertype: watertype
     
     //FIXME: welche Form hat das genau?
     var coastproperties: [String]
@@ -38,7 +41,10 @@ public struct Location {
         favorite = false
         adress = ""
         tags = []
-        waterproperties = []
+        _wavetype = wavetype()
+        _waterdepth = waterdepth()
+        _watertemperature = watertemperature()
+        _watertype = watertype()
         coastproperties = []
         notes = ""
         possibleDangers = []
@@ -46,6 +52,14 @@ public struct Location {
     }
     
 }
+
+//public struct waterproperties {
+//    var waterproperties: Dictionary<>
+//    init() {
+//        waterproperties.wavetype = wavetype()
+//        
+//    }
+//}
 
 public struct wavetype {
     var wavetype: [String]
