@@ -44,4 +44,75 @@ public struct Location {
         possibleDangers = []
         difficulty = ""
     }
+    
 }
+
+public struct wavetype {
+    var wavetype: [String]
+    var count: Int { return wavetype.count }
+    
+    init() {
+        wavetype = ["hoch", "mittel", "niedrig"]
+    }
+    subscript(index: Int) -> String {
+        get {
+            return wavetype[index]
+        }
+        set(newValue) {
+            // perform a suitable setting action here
+        }
+    }
+}
+
+public struct waterdepth {
+    var waterdepth: [String]
+    var count: Int { return waterdepth.count }
+    
+    init() {
+        waterdepth = ["tief", "mittel", "flach"]
+    }
+    subscript(index: Int) -> String {
+        get {
+            return waterdepth[index]
+        }
+        set(newValue) {
+            // perform a suitable setting action here
+        }
+    }
+}
+
+public struct watertemperature {
+    var watertemperature: [String]
+    var count: Int { return watertemperature.count }
+    
+    init() {
+        watertemperature = ["kühl", "mittel", "warm"]
+    }
+    subscript(index: Int) -> String {
+        get {
+            return watertemperature[index]
+        }
+        set(newValue) {
+            // perform a suitable setting action here
+        }
+    }
+}
+
+public struct watertype {
+    var watertype: [String]
+    var count: Int { return watertype.count }
+    
+    init() {
+        watertype = ["süß", "salzig"]
+    }
+    subscript(index: Int) -> String {
+        get {
+            return watertype[index]
+        }
+        set(newValue) {
+            // perform a suitable setting action here
+        }
+    }
+}
+
+

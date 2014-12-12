@@ -17,7 +17,7 @@ let itemSeperator = ""
 
 var Locations = [Location]()
 
-class Vault {
+class Vault: UIViewController {
     
     class func saveLocation(punkt: Location) {
         var saveStr = String()
@@ -49,6 +49,8 @@ class Vault {
             for item in spot.possibleDangers { saveStr += item + itemSeperator }
             
             saveStr += spot.difficulty
+            
+            saveStr += spotSeperator;
         }
         
         let dirs = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true) as? [String]
@@ -79,7 +81,8 @@ class Vault {
             println("Laden fehlgeschlagen")
         }
         
-        loadedStr.componentsSeparatedByString(spotSeperator)
+        //FIXME: waaaaaas?
+        //loadedStr.componentsSeparatedByString(spotSeperator)
         //TODO: String aus gespeicherter Datei wieder aufsplitten
         
         // Locations auseinander fuddeln & als Array speichern
