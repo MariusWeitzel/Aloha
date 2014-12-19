@@ -9,65 +9,83 @@
 import Foundation
 
 public struct Location {
+    //Name des Punkts
     var name: String
-    
+    //Favorit ja/nein
     var favorite: Bool
-    
-    //FIXME: welche Form hat das genau?
+    //aus dem MapKit gelieferte Adresse zu dem Punkt (falls möglich)
     var adress: String
     
     //FIXME: welche Form hat das genau?
-    var tags: [String]
+    //CAUTION: erstmal raus genommen, Aufwand zu hoch/Nutzen zu gering
+    //var tags: [String]
     
-    //FIXME: all waterproperties
-    var _wavetype: wavetype
-    var _waterdepth: waterdepth
-    var _watertemperature: watertemperature
-    var _watertype: watertype
+    //FIXME: hier stattdessen 4x nen Int speichern?
+    //all waterproperties
+    var _wavetype: Int
+    var _waterdepth: Int
+    var _watertemperature: Int
+    var _watertype: Int
     
-    //FIXME: welche Form hat das genau?
-    var coastproperties: [String]
+    //Index für ausgewähltes struct coastproperties
+    var _coastproperties: Int
     
+    //freie Notizen zu diesem Punkt
     var notes: String
     
     //FIXME: welche Form hat das genau?
-    var possibleDangers: [String]
+//    var possibleDangers: [String]
+    var sharks: Bool
+    var riffs: Bool
     
-    //FIXME: nice2have enums mit konstanten (dann wärs nen int)
-    var difficulty: String
+    //Index für ausgewähltes struct difficulty
+    var _difficulty: Int
     
     init() {
         name = ""
         favorite = false
         adress = ""
-        tags = []
-        _wavetype = wavetype()
-        _waterdepth = waterdepth()
-        _watertemperature = watertemperature()
-        _watertype = watertype()
-        coastproperties = []
+//        tags = []
+        //Standardwerte annehmend
+        _wavetype = 0
+        _waterdepth = 0
+        _watertemperature = 0
+        _watertype = 0
+        //Standardwert (Flachküste) annehmend
+        _coastproperties = 1
         notes = ""
-        possibleDangers = []
-        difficulty = ""
+        sharks = false
+        riffs = false
+        //Standardwert (mittel) annehmend
+        _difficulty = 1
     }
     
 }
 
-//public struct waterproperties {
-//    var waterproperties: Dictionary<>
-//    init() {
-//        waterproperties.wavetype = wavetype()
-//        
-//    }
-//}
+public struct coastproperties {
+    var coastproperties: [String]
+    var count: Int { return coastproperties.count }
+    init() {
+        coastproperties = ["Steilküste", "Flachküste"]
+    }
+}
+
+public struct difficulty {
+    var difficulty: [String]
+    var count: Int { return difficulty.count }
+    init() {
+        difficulty = ["einfach", "mittel", "schwierig"]
+    }
+}
 
 public struct wavetype {
     var wavetype: [String]
     var count: Int { return wavetype.count }
     
     init() {
-        wavetype = ["hoch", "mittel", "niedrig"]
+        wavetype = ["flach", "mittel", "hoch"]
     }
+    
     subscript(index: Int) -> String {
         get {
             return wavetype[index]
@@ -83,7 +101,7 @@ public struct waterdepth {
     var count: Int { return waterdepth.count }
     
     init() {
-        waterdepth = ["tief", "mittel", "flach"]
+        waterdepth = [">10m", "5-10m", "<5m"]
     }
     subscript(index: Int) -> String {
         get {
@@ -100,7 +118,7 @@ public struct watertemperature {
     var count: Int { return watertemperature.count }
     
     init() {
-        watertemperature = ["kühl", "mittel", "warm"]
+        watertemperature = ["<15°C", "15-25°C", ">25°C"]
     }
     subscript(index: Int) -> String {
         get {

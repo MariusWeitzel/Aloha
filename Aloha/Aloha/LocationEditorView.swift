@@ -12,9 +12,20 @@ import UIKit
 
 class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
-//    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet var waveTypePicker: UIPickerView!
+    @IBOutlet var _outName: UITextField!
+    @IBOutlet var _outAdress: UILabel!
     
+    @IBOutlet var _outWaveType: UIPickerView!
+    @IBOutlet var _outWaterDepth: UIPickerView!
+    @IBOutlet var _outWaterTemp: UIPickerView!
+    @IBOutlet var _outWaterType: UIPickerView!
+    
+    @IBOutlet var _outFavorite: UISwitch!
+    
+    var _intWaveType = 0
+    var _intWaterDepth = 0
+    var _intWaterTemp = 0
+    var _intWaterType = 0
     
     var items: [String] = ["Koordinaten", "Adresse", "Name", "Beschreibung"]
     var itemValue = Array<String>()
@@ -24,7 +35,10 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
     var surfSpotName:String = "surfSpotName"
     var spotDescription:String = "Spot Beschreibung"
     
-    let pickerData = [watertemperature(), waterdepth(), watertemperature(), watertype()]
+    let _dataWaveType = wavetype()
+    let _dataWaterDepth = waterdepth()
+    let _dataWaterTemp = watertemperature()
+    let _dataWaterType = watertype()
     
     var currentCoordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
    
@@ -38,7 +52,10 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         self.itemValue.append(self.surfSpotName)
         self.itemValue.append(self.spotDescription)
         
-        waveTypePicker.dataSource = self
+        _outWaveType.dataSource = self
+        _outWaterDepth.dataSource = self
+        _outWaterTemp.dataSource = self
+        _outWaterType.dataSource = self
         
 //         waveTypePicker.dataSource = pickerData
         
@@ -56,18 +73,63 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         return 1
     }
     
+    
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerData.count
-//        return pickerData[component].count
-    }
-
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-        return pickerData[row]
+        
+        if pickerView.tag == 0 {
+            return _dataWaveType.count
+        } else if pickerView.tag == 1 {
+            return _dataWaterDepth.count
+        } else if pickerView.tag == 2 {
+            return  _dataWaterTemp.count
+        } else if  pickerView.tag == 3 {
+            return _dataWaterType.count
+        }
+        return 1
     }
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        println(pickerData[row])
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+        
+        if pickerView.tag == 0 {
+            return _dataWaveType[row]
+        } else if pickerView.tag == 1 {
+            return _dataWaterDepth[row]
+        } else if pickerView.tag == 2 {
+            return _dataWaterTemp[row]
+        } else if pickerView.tag == 3 {
+            return _dataWaterType[row]
+        }
+        return ""
     }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)  {
+        
+        if pickerView.tag == 0 {
+            _intWaveType = row
+        } else if pickerView.tag == 1 {
+            _intWaterDepth = row
+        } else if pickerView.tag == 2 {
+            _intWaterTemp = row
+        } else if pickerView.tag == 3 {
+            _intWaterType = row
+        }
+    }
+    
+    
+    // --------------------------------------------------------
+    
+//    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+//        return _dataWaterType.count
+////        return pickerData[component].count
+//    }
+//
+//    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+//        return _dataWaterType[row]
+//    }
+//    
+//    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+////        println(pickerData[row])
+//    }
     
     
     
@@ -158,19 +220,29 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
     @IBAction func back2initialViewController(Sender: UIButton) {
         // erst mal Daten speichern
         //TODO: gegen echte Werte aus den Feldern ersetzen!
+        //      - 
+        //      -
+        
         //FIXME: das is nur zu Testzwecken!
-        var testPunkt = Location()
-        testPunkt.name = "Hier wird ein Name stehen"
-        testPunkt.favorite = false
-        testPunkt.adress = "dummy Straße 12"
-        testPunkt.tags = ["sportlich", "nass"]
-        testPunkt.waterproperties = ["wellig", "auf und ab"]
-        testPunkt.coastproperties = ["sandig", "flach"]
-        testPunkt.notes = "nuffin to say"
-        testPunkt.possibleDangers = ["Hipsters möglich"]
-        testPunkt.difficulty = "pretty easy"
+        var nuPunkt = Location()
+        nuPunkt.name = _outName.text
+        nuPunkt.favorite = _outFavorite.on
+        nuPunkt.adress = _outAdress.text!
+        
+        nuPunkt._wavetype = _intWaveType
+        nuPunkt._waterdepth = _intWaterDepth
+        nuPunkt._watertemperature = _intWaterTemp
+        nuPunkt._watertype = _intWaterType
+        
+        //nuPunkt.tags = ["sportlich", "nass"]
+        
+        nuPunkt._coastproperties = 0
+        nuPunkt.notes = "nuffin to say"
+        //FIXME: wieder rein damit!
+        //nuPunkt.possibleDangers = ["Hipsters möglich"]
+        nuPunkt._difficulty = 1
 
-        Vault.saveLocation(testPunkt)
+        Vault.saveLocation(nuPunkt)
         
         // View wechseln
         let secondViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MapView") as MapController
