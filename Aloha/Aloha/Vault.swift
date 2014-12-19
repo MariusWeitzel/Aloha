@@ -9,24 +9,21 @@
 import Foundation
 
 //surfSpots voneinander trennen
-let spotSeperator = ""
+let spotSeperator = "#\n"
 //SpotEigenschaften voneinander trennen
-let spotItemSeperator = ""
+let spotItemSeperator = "|\n"
 //einzelne Werte in Arrays trennen
-let itemSeperator = ""
+//FIXME: wahrscheinlich obsolet
+//let itemSeperator = "\n"
 
 var Locations = [Location]()
 
 class Vault: UIViewController {
     
     class func saveLocation(punkt: Location) {
-        var saveStr = String()
-        
-        //TODO: validate punkt, dass die immer stimmig sind
-        //      oder vernünftig initialisieren
-        
-        //        weak var textFeldDaten: UITextField!
-//        tempStr = myTextFeld.text;
+        // anzulegenden Punkt an bisherige Locations anfügen
+        Locations.append(punkt)
+        var saveStr = ""
         
         // Locations auseinander fuddeln
         for spot in Locations {
@@ -34,21 +31,35 @@ class Vault: UIViewController {
             
             if spot.favorite { saveStr += "1" }
             else { saveStr += "0" }
-            saveStr = spotItemSeperator
+            saveStr += spotItemSeperator
 
-            saveStr += spot.adress
+            saveStr += spot.adress + spotItemSeperator
             
-            for item in spot.tags { saveStr += item + itemSeperator }
+            //for item in spot.tags { saveStr += item + itemSeperator }
+            //saveStr += spotItemSeperator
             
-            for item in spot.waterproperties { saveStr += item + itemSeperator }
+            //waterproperties
+            //TODO: ausgewähltes item zurück geben/speichern
+            //      alternativ auch nur den Index speichern?
+            //      machts beim Laden leichter
             
-            for item in spot.coastproperties { saveStr += item + itemSeperator }
+            
+            
+            saveStr += String(spot._wavetype) + spotItemSeperator
+            saveStr += String(spot._waterdepth) + spotItemSeperator
+            saveStr += String(spot._watertemperature) + spotItemSeperator
+            saveStr += String(spot._watertype) + spotItemSeperator
+            
+            saveStr += String(spot._coastproperties) + spotItemSeperator
             
             saveStr += spot.notes
             
-            for item in spot.possibleDangers { saveStr += item + itemSeperator }
+            //TODO: in ner sinnvollenweise umbauen
+            //OFFER: wie bei Favorit nen Switch für Haie & Riffs machen (erstmal)
+            //for item in spot.possibleDangers { saveStr += item + itemSeperator }
             
-            saveStr += spot.difficulty
+            
+            saveStr += String(spot._difficulty)
             
             saveStr += spotSeperator;
         }
