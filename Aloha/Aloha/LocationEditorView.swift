@@ -12,30 +12,77 @@ import UIKit
 
 class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
     
+    // Elemente des UI
     @IBOutlet var _outName: UITextField!
     @IBOutlet var _outAdress: UILabel!
     
+    // PickerViews
     @IBOutlet var _outWaveType: UIPickerView!
     @IBOutlet var _outWaterDepth: UIPickerView!
     @IBOutlet var _outWaterTemp: UIPickerView!
     @IBOutlet var _outWaterType: UIPickerView!
     
+   
+    
+    // Switch
     @IBOutlet var _outFavorite: UISwitch!
     
-    @IBOutlet weak var _tfWatertype: UITextField!
-    
+   
+    // Buttons and their functions
     @IBOutlet weak var waveTypeBtn: UIButton!
     @IBAction func settingWaveTypeByPressingButton(sender: UIButton) {
-        _outWaveType.hidden = false
         
+        if(!_outWaterType.hidden){
+           _outWaveType.hidden = true
+           println("aktiv")
+        }
+        else {
+            println("gedrückt")
+            _outWaveType.hidden = false
+        }
+
     }
     
-    @IBAction func settingWatertypeByEditingTF(sender: UITextField) {
-        _outWaveType.hidden = false
-        _tfWatertype.resignFirstResponder()
-        _tfWatertype.enabled = false
-        
+    @IBOutlet weak var waterDepthBtn: UIButton!
+    @IBAction func settingWaterDepthByPressingBtn(sender: UIButton) {
+        if(_outWaterDepth.hidden){
+            _outWaterDepth.hidden = false
+            
+        }
+        else{
+            _outWaterDepth.hidden = true
+          
+        }
     }
+    
+    @IBOutlet weak var waterTempBtn: UIButton!
+    @IBAction func settingWaterTempByPressingBtn(sender: UIButton) {
+        
+        if(_outWaterTemp.hidden){
+            _outWaterTemp.hidden = false
+           
+        }
+        else{
+            _outWaterTemp.hidden = true
+          
+        }
+
+    }
+    
+    @IBOutlet weak var waterTypeBtn: UIButton!
+    @IBAction func settingWatertypeByPressingBtn(sender: UIButton) {
+       
+        if(_outWaterType.hidden){
+             _outWaterType.hidden = false
+           
+        }
+        else{
+             _outWaterType.hidden = true
+           
+        }
+
+    }
+    
     var _intWaveType = 0
     var _intWaterDepth = 0
     var _intWaterTemp = 0
@@ -60,8 +107,10 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         super.viewDidLoad()
         var coordString: String  = String(format: "%f", self.currentCoordinate.latitude) + ", " + String(format: "%f", self.currentCoordinate.longitude)
         
-        _tfWatertype.delegate = self
         _outWaveType.delegate = self
+        _outWaterDepth.delegate = self
+        _outWaterTemp.delegate = self
+        _outWaterType.delegate = self
         
         self.itemValue.append(coordString)
         self.addressText = getAddress(currentCoordinate)
@@ -78,8 +127,11 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         _outWaterType.dataSource = self
         
         _outWaveType.hidden = true
+        _outWaterDepth.hidden = true
+        _outWaterTemp.hidden = true
+        _outWaterType.hidden = true
         
-       var timer = NSTimer.scheduledTimerWithTimeInterval(0.4, target: self, selector: Selector("update"), userInfo: nil, repeats: false)
+ //      var timer = NSTimer.scheduledTimerWithTimeInterval(0.4, target: self, selector: Selector("update"), userInfo: nil, repeats: false)
 //         waveTypePicker.dataSource = pickerData
         
         
@@ -92,15 +144,21 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         // Do any additional setup after loading the view, typically from a nib.
     }
     
-    func update () {
-        dispatch_async(dispatch_get_main_queue(), {
-            self._outAdress.text = self.getAddress(self.currentCoordinate)
-        })
-         var coordString: String  = String(format: "%f", self.currentCoordinate.latitude) + ", " + String(format: "%f", self.currentCoordinate.longitude)
-        self._outAdress.text = coordString
-        println("update: \(coordString)")
-    }
+//    func update () {
+//        dispatch_async(dispatch_get_main_queue(), {
+//            self._outAdress.text = self.getAddress(self.currentCoordinate)
+//        })
+//         var coordString: String  = String(format: "%f", self.currentCoordinate.latitude) + ", " + String(format: "%f", self.currentCoordinate.longitude)
+//        self._outAdress.text = coordString
+//        println("update: \(coordString)")
+//    }
     
+    /*
+    **************************************************************************
+    PickerView Settings:
+    
+    **************************************************************************
+    */
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -139,14 +197,24 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         if pickerView.tag == 0 {
             _intWaveType = row
            waveTypeBtn.setTitle(_dataWaveType[row], forState: UIControlState.Normal)
-            _outWaveType.hidden = true;
+            _outWaveType.hidden = true
+          
             
         } else if pickerView.tag == 1 {
             _intWaterDepth = row
+            waterDepthBtn.setTitle(_dataWaterDepth[row], forState: .Normal)
+            _outWaterDepth.hidden = true
+          
         } else if pickerView.tag == 2 {
             _intWaterTemp = row
+             waterTempBtn.setTitle(_dataWaterTemp[row], forState: .Normal)
+            _outWaterTemp.hidden = true
+            
         } else if pickerView.tag == 3 {
             _intWaterType = row
+             waterTypeBtn.setTitle(_dataWaterType[row], forState: .Normal)
+            _outWaterType.hidden = true
+            
         }
     }
     
@@ -166,7 +234,12 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
 ////        println(pickerData[row])
 //    }
     
+    /*
+    **************************************************************************
+    PickerView Settings Ende
     
+    **************************************************************************
+    */
     
     // Sucht zur gegebenen Koordinate die Adresse raus und speichert sie in das Array für die tableView.
     func getAddress(coord: CLLocationCoordinate2D) -> String{

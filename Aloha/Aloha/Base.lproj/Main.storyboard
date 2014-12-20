@@ -187,8 +187,15 @@
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="zSK-UQ-GFh">
                                 <rect key="frame" x="701" y="180" width="51" height="31"/>
                             </switch>
+                            <pickerView contentMode="center" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PPB-7I-RHY" userLabel="Picker View Wellengang">
+                                <rect key="frame" x="350" y="229" width="389" height="162"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="bnq-lf-gRm" id="SYc-yH-tU9"/>
+                                    <outlet property="delegate" destination="bnq-lf-gRm" id="ai7-1F-qRM"/>
+                                </connections>
+                            </pickerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wassereigenschaften" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lj7-dH-mvD">
-                                <rect key="frame" x="18" y="245" width="164" height="21"/>
+                                <rect key="frame" x="302" y="229" width="164" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -199,8 +206,8 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <pickerView tag="1" contentMode="scaleToFill" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hNe-qJ-cFA" userLabel="Picker View Wellengang">
-                                <rect key="frame" x="362" y="581" width="388" height="162"/>
+                            <pickerView tag="1" contentMode="scaleToFill" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hNe-qJ-cFA" userLabel="Picker View Wassertiefe">
+                                <rect key="frame" x="350" y="295" width="388" height="162"/>
                                 <connections>
                                     <outlet property="dataSource" destination="bnq-lf-gRm" id="qzx-yy-var"/>
                                     <outlet property="delegate" destination="bnq-lf-gRm" id="yg7-uW-aUP"/>
@@ -212,8 +219,8 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <pickerView tag="2" contentMode="scaleToFill" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fQf-8E-cQs" userLabel="Picker View Wassertiefe">
-                                <rect key="frame" x="361" y="315" width="388" height="162"/>
+                            <pickerView tag="2" contentMode="scaleToFill" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fQf-8E-cQs" userLabel="Picker View Wassertemperatur">
+                                <rect key="frame" x="351" y="363" width="388" height="162"/>
                                 <connections>
                                     <outlet property="dataSource" destination="bnq-lf-gRm" id="3JE-Hj-Ybt"/>
                                     <outlet property="delegate" destination="bnq-lf-gRm" id="ZHp-LS-jF2"/>
@@ -225,40 +232,47 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <pickerView tag="3" contentMode="scaleToFill" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GBU-fF-imj" userLabel="Picker View Wassertemperatur">
-                                <rect key="frame" x="361" y="386" width="388" height="162"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FxW-gs-qdh" userLabel="Button Wellengang">
+                                <rect key="frame" x="588" y="311" width="161" height="30"/>
+                                <state key="normal" title="Wähle"/>
+                                <connections>
+                                    <action selector="settingWaveTypeByPressingButton:" destination="bnq-lf-gRm" eventType="touchUpInside" id="xId-bH-PeM"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="218-gQ-Vhs" userLabel="Button Wassertiefe">
+                                <rect key="frame" x="645" y="376" width="46" height="30"/>
+                                <state key="normal" title="Wähle">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="settingWaterDepthByPressingBtn:" destination="bnq-lf-gRm" eventType="touchUpInside" id="g9W-JH-Ko8"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XBn-2Q-ygP" userLabel="Button Wassertemperatur">
+                                <rect key="frame" x="596" y="452" width="141" height="30"/>
+                                <state key="normal" title="Wähle">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="settingWaterTempByPressingBtn:" destination="bnq-lf-gRm" eventType="touchUpInside" id="b6Q-TI-P6g"/>
+                                </connections>
+                            </button>
+                            <pickerView tag="3" contentMode="scaleToFill" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GBU-fF-imj" userLabel="Picker View Wasserart">
+                                <rect key="frame" x="351" y="405" width="388" height="162"/>
                                 <connections>
                                     <outlet property="dataSource" destination="bnq-lf-gRm" id="Cq9-QK-OfU"/>
                                     <outlet property="delegate" destination="bnq-lf-gRm" id="kMK-4i-SBC"/>
                                 </connections>
                             </pickerView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lrc-pK-ZIq" userLabel="Text Field Wassereigenschaft">
-                                <rect key="frame" x="267" y="760" width="388" height="30"/>
-                                <accessibility key="accessibilityConfiguration">
-                                    <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
-                                    <bool key="isElement" value="NO"/>
-                                </accessibility>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" enablesReturnKeyAutomatically="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J58-Qd-RB9" userLabel="Button Wasserart">
+                                <rect key="frame" x="645" y="523" width="43" height="30"/>
+                                <state key="normal" title="Wähle">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
-                                    <action selector="settingWatertypeByEditingTF:" destination="bnq-lf-gRm" eventType="editingDidBegin" id="vD4-P0-zZx"/>
-                                </connections>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FxW-gs-qdh">
-                                <rect key="frame" x="588" y="241" width="161" height="30"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
-                                <state key="normal" title="Wähle"/>
-                                <connections>
-                                    <action selector="settingWaveTypeByPressingButton:" destination="bnq-lf-gRm" eventType="touchUpInside" id="oe7-wX-cMe"/>
+                                    <action selector="settingWatertypeByPressingBtn:" destination="bnq-lf-gRm" eventType="touchUpInside" id="B1f-Li-P5h"/>
                                 </connections>
                             </button>
-                            <pickerView contentMode="center" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PPB-7I-RHY" userLabel="Picker View Wassereigenschaften">
-                                <rect key="frame" x="346" y="154" width="389" height="162"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="bnq-lf-gRm" id="SYc-yH-tU9"/>
-                                    <outlet property="delegate" destination="bnq-lf-gRm" id="ai7-1F-qRM"/>
-                                </connections>
-                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -266,68 +280,68 @@
                             <constraint firstItem="ece-3d-gTN" firstAttribute="top" secondItem="dPc-ep-cGI" secondAttribute="bottom" constant="8" id="0MD-v9-dTd"/>
                             <constraint firstItem="F1g-Hn-8dS" firstAttribute="top" secondItem="28a-NT-g1F" secondAttribute="bottom" constant="17" id="1gc-v0-AIP"/>
                             <constraint firstItem="F1g-Hn-8dS" firstAttribute="leading" secondItem="yda-ph-JmQ" secondAttribute="leading" id="2o3-t2-YSf"/>
-                            <constraint firstItem="ece-3d-gTN" firstAttribute="centerX" secondItem="PPB-7I-RHY" secondAttribute="centerX" constant="15.5" id="3bh-Ff-J9D"/>
+                            <constraint firstItem="ece-3d-gTN" firstAttribute="centerX" secondItem="PPB-7I-RHY" secondAttribute="centerX" constant="11.5" id="3bh-Ff-J9D"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ece-3d-gTN" secondAttribute="trailing" constant="1" id="3nE-jf-Xl8"/>
                             <constraint firstItem="dPc-ep-cGI" firstAttribute="leading" secondItem="28a-NT-g1F" secondAttribute="trailing" constant="301" id="3pR-xj-eyy"/>
                             <constraint firstItem="fQf-8E-cQs" firstAttribute="top" secondItem="VBP-9W-7V6" secondAttribute="top" constant="443" id="59M-gN-PWi"/>
-                            <constraint firstItem="PPB-7I-RHY" firstAttribute="top" secondItem="ece-3d-gTN" secondAttribute="bottom" constant="-17" id="5nZ-xg-iL5"/>
+                            <constraint firstItem="PPB-7I-RHY" firstAttribute="top" secondItem="ece-3d-gTN" secondAttribute="bottom" constant="58" id="5nZ-xg-iL5"/>
                             <constraint firstItem="F1g-Hn-8dS" firstAttribute="leading" secondItem="28a-NT-g1F" secondAttribute="leading" id="Bko-HK-OpL"/>
                             <constraint firstItem="hNe-qJ-cFA" firstAttribute="top" secondItem="PPB-7I-RHY" secondAttribute="bottom" constant="7" id="DoS-W6-7P3"/>
                             <constraint firstItem="F1g-Hn-8dS" firstAttribute="leading" secondItem="wCZ-hY-gmT" secondAttribute="leading" constant="1" id="EGO-sC-hs6"/>
                             <constraint firstItem="F1g-Hn-8dS" firstAttribute="leading" secondItem="oXg-he-u0m" secondAttribute="leading" constant="1" id="FEb-Xl-qkc"/>
                             <constraint firstItem="dPc-ep-cGI" firstAttribute="trailing" secondItem="VBP-9W-7V6" secondAttribute="trailingMargin" constant="2" id="GLO-1m-Y9H"/>
-                            <constraint firstItem="hNe-qJ-cFA" firstAttribute="top" secondItem="zSK-UQ-GFh" secondAttribute="bottom" constant="370" id="GWR-oY-v8m"/>
-                            <constraint firstItem="NmF-Yt-tsT" firstAttribute="top" secondItem="hNe-qJ-cFA" secondAttribute="bottom" constant="111" id="HJz-9i-nN2"/>
-                            <constraint firstItem="ece-3d-gTN" firstAttribute="leading" secondItem="GBU-fF-imj" secondAttribute="leading" constant="1" id="HiK-RH-d27"/>
+                            <constraint firstItem="hNe-qJ-cFA" firstAttribute="top" secondItem="zSK-UQ-GFh" secondAttribute="bottom" constant="84" id="GWR-oY-v8m"/>
+                            <constraint firstItem="NmF-Yt-tsT" firstAttribute="top" secondItem="hNe-qJ-cFA" secondAttribute="bottom" constant="397" id="HJz-9i-nN2"/>
+                            <constraint firstItem="ece-3d-gTN" firstAttribute="leading" secondItem="GBU-fF-imj" secondAttribute="leading" constant="11" id="HiK-RH-d27"/>
                             <constraint firstItem="ece-3d-gTN" firstAttribute="top" secondItem="dPc-ep-cGI" secondAttribute="bottom" constant="8" symbolic="YES" id="JoK-ZW-Cdj"/>
                             <constraint firstItem="oXg-he-u0m" firstAttribute="top" secondItem="309-0y-QNf" secondAttribute="bottom" constant="50" id="Jw5-rK-1xg"/>
-                            <constraint firstItem="PPB-7I-RHY" firstAttribute="leading" secondItem="Lj7-dH-mvD" secondAttribute="trailing" constant="164" id="KRv-F2-kZt"/>
+                            <constraint firstItem="PPB-7I-RHY" firstAttribute="leading" secondItem="Lj7-dH-mvD" secondAttribute="trailing" constant="-116" id="KRv-F2-kZt"/>
                             <constraint firstItem="wK5-dN-vQF" firstAttribute="top" secondItem="oXg-he-u0m" secondAttribute="bottom" constant="49" id="L1g-rC-1v6"/>
-                            <constraint firstItem="hNe-qJ-cFA" firstAttribute="top" secondItem="VBP-9W-7V6" secondAttribute="top" constant="581" id="LZg-g3-G8z"/>
+                            <constraint firstItem="hNe-qJ-cFA" firstAttribute="top" secondItem="VBP-9W-7V6" secondAttribute="top" constant="295" id="LZg-g3-G8z"/>
                             <constraint firstItem="ece-3d-gTN" firstAttribute="leading" secondItem="PPB-7I-RHY" secondAttribute="leading" id="NPB-Aa-MUf"/>
                             <constraint firstItem="ece-3d-gTN" firstAttribute="leading" secondItem="F1g-Hn-8dS" secondAttribute="trailing" constant="235" id="PGi-mT-PqY"/>
-                            <constraint firstItem="ece-3d-gTN" firstAttribute="leading" secondItem="hNe-qJ-cFA" secondAttribute="leading" id="POf-sG-COO"/>
+                            <constraint firstItem="ece-3d-gTN" firstAttribute="leading" secondItem="hNe-qJ-cFA" secondAttribute="leading" constant="12" id="POf-sG-COO"/>
                             <constraint firstItem="dPc-ep-cGI" firstAttribute="top" secondItem="apb-B8-Zbe" secondAttribute="bottom" constant="41" id="QkK-MP-xDp"/>
                             <constraint firstAttribute="trailingMargin" secondItem="PPB-7I-RHY" secondAttribute="trailing" constant="3" id="RRt-kW-SYp"/>
                             <constraint firstItem="ece-3d-gTN" firstAttribute="leading" secondItem="dPc-ep-cGI" secondAttribute="leading" id="Smd-7P-yaf"/>
                             <constraint firstItem="ece-3d-gTN" firstAttribute="leading" secondItem="F1g-Hn-8dS" secondAttribute="trailing" constant="285" id="TnZ-jZ-kKr"/>
-                            <constraint firstItem="F1g-Hn-8dS" firstAttribute="leading" secondItem="Lj7-dH-mvD" secondAttribute="leading" constant="-2" id="UPJ-GH-8WK"/>
-                            <constraint firstItem="ece-3d-gTN" firstAttribute="leading" secondItem="fQf-8E-cQs" secondAttribute="leading" constant="1" id="Ubx-vI-gCi"/>
+                            <constraint firstItem="F1g-Hn-8dS" firstAttribute="leading" secondItem="Lj7-dH-mvD" secondAttribute="leading" constant="-286" id="UPJ-GH-8WK"/>
+                            <constraint firstItem="ece-3d-gTN" firstAttribute="leading" secondItem="fQf-8E-cQs" secondAttribute="leading" constant="11" id="Ubx-vI-gCi"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ece-3d-gTN" secondAttribute="trailing" constant="2" id="VzZ-Zs-qtg"/>
                             <constraint firstItem="zSK-UQ-GFh" firstAttribute="top" secondItem="ece-3d-gTN" secondAttribute="bottom" constant="9" id="WYs-uH-u7L"/>
                             <constraint firstItem="nOT-Vn-dj9" firstAttribute="top" secondItem="NmF-Yt-tsT" secondAttribute="bottom" constant="58" id="Xph-1l-KjS"/>
                             <constraint firstItem="F1g-Hn-8dS" firstAttribute="top" secondItem="28a-NT-g1F" secondAttribute="bottom" constant="17" id="YI1-To-fGj"/>
                             <constraint firstItem="ece-3d-gTN" firstAttribute="top" secondItem="dPc-ep-cGI" secondAttribute="bottom" constant="8" id="ZEr-Oc-nVe"/>
-                            <constraint firstItem="fQf-8E-cQs" firstAttribute="top" secondItem="VBP-9W-7V6" secondAttribute="top" constant="315" id="ZFb-7H-hoU"/>
+                            <constraint firstItem="fQf-8E-cQs" firstAttribute="top" secondItem="VBP-9W-7V6" secondAttribute="top" constant="363" id="ZFb-7H-hoU"/>
                             <constraint firstItem="F1g-Hn-8dS" firstAttribute="leading" secondItem="VBP-9W-7V6" secondAttribute="leadingMargin" id="ZLN-p9-5fY"/>
                             <constraint firstItem="dPc-ep-cGI" firstAttribute="leading" secondItem="28a-NT-g1F" secondAttribute="trailing" constant="301" id="b4i-Wv-b2Q"/>
                             <constraint firstItem="ece-3d-gTN" firstAttribute="centerX" secondItem="dPc-ep-cGI" secondAttribute="centerX" id="ba9-3O-E5V"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="PPB-7I-RHY" secondAttribute="trailing" constant="17" id="c1N-61-BUf"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="PPB-7I-RHY" secondAttribute="trailing" constant="13" id="c1N-61-BUf"/>
                             <constraint firstItem="ece-3d-gTN" firstAttribute="top" secondItem="VBP-9W-7V6" secondAttribute="top" constant="143" id="dAf-cZ-Xpr"/>
                             <constraint firstItem="28a-NT-g1F" firstAttribute="top" secondItem="apb-B8-Zbe" secondAttribute="bottom" constant="44" id="dFz-M5-JBW"/>
                             <constraint firstItem="28a-NT-g1F" firstAttribute="leading" secondItem="VBP-9W-7V6" secondAttribute="leadingMargin" id="e4X-E5-pz0"/>
-                            <constraint firstItem="ece-3d-gTN" firstAttribute="centerX" secondItem="hNe-qJ-cFA" secondAttribute="centerX" id="fNa-aj-LIh"/>
-                            <constraint firstItem="PPB-7I-RHY" firstAttribute="top" secondItem="ece-3d-gTN" secondAttribute="bottom" constant="-17" id="fiQ-5Z-wwf"/>
+                            <constraint firstItem="ece-3d-gTN" firstAttribute="centerX" secondItem="hNe-qJ-cFA" secondAttribute="centerX" constant="12" id="fNa-aj-LIh"/>
+                            <constraint firstItem="PPB-7I-RHY" firstAttribute="top" secondItem="ece-3d-gTN" secondAttribute="bottom" constant="58" id="fiQ-5Z-wwf"/>
                             <constraint firstItem="F1g-Hn-8dS" firstAttribute="leading" secondItem="309-0y-QNf" secondAttribute="leading" id="jUO-E7-kJf"/>
-                            <constraint firstItem="PPB-7I-RHY" firstAttribute="top" secondItem="ece-3d-gTN" secondAttribute="bottom" constant="-17" id="jqB-aU-nje"/>
-                            <constraint firstItem="GBU-fF-imj" firstAttribute="top" secondItem="PPB-7I-RHY" secondAttribute="bottom" constant="70" id="khL-Qj-kT6"/>
+                            <constraint firstItem="PPB-7I-RHY" firstAttribute="top" secondItem="ece-3d-gTN" secondAttribute="bottom" constant="58" id="jqB-aU-nje"/>
+                            <constraint firstItem="GBU-fF-imj" firstAttribute="top" secondItem="PPB-7I-RHY" secondAttribute="bottom" constant="14" id="khL-Qj-kT6"/>
                             <constraint firstItem="dPc-ep-cGI" firstAttribute="leading" secondItem="28a-NT-g1F" secondAttribute="trailing" constant="229" id="l5d-rn-hH5"/>
                             <constraint firstItem="ece-3d-gTN" firstAttribute="leading" secondItem="F1g-Hn-8dS" secondAttribute="trailing" constant="284" id="l6v-LR-7YJ"/>
                             <constraint firstItem="F1g-Hn-8dS" firstAttribute="leading" secondItem="wK5-dN-vQF" secondAttribute="leading" constant="1" id="m1R-4q-mWG"/>
-                            <constraint firstItem="ece-3d-gTN" firstAttribute="centerX" secondItem="GBU-fF-imj" secondAttribute="centerX" constant="1" id="mdg-gD-IjN"/>
-                            <constraint firstItem="fQf-8E-cQs" firstAttribute="trailing" secondItem="zSK-UQ-GFh" secondAttribute="trailing" constant="-1" id="nK6-GK-tBo"/>
+                            <constraint firstItem="ece-3d-gTN" firstAttribute="centerX" secondItem="GBU-fF-imj" secondAttribute="centerX" constant="11" id="mdg-gD-IjN"/>
+                            <constraint firstItem="fQf-8E-cQs" firstAttribute="trailing" secondItem="zSK-UQ-GFh" secondAttribute="trailing" constant="-11" id="nK6-GK-tBo"/>
                             <constraint firstItem="yda-ph-JmQ" firstAttribute="top" secondItem="F1g-Hn-8dS" secondAttribute="bottom" constant="17" id="nN6-Pu-2s8"/>
                             <constraint firstItem="NmF-Yt-tsT" firstAttribute="baseline" secondItem="FX5-hu-iFx" secondAttribute="baseline" id="ngD-Ab-Gmu"/>
                             <constraint firstItem="zSK-UQ-GFh" firstAttribute="top" secondItem="ece-3d-gTN" secondAttribute="bottom" constant="9" id="niY-nr-0ZK"/>
-                            <constraint firstItem="GBU-fF-imj" firstAttribute="top" secondItem="hNe-qJ-cFA" secondAttribute="bottom" constant="-357" id="rtF-5w-kJi"/>
-                            <constraint firstItem="fQf-8E-cQs" firstAttribute="trailing" secondItem="nOT-Vn-dj9" secondAttribute="trailing" constant="-1" id="uL7-PK-LWc"/>
+                            <constraint firstItem="GBU-fF-imj" firstAttribute="top" secondItem="hNe-qJ-cFA" secondAttribute="bottom" constant="-52" id="rtF-5w-kJi"/>
+                            <constraint firstItem="fQf-8E-cQs" firstAttribute="trailing" secondItem="nOT-Vn-dj9" secondAttribute="trailing" constant="-11" id="uL7-PK-LWc"/>
                             <constraint firstItem="fQf-8E-cQs" firstAttribute="top" secondItem="PPB-7I-RHY" secondAttribute="bottom" constant="36" id="usX-V8-mxh"/>
                             <constraint firstItem="ece-3d-gTN" firstAttribute="trailing" secondItem="NmF-Yt-tsT" secondAttribute="trailing" id="w9h-RC-zKC"/>
                             <constraint firstItem="wCZ-hY-gmT" firstAttribute="top" secondItem="wK5-dN-vQF" secondAttribute="bottom" constant="50" id="wB1-TF-EBx"/>
                             <constraint firstItem="FX5-hu-iFx" firstAttribute="leading" secondItem="VBP-9W-7V6" secondAttribute="leadingMargin" constant="2" id="xQX-rb-De0"/>
                             <constraint firstItem="oXg-he-u0m" firstAttribute="top" secondItem="VBP-9W-7V6" secondAttribute="top" constant="386" id="xbJ-Me-T7E"/>
-                            <constraint firstItem="Lj7-dH-mvD" firstAttribute="top" secondItem="PPB-7I-RHY" secondAttribute="top" constant="91" id="yTo-Wy-1Aa"/>
-                            <constraint firstItem="ece-3d-gTN" firstAttribute="centerX" secondItem="fQf-8E-cQs" secondAttribute="centerX" constant="1" id="yxf-r3-GbI"/>
+                            <constraint firstItem="Lj7-dH-mvD" firstAttribute="top" secondItem="PPB-7I-RHY" secondAttribute="top" id="yTo-Wy-1Aa"/>
+                            <constraint firstItem="ece-3d-gTN" firstAttribute="centerX" secondItem="fQf-8E-cQs" secondAttribute="centerX" constant="11" id="yxf-r3-GbI"/>
                             <constraint firstItem="yda-ph-JmQ" firstAttribute="top" secondItem="F1g-Hn-8dS" secondAttribute="bottom" constant="17" id="zbZ-vR-Ey8"/>
                         </constraints>
                         <variation key="default">
@@ -357,8 +371,10 @@
                         <outlet property="_outWaterDepth" destination="hNe-qJ-cFA" id="yTp-BI-aEN"/>
                         <outlet property="_outWaterTemp" destination="fQf-8E-cQs" id="XM8-bJ-YZg"/>
                         <outlet property="_outWaterType" destination="GBU-fF-imj" id="wtT-6g-qRq"/>
-                        <outlet property="_outWaveType" destination="PPB-7I-RHY" id="tH9-Kb-exs"/>
-                        <outlet property="_tfWatertype" destination="lrc-pK-ZIq" id="jtC-V5-tnX"/>
+                        <outlet property="_outWaveType" destination="PPB-7I-RHY" id="myc-Gg-0MH"/>
+                        <outlet property="waterDepthBtn" destination="218-gQ-Vhs" id="msV-b3-2ca"/>
+                        <outlet property="waterTempBtn" destination="XBn-2Q-ygP" id="wYV-ij-pbd"/>
+                        <outlet property="waterTypeBtn" destination="J58-Qd-RB9" id="yMS-1a-bC8"/>
                         <outlet property="waveTypeBtn" destination="FxW-gs-qdh" id="vNf-Rs-eoc"/>
                     </connections>
                 </viewController>
