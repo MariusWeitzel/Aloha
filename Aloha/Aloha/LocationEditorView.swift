@@ -10,7 +10,7 @@ import UIKit
 
 
 
-class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
     
     @IBOutlet var _outName: UITextField!
     @IBOutlet var _outAdress: UILabel!
@@ -22,6 +22,20 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
     
     @IBOutlet var _outFavorite: UISwitch!
     
+    @IBOutlet weak var _tfWatertype: UITextField!
+    
+    @IBOutlet weak var waveTypeBtn: UIButton!
+    @IBAction func settingWaveTypeByPressingButton(sender: UIButton) {
+        _outWaveType.hidden = false
+        
+    }
+    
+    @IBAction func settingWatertypeByEditingTF(sender: UITextField) {
+        _outWaveType.hidden = false
+        _tfWatertype.resignFirstResponder()
+        _tfWatertype.enabled = false
+        
+    }
     var _intWaveType = 0
     var _intWaterDepth = 0
     var _intWaterTemp = 0
@@ -46,17 +60,26 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         super.viewDidLoad()
         var coordString: String  = String(format: "%f", self.currentCoordinate.latitude) + ", " + String(format: "%f", self.currentCoordinate.longitude)
         
+        _tfWatertype.delegate = self
+        _outWaveType.delegate = self
+        
         self.itemValue.append(coordString)
         self.addressText = getAddress(currentCoordinate)
         self.itemValue.append(self.addressText)
         self.itemValue.append(self.surfSpotName)
         self.itemValue.append(self.spotDescription)
         
+        _outAdress.text = "Adresse wird geladen"
+        _outAdress.reloadInputViews()
+        
         _outWaveType.dataSource = self
         _outWaterDepth.dataSource = self
         _outWaterTemp.dataSource = self
         _outWaterType.dataSource = self
         
+        _outWaveType.hidden = true
+        
+       var timer = NSTimer.scheduledTimerWithTimeInterval(0.4, target: self, selector: Selector("update"), userInfo: nil, repeats: false)
 //         waveTypePicker.dataSource = pickerData
         
         
@@ -67,6 +90,15 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
 //        tableView.rowHeight = UITableViewAutomaticDimension
         
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    func update () {
+        dispatch_async(dispatch_get_main_queue(), {
+            self._outAdress.text = self.getAddress(self.currentCoordinate)
+        })
+         var coordString: String  = String(format: "%f", self.currentCoordinate.latitude) + ", " + String(format: "%f", self.currentCoordinate.longitude)
+        self._outAdress.text = coordString
+        println("update: \(coordString)")
     }
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
@@ -106,6 +138,9 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         
         if pickerView.tag == 0 {
             _intWaveType = row
+           waveTypeBtn.setTitle(_dataWaveType[row], forState: UIControlState.Normal)
+            _outWaveType.hidden = true;
+            
         } else if pickerView.tag == 1 {
             _intWaterDepth = row
         } else if pickerView.tag == 2 {
@@ -145,13 +180,16 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
                 let lines = address.lines as [String]
                 newAddress = join(" ", lines)
                 self.addressText = newAddress
-                if(!self.itemValue.isEmpty){
-                    self.itemValue.removeAtIndex(1)
-                    self.itemValue.insert(newAddress, atIndex: 1)
-//                    self.tableView.reloadData()
-                }
+                self._outAdress.text = newAddress
+                
+//                if(!self.itemValue.isEmpty){
+//                    self.itemValue.removeAtIndex(1)
+//                    self.itemValue.insert(newAddress, atIndex: 1)
+////                    self.tableView.reloadData()
+//                }
             }
         }
+        println(newAddress)
        return newAddress
     }
     

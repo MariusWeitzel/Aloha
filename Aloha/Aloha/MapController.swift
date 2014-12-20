@@ -156,8 +156,11 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
         
         let secondViewController = self.storyboard?.instantiateViewControllerWithIdentifier("LocationView") as LocationEditorView
         
+        // überträgt die Koordinaten des neuen Markes zur LocationEditorView
         secondViewController.currentCoordinate = surfMarker.position
-        
+        var text =  String(format: "%f", secondViewController.currentCoordinate.latitude) + ", " + String(format: "%f", secondViewController.currentCoordinate.longitude)
+        println("marker position: \(text)")
+       
         self.navigationController?.pushViewController(secondViewController, animated: true)
         
         
@@ -195,8 +198,7 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
             locationManager.stopUpdatingLocation()
             fetchNearbyPlaces(location.coordinate)
         }
-        
-        
+
     }
     
     // kalkuliert den sichtbaren Radius der MapView
