@@ -29,6 +29,7 @@ public struct Location {
     
     //Index für ausgewähltes struct coastproperties
     var _coastproperties: Int
+    var _beachtype: Int
     
     //freie Notizen zu diesem Punkt
     var notes: String
@@ -37,6 +38,10 @@ public struct Location {
 //    var possibleDangers: [String]
     var sharks: Bool
     var riffs: Bool
+    var jellyfisch: Bool
+    var dirt: Bool
+    var cautionXY: Bool
+    var cautionZX: Bool
     
     //Index für ausgewähltes struct difficulty
     var _difficulty: Int
@@ -53,9 +58,15 @@ public struct Location {
         _watertype = 0
         //Standardwert (Flachküste) annehmend
         _coastproperties = 1
+        _beachtype = 0
         notes = ""
         sharks = false
         riffs = false
+        jellyfisch = false
+        dirt = false
+        cautionXY = false
+        cautionZX = false
+        
         //Standardwert (mittel) annehmend
         _difficulty = 1
     }
@@ -68,6 +79,13 @@ public struct coastproperties {
     init() {
         coastproperties = ["Steilküste", "Flachküste"]
     }
+    subscript(index: Int) -> String {
+        get {
+            return coastproperties[index]
+        }
+        
+    }
+
 }
 
 public struct difficulty {
@@ -145,6 +163,24 @@ public struct watertype {
             // perform a suitable setting action here
         }
     }
+    
+
 }
+
+public struct beachtype {
+    var beachtype: [String]
+    var count: Int { return beachtype.count }
+    
+    init() {
+        beachtype = ["Stein", "Strand", "Sonstiges"]
+    }
+    subscript(index: Int) -> String {
+        get {
+            return beachtype[index]
+        }
+        
+    }
+}
+
 
 
