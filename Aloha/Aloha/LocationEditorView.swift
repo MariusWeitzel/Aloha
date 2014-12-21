@@ -10,7 +10,7 @@ import UIKit
 
 
 
-class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
+class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UIScrollViewDelegate{
     
     // Elemente des UI
     @IBOutlet var _outName: UITextField!
@@ -27,6 +27,8 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
     // Switch
     @IBOutlet var _outFavorite: UISwitch!
     
+    @IBOutlet weak var scroller: UIScrollView!
+    @IBOutlet weak var scrollerView: UIView!
    
     // Buttons and their functions
     @IBOutlet weak var waveTypeBtn: UIButton!
@@ -105,6 +107,12 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        scroller.contentSize = CGSizeMake(730, 750)
+        scroller.scrollEnabled = true
+        scroller.showsVerticalScrollIndicator = true
+        scroller.addSubview(scrollerView)
+        view.addSubview(scroller)
         var coordString: String  = String(format: "%f", self.currentCoordinate.latitude) + ", " + String(format: "%f", self.currentCoordinate.longitude)
         
         _outWaveType.delegate = self
