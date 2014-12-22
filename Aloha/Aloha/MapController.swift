@@ -45,6 +45,10 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
         
         super.viewDidLoad()
         
+        //Lädt direkt am Anfang alle Locations
+        //FIXME: möglicherweise früher notwendig!
+        Vault.loadLocations()
+        
         mapView.delegate = self
         mapView.myLocationEnabled = true
         // erfragt den Zugriff auf Lokalisierung
@@ -169,6 +173,8 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
     
     // öffnet die LocationView nach drücken des Markers und überträgt die dazugehörigen Koordinaten
     func mapView(mapView: GMSMapView!, didTapMarker marker: GMSMarker!) -> Bool {
+        
+        //FIXME: aus Locations die Koordinate wieder fischen & dem LocationEditorView den Punkt zum anzeigen übergeben
         
         let secondViewController = self.storyboard?.instantiateViewControllerWithIdentifier("LocationView") as LocationEditorView
         secondViewController.currentCoordinate = marker.position
