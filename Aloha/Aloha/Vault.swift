@@ -27,6 +27,9 @@ class Vault: UIViewController {
         
         // Locations auseinander fuddeln
         for spot in Locations {
+            saveStr += spot.lat.stringValue + spotItemSeperator
+            saveStr += spot.long.stringValue + spotItemSeperator
+            
             saveStr += spot.name + spotItemSeperator
             
             if spot.favorite { saveStr += "1" }
@@ -35,32 +38,48 @@ class Vault: UIViewController {
 
             saveStr += spot.adress + spotItemSeperator
             
-            //for item in spot.tags { saveStr += item + itemSeperator }
-            //saveStr += spotItemSeperator
-            
             //waterproperties
-            //TODO: ausgewähltes item zurück geben/speichern
-            //      alternativ auch nur den Index speichern?
-            //      machts beim Laden leichter
-            
-            
-            
             saveStr += String(spot._wavetype) + spotItemSeperator
             saveStr += String(spot._waterdepth) + spotItemSeperator
             saveStr += String(spot._watertemperature) + spotItemSeperator
             saveStr += String(spot._watertype) + spotItemSeperator
             
             saveStr += String(spot._coastproperties) + spotItemSeperator
+            saveStr += String(spot._beachtype) + spotItemSeperator
             
-            saveStr += spot.notes
+            if spot.jellyfisch { saveStr += "1" }
+            else { saveStr += "0" }
+            saveStr += spotItemSeperator
+            
+            if spot.sharks { saveStr += "1" }
+            else { saveStr += "0" }
+            saveStr += spotItemSeperator
+            
+            if spot.riffs { saveStr += "1" }
+            else { saveStr += "0" }
+            saveStr += spotItemSeperator
+            
+            if spot.dirt { saveStr += "1" }
+            else { saveStr += "0" }
+            saveStr += spotItemSeperator
+            
+            if spot.cautionXY { saveStr += "1" }
+            else { saveStr += "0" }
+            saveStr += spotItemSeperator
+            
+            if spot.cautionZX { saveStr += "1" }
+            else { saveStr += "0" }
+            saveStr += spotItemSeperator
             
             //TODO: in ner sinnvollenweise umbauen
             //OFFER: wie bei Favorit nen Switch für Haie & Riffs machen (erstmal)
             //for item in spot.possibleDangers { saveStr += item + itemSeperator }
             
             
-            saveStr += String(spot._difficulty)
-            
+            saveStr += String(spot._difficulty) + spotItemSeperator
+
+            saveStr += spot.notes + spotItemSeperator
+
             saveStr += spotSeperator;
         }
         
@@ -72,7 +91,6 @@ class Vault: UIViewController {
             saveStr.writeToFile(path!, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
             println("Daten \"\(saveStr)\" geschrieben.")
         }
-
     }
     
     class func loadLocations() {
@@ -83,10 +101,12 @@ class Vault: UIViewController {
         
         if (path != nil) {
             loadedStr = String(contentsOfFile: path!, encoding: NSUTF8StringEncoding, error: nil)!
-            //daten.removeAll(keepCapacity: false)
-            //textFeldDaten.text = tempStr
-//            myTextFeld.text = tempStr;
-            println("\"\(loadedStr)\" geladen");
+            
+            var splittedLocations = split(loadedStr, {$0=="#"})
+            
+            println("\(splittedLocations)")
+            
+//            println("\"\(loadedStr)\" geladen");
         }
         else {
             println("Laden fehlgeschlagen")

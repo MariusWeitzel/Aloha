@@ -45,6 +45,10 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
         
         super.viewDidLoad()
         
+        //Lädt direkt am Anfang alle Locations
+        //FIXME: möglicherweise früher notwendig!
+        Vault.loadLocations()
+        
         mapView.delegate = self
         mapView.myLocationEnabled = true
         // erfragt den Zugriff auf Lokalisierung

@@ -14,7 +14,7 @@
                         <viewControllerLayoutGuide type="bottom" id="gp2-5A-eJ2"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="beV-GD-qgn">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_me" translatesAutoresizingMaskIntoConstraints="NO" id="LD1-cT-bWR">
@@ -38,7 +38,7 @@
                     <navigationItem key="navigationItem" id="Cbj-WE-ggm">
                         <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" style="plain" id="2gp-sz-KaV">
-                            <switch key="customView" opaque="NO" alpha="0.40000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="g30-qg-0on">
+                            <switch key="customView" opaque="NO" alpha="0.40000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="g30-qg-0on">
                                 <rect key="frame" x="23" y="91" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
@@ -47,7 +47,7 @@
                             </switch>
                         </barButtonItem>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="bye-7u-soR">
-                            <rect key="frame" x="71" y="7" width="198" height="30"/>
+                            <rect key="frame" x="285" y="7" width="198" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
                                 <segment title="Normal"/>
@@ -64,7 +64,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
                         <outlet property="adressLabel" destination="8Fi-O9-n79" id="xYU-Va-SDK"/>
                         <outlet property="mapPin" destination="LD1-cT-bWR" id="Fd0-sC-xP1"/>

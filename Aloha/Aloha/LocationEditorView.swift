@@ -502,9 +502,9 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         //TODO: gegen echte Werte aus den Feldern ersetzen!
         //      - 
         //      -
-        
-        //FIXME: das is nur zu Testzwecken!
         var nuPunkt = Location()
+        nuPunkt.lat = self.currentCoordinate.latitude
+        nuPunkt.long = self.currentCoordinate.longitude
         nuPunkt.name = _outName.text
         nuPunkt.favorite = _outFavorite.on
         nuPunkt.adress = _outAdress.text!
@@ -514,12 +514,18 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         nuPunkt._watertemperature = _intWaterTemp
         nuPunkt._watertype = _intWaterType
         
-        //nuPunkt.tags = ["sportlich", "nass"]
+        nuPunkt._coastproperties = _intCoastproperty
+        nuPunkt._beachtype = _intBeachType
+        nuPunkt.notes = _outTextbox.text
         
-        nuPunkt._coastproperties = 0
-        nuPunkt.notes = "nuffin to say"
-        //FIXME: wieder rein damit!
-        //nuPunkt.possibleDangers = ["Hipsters möglich"]
+        nuPunkt.jellyfisch = _boolJellyfish
+        nuPunkt.sharks = _boolSharks
+        nuPunkt.riffs = _boolRiffs
+        nuPunkt.dirt = _boolDirt
+        nuPunkt.cautionXY = _boolCautionXY
+        nuPunkt.cautionZX = _boolCautionZX
+        
+        //FIXME: Leiste noch ohne Funktion!
         nuPunkt._difficulty = 1
 
         Vault.saveLocation(nuPunkt)

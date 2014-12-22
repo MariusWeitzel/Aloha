@@ -9,6 +9,9 @@
 import Foundation
 
 public struct Location {
+    //ID bestehend aus der Koordinate
+    var lat: NSNumber
+    var long: NSNumber
     //Name des Punkts
     var name: String
     //Favorit ja/nein
@@ -47,6 +50,8 @@ public struct Location {
     var _difficulty: Int
     
     init() {
+        lat = 0
+        long = 0
         name = ""
         favorite = false
         adress = ""
