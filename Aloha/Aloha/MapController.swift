@@ -149,7 +149,8 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
         var surfMarker = GMSMarker()
         surfMarker.position = longPressCoordinate //mapView.camera.target
         surfMarker.snippet = "Surf_Spot"
-        surfMarker.icon = UIImage(named: "icon_me")
+        surfMarker.icon = UIImage(named: "surfer") // zum Nutzen des Bildes muss aus Urheberrechtlichen Gründen folgendes bei den Credits, Website angegeben werden <div>Icon made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed under <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div> http://www.flaticon.com/free-icon/surfer-surfing-in-a-big-water-wave_48043
+        
         surfMarker.appearAnimation = kGMSMarkerAnimationPop
         surfMarker.map = mapView
        
@@ -166,6 +167,15 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
         
     }
     
+    // öffnet die LocationView nach drücken des Markers und überträgt die dazugehörigen Koordinaten
+    func mapView(mapView: GMSMapView!, didTapMarker marker: GMSMarker!) -> Bool {
+        
+        let secondViewController = self.storyboard?.instantiateViewControllerWithIdentifier("LocationView") as LocationEditorView
+        secondViewController.currentCoordinate = marker.position
+        self.marker.position = marker.position
+        self.navigationController?.pushViewController(secondViewController, animated: true)
+        return true
+    }
 
 
     // wird aufgerufen wenn der User die Anfrage zur Erlaubnis der Lokalisierung beantwortet hat
