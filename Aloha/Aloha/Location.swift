@@ -62,9 +62,9 @@ public struct Location {
         _watertemperature = 0
         _watertype = 0
         //Standardwert (Flachküste) annehmend
-        _coastproperties = 1
+        _coastproperties = 0
         _beachtype = 0
-        notes = ""
+        notes = " "
         sharks = false
         riffs = false
         jellyfisch = false

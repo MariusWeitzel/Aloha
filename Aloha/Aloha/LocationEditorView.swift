@@ -8,9 +8,10 @@
 
 import UIKit
 
-
-
-class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UIScrollViewDelegate{
+class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UIScrollViewDelegate {
+    
+    //spot Location global für diese View anlegen
+    var nuPunkt = Location()
     
     // Elemente des UI
     @IBOutlet var _outName: UITextField!
@@ -206,7 +207,7 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
     var _intWaterTemp = 0
     var _intWaterType = 0
     
-    var _intCoastproperty = 1
+    var _intCoastproperty = 0
     var _intBeachType = 0
     
     var _intDifficulty = 1
@@ -254,15 +255,15 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         _outCoastProperty.delegate = self
         _outBeachType.delegate = self
         
-        
+        //FIXME: zu was genau ist das hier da?
         self.itemValue.append(coordString)
         self.addressText = getAddress(currentCoordinate)
         self.itemValue.append(self.addressText)
         self.itemValue.append(self.surfSpotName)
         self.itemValue.append(self.spotDescription)
         
+        //FIXME: brauchen wir das noch?
         _outAdress.text = "Adresse wird geladen"
-        
         
         _outWaveType.dataSource = self
         _outWaterDepth.dataSource = self
@@ -278,17 +279,53 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         _outWaterType.hidden = true
         _outCoastProperty.hidden = true
         _outBeachType.hidden = true
- //      var timer = NSTimer.scheduledTimerWithTimeInterval(0.4, target: self, selector: Selector("update"), userInfo: nil, repeats: false)
-//         waveTypePicker.dataSource = pickerData
         
+// Do any additional setup after loading the view, typically from a nib.
         
+        //FIXME: ob das nicht auch schöner geht?
+        //       leeren Punkt übergeben für neu
+        //       bestehenden Punkt falls vorhanden
+        //TODO:  rausfinden, wie man aus func mapview() dem Aufruf was übergibt
+        //raus finden ob es den Punkt schon gibt oder es ein neuer sein soll
+        for spot in Locations {
+            if (spot.lat == self.currentCoordinate.latitude && spot.long == self.currentCoordinate.longitude) {
+                nuPunkt = spot
+            }
+        }
         
-//        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
-//        self.tableView.dataSource = self
-//        tableView.estimatedRowHeight = 89
-//        tableView.rowHeight = UITableViewAutomaticDimension
+        //TODO: jetzt nur noch alle Items durch nuPunkt setzen
+        //falls if:    Werte des bestehenden Punktes
+        //andernfalls: dann eben die Defaultwerte -> wie nen neuer Punkt
+        _outName.text = nuPunkt.name
         
-        // Do any additional setup after loading the view, typically from a nib.
+        //CHECKME: überflüssig?
+//        nuPunkt.lat = self.currentCoordinate.latitude
+//        nuPunkt.long = self.currentCoordinate.longitude
+        
+        _outFavorite.on = nuPunkt.favorite
+        _outAdress.text = nuPunkt.adress
+        
+        _intWaveType = nuPunkt._wavetype
+        //FIXME: das stimmt so noch nicht so ganz... :(
+        _outWaveType.selectRow(_intWaveType, inComponent: 0, animated: false)
+        _intWaterDepth = nuPunkt._waterdepth
+        _intWaterTemp = nuPunkt._watertemperature
+        _intWaterType = nuPunkt._watertype
+        
+        _intCoastproperty = nuPunkt._coastproperties
+        _intBeachType = nuPunkt._beachtype
+        
+        _outTextbox.text = nuPunkt.name
+        
+        _boolJellyfish = nuPunkt.jellyfisch
+        _boolSharks = nuPunkt.sharks
+        _boolRiffs = nuPunkt.riffs
+        _boolDirt = nuPunkt.dirt
+        _boolCautionXY = nuPunkt.cautionXY
+        _boolCautionZX = nuPunkt.cautionZX
+        
+        //FIXME: Leiste noch ohne Funktion!
+//        nuPunkt._difficulty = 1
     }
     
 //    func update () {
@@ -499,13 +536,20 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
     
     @IBAction func back2initialViewController(Sender: UIButton) {
         // erst mal Daten speichern
-        //TODO: gegen echte Werte aus den Feldern ersetzen!
-        //      - 
-        //      -
-        var nuPunkt = Location()
+        
+        //FIXME: falls bestehender Punkt ausgewählt wurde, muss der alte erst aus den Locations raus!!
+        
+        
         nuPunkt.lat = self.currentCoordinate.latitude
         nuPunkt.long = self.currentCoordinate.longitude
-        nuPunkt.name = _outName.text
+        
+        // to avoid loading errors
+        if _outName.text == "" {
+            nuPunkt.name = " "
+        }
+        else {
+            nuPunkt.name = _outName.text
+        }
         nuPunkt.favorite = _outFavorite.on
         nuPunkt.adress = _outAdress.text!
         
@@ -516,7 +560,13 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         
         nuPunkt._coastproperties = _intCoastproperty
         nuPunkt._beachtype = _intBeachType
-        nuPunkt.notes = _outTextbox.text
+        // to avoid loading errors
+        if _outTextbox.text == "" {
+            nuPunkt.name = " "
+        }
+        else {
+            nuPunkt.name = _outTextbox.text
+        }
         
         nuPunkt.jellyfisch = _boolJellyfish
         nuPunkt.sharks = _boolSharks

@@ -9,9 +9,9 @@
 import Foundation
 
 //surfSpots voneinander trennen
-let spotSeperator = "#\n"
+let spotSeperator = "#"
 //SpotEigenschaften voneinander trennen
-let spotItemSeperator = "|\n"
+let spotItemSeperator = "|"
 //einzelne Werte in Arrays trennen
 //FIXME: wahrscheinlich obsolet
 //let itemSeperator = "\n"
@@ -85,7 +85,7 @@ class Vault: UIViewController {
         
         let dirs = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true) as? [String]
         
-        let path = dirs?[0].stringByAppendingPathExtension("locations.csv")
+        let path = dirs?[0].stringByAppendingPathComponent("locations.csv")
         
         if (path != nil) {
             saveStr.writeToFile(path!, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
@@ -97,14 +97,67 @@ class Vault: UIViewController {
         var loadedStr: String
         let dirs = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true) as? [String]
         
-        let path = dirs?[0].stringByAppendingPathExtension("locations.csv")
+        let path = dirs?[0].stringByAppendingPathComponent("locations.csv")
         
-        if (path != nil) {
+        println("path: \(path)")
+        
+        var checkValidation = NSFileManager.defaultManager()
+        
+        if (checkValidation.fileExistsAtPath(path!)) {
             loadedStr = String(contentsOfFile: path!, encoding: NSUTF8StringEncoding, error: nil)!
             
-            var splittedLocations = split(loadedStr, {$0=="#"})
+            let splittedLocations = split(loadedStr, {$0=="#"})
+            for location in splittedLocations {
+                var pointItems = split(location, {$0=="|"})
+                var nuPunkt = Location()
+                
+                println("\(pointItems[0]) & \(pointItems[1])")
+                
+                //FIXME: wenn das schief geht, is halt direkt rum :/
+                nuPunkt.lat = NSNumberFormatter().numberFromString(pointItems[0])!
+                nuPunkt.long = NSNumberFormatter().numberFromString(pointItems[1])!
+                
+                nuPunkt.name = pointItems[2]
+                
+                if pointItems[3].toInt()! == 1 { nuPunkt.favorite = true }
+                else { nuPunkt.favorite = false }
+                
+                nuPunkt.adress = pointItems[4]
+                
+                //waterproperties
+                nuPunkt._wavetype = pointItems[5].toInt()!
+                nuPunkt._waterdepth = pointItems[6].toInt()!
+                nuPunkt._watertemperature = pointItems[7].toInt()!
+                nuPunkt._watertype = pointItems[8].toInt()!
+                
+                nuPunkt._coastproperties = pointItems[9].toInt()!
+                nuPunkt._beachtype = pointItems[10].toInt()!
+                
+                if pointItems[11].toInt()! == 1 { nuPunkt.jellyfisch = true }
+                else { nuPunkt.jellyfisch = false }
+                
+                if pointItems[12].toInt()! == 1 { nuPunkt.sharks = true }
+                else { nuPunkt.sharks = false }
+                
+                if pointItems[13].toInt()! == 1 { nuPunkt.riffs = true }
+                else { nuPunkt.riffs = false }
+                
+                if pointItems[14].toInt()! == 1 { nuPunkt.dirt = true }
+                else { nuPunkt.dirt = false }
+                
+                if pointItems[15].toInt()! == 1 { nuPunkt.cautionXY = true }
+                else { nuPunkt.cautionXY = false }
+                
+                if pointItems[16].toInt()! == 1 { nuPunkt.cautionZX = true }
+                else { nuPunkt.cautionZX = false }
+                
+                nuPunkt._difficulty = pointItems[17].toInt()!
+                
+                nuPunkt.notes = pointItems[18]
+                
+                println("\(nuPunkt.name)")
+            }
             
-            println("\(splittedLocations)")
             
 //            println("\"\(loadedStr)\" geladen");
         }
