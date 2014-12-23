@@ -10,7 +10,7 @@ import Foundation
 
 import UIKit
 
-class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDelegate  { //MapToLocationViewDelegate,
+class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDelegate, SidebarDelegate  { //MapToLocationViewDelegate,
     
     
     @IBOutlet weak var mapView: GMSMapView!
@@ -19,6 +19,8 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
     
     @IBOutlet weak var pinImageVerticalConstraint: NSLayoutConstraint!
     var searchedTypes = ["Very Worse", "Worse", "Not Bad", "Good", "Very Good"]
+    
+    var sidebar:Sidebar = Sidebar()
     
     var marker = GMSMarker()
     var surfMarker = GMSMarker()
@@ -45,6 +47,8 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
         
         super.viewDidLoad()
         
+        
+        
         mapView.delegate = self
         mapView.myLocationEnabled = true
         // erfragt den Zugriff auf Lokalisierung
@@ -59,6 +63,10 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
         marker.icon = UIImage(named: "icon_me")
         marker.appearAnimation = kGMSMarkerAnimationPop
         marker.map = mapView
+        
+        //erzeugt die Sidebar
+        sidebar = Sidebar(sourceView: self.view)
+        sidebar.delegate = self
         
         
         
@@ -175,6 +183,7 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
             
             mapView.myLocationEnabled = true // erzeugt einen blauen Punkt, wo sich der User befindet
             mapView.settings.myLocationButton = true // erzeugt einen Button auf der Map zum zentrieren der Location
+            mapView.settings.consumesGesturesInView = false // Andere Gesten werden nich mehr abgefangen
             
         }
         else{
