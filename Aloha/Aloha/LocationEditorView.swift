@@ -7,8 +7,17 @@
 //
 
 import UIKit
+// Wichtig für die Übertragung der Koordinaten von MapController zu LocationViewEditor und zurück
+// zur Regelung der Anzeige des Surfspot-Icons
+protocol SurfSpotMarkerDelegate {
+    func createNewSurfSpotDidFinish(controller: LocationEditorView, coords: CLLocationCoordinate2D)
+}
+
 
 class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UIScrollViewDelegate {
+    
+    
+    var delegate:SurfSpotMarkerDelegate? = nil
     
     //spot Location global für diese View anlegen
     var nuPunkt = Location()
@@ -16,6 +25,8 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
     // Elemente des UI
     @IBOutlet var _outName: UITextField!
     @IBOutlet var _outAdress: UILabel!
+    var addressText:String = "Adresse wird geladen"
+
     
     // PickerViews
     @IBOutlet var _outWaveType: UIPickerView!
@@ -115,74 +126,74 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
 
     }
     //Caution Buttons
+
     
-    
-    @IBOutlet weak var caution_JellyfishBtn: UIButton!
+    // CHECKME: Kann man das schöner machen?
     @IBAction func changeBackgroundImageOfBtn(sender: UIButton) {
         
         switch(sender.tag){
         case 0:
             if(!_boolJellyfish){
-                sender.setBackgroundImage(UIImage(named: "iosOKHaken.png"), forState: .Normal)
+                setCautionButtonBackgroundToYES(sender)
                 _boolJellyfish = true
             }
             else{
-                sender.setBackgroundImage(UIImage(named: "iosCrossHaken.png"), forState: .Normal)
+                setCautionButtonBackgroundToNO(sender)
                 _boolJellyfish = false
             }
             break
             
         case 1:
             if(!_boolSharks){
-                sender.setBackgroundImage(UIImage(named: "iosOKHaken.png"), forState: .Normal)
+                setCautionButtonBackgroundToYES(sender)
                 _boolSharks = true
             }
             else{
-                sender.setBackgroundImage(UIImage(named: "iosCrossHaken.png"), forState: .Normal)
+                setCautionButtonBackgroundToNO(sender)
                 _boolSharks = false
             }
             break
             
         case 2:
             if(!_boolRiffs){
-                sender.setBackgroundImage(UIImage(named: "iosOKHaken.png"), forState: .Normal)
+                setCautionButtonBackgroundToYES(sender)
                 _boolRiffs = true
             }
             else{
-                sender.setBackgroundImage(UIImage(named: "iosCrossHaken.png"), forState: .Normal)
+                setCautionButtonBackgroundToNO(sender)
                 _boolRiffs = false
             }
             break
 
         case 3:
             if(!_boolDirt){
-                sender.setBackgroundImage(UIImage(named: "iosOKHaken.png"), forState: .Normal)
+                setCautionButtonBackgroundToYES(sender)
                 _boolDirt = true
             }
             else{
-                sender.setBackgroundImage(UIImage(named: "iosCrossHaken.png"), forState: .Normal)
+                setCautionButtonBackgroundToNO(sender)
                 _boolDirt = false
             }
             break
 
         case 4:
             if(!_boolCautionXY){
-                sender.setBackgroundImage(UIImage(named: "iosOKHaken.png"), forState: .Normal)
+                setCautionButtonBackgroundToYES(sender)
                 _boolCautionXY = true
             }
             else{
-                sender.setBackgroundImage(UIImage(named: "iosCrossHaken.png"), forState: .Normal)
+                setCautionButtonBackgroundToNO(sender)
                 _boolCautionXY = false
             }
             break
 
         case 5:
             if(!_boolCautionZX){
-                sender.setBackgroundImage(UIImage(named: "iosOKHaken.png"), forState: .Normal)
+                setCautionButtonBackgroundToYES(sender)
                 _boolCautionZX = true
             }
             else{
-                sender.setBackgroundImage(UIImage(named: "iosCrossHaken.png"), forState: .Normal)
+                setCautionButtonBackgroundToNO(sender)
                 _boolCautionZX = false
             }
             break
@@ -193,7 +204,13 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         
     }
     
-    
+    func setCautionButtonBackgroundToYES(sender: UIButton){
+        sender.setBackgroundImage(UIImage(named: "iosOKHaken.png"), forState: .Normal)
+        
+    }
+    func setCautionButtonBackgroundToNO(sender: UIButton){
+        sender.setBackgroundImage(UIImage(named: "iosCrossHaken.png"), forState: .Normal)
+    }
     /* Buttons and their funcs Ende */
     
     @IBAction func setDifficultyBySlider(sender: UISlider) {
@@ -219,14 +236,6 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
     var _boolCautionXY = false
     var _boolCautionZX = false
     
-    var items: [String] = ["Koordinaten", "Adresse", "Name", "Beschreibung"]
-    var itemValue = Array<String>()
-    
-   
-    var addressText:String = "Adresse wird geladen"
-    var surfSpotName:String = "surfSpotName"
-    var spotDescription:String = "Spot Beschreibung"
-    
     let _dataWaveType = wavetype()
     let _dataWaterDepth = waterdepth()
     let _dataWaterTemp = watertemperature()
@@ -239,6 +248,8 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         
         scroller.contentSize = CGSizeMake(730, 750)
         scroller.scrollEnabled = true
@@ -255,15 +266,10 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         _outCoastProperty.delegate = self
         _outBeachType.delegate = self
         
-        //FIXME: zu was genau ist das hier da?
-        self.itemValue.append(coordString)
-        self.addressText = getAddress(currentCoordinate)
-        self.itemValue.append(self.addressText)
-        self.itemValue.append(self.surfSpotName)
-        self.itemValue.append(self.spotDescription)
+        
         
         //FIXME: brauchen wir das noch?
-        _outAdress.text = "Adresse wird geladen"
+        _outAdress.text = getAddress(currentCoordinate)
         
         _outWaveType.dataSource = self
         _outWaterDepth.dataSource = self
@@ -324,18 +330,20 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         _boolCautionXY = nuPunkt.cautionXY
         _boolCautionZX = nuPunkt.cautionZX
         
+        // Defaultwerte der Pickerview-Buttons
+        waveTypeBtn.setTitle(_dataWaveType[_intWaveType], forState: .Normal)
+        waterDepthBtn.setTitle(_dataWaterDepth[_intWaterDepth], forState: .Normal)
+        waterTempBtn.setTitle(_dataWaterTemp[_intWaterTemp], forState: .Normal)
+        waterTypeBtn.setTitle(_dataWaterType[_intWaterType], forState: .Normal)
+        
+        coastBtn.setTitle(_dataCoastProperty[_intCoastproperty], forState: .Normal)
+        beachTypeBtn.setTitle(_dataBeachType[_intBeachType], forState: .Normal)
+        
         //FIXME: Leiste noch ohne Funktion!
 //        nuPunkt._difficulty = 1
+        
+        waveTypeBtn.setTitle(_dataWaveType[_intWaveType], forState: .Normal)
     }
-    
-//    func update () {
-//        dispatch_async(dispatch_get_main_queue(), {
-//            self._outAdress.text = self.getAddress(self.currentCoordinate)
-//        })
-//         var coordString: String  = String(format: "%f", self.currentCoordinate.latitude) + ", " + String(format: "%f", self.currentCoordinate.longitude)
-//        self._outAdress.text = coordString
-//        println("update: \(coordString)")
-//    }
     
     /*
     **************************************************************************
@@ -461,11 +469,6 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
                 self.addressText = newAddress
                 self._outAdress.text = newAddress
                 
-//                if(!self.itemValue.isEmpty){
-//                    self.itemValue.removeAtIndex(1)
-//                    self.itemValue.insert(newAddress, atIndex: 1)
-////                    self.tableView.reloadData()
-//                }
             }
         }
         println(newAddress)
@@ -478,61 +481,7 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         // Dispose of any resources that can be recreated.
     }
     
-    
-    
-//    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return self.items.count
-//    }
-//    
-//    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-//        var cell:UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("cell") as UITableViewCell // erzeugt eine Zelle in der Tabelle
-//        cell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "cell") // zeigt eine Wertefeld in der erzeugten Zelle an
-//        cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-//        cell.editingAccessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-//        cell.textLabel?.text? = self.items[indexPath.row]
-//        cell.detailTextLabel?.text = self.itemValue[indexPath.row] // String(format: "%f", currentSpotLatitude)
-//        return cell
-//        
-//    }
-    
-   
-    
-//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        println("You selected cell #\(indexPath.row)!")
-//    }
-    
-//    func tableView(tableView: UITableView,
-//        commitEditingStyle editingStyle: UITableViewCellEditingStyle,
-//        forRowAtIndexPath indexPath: NSIndexPath) {
-//            switch editingStyle {
-//            case .Delete:
-//                // remove the deleted item from the model
-//                self.items.removeAtIndex(indexPath.row)
-//                
-//                // remove the deleted item from the `UITableView`
-//                self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-//            default:
-//                return
-//            }
-//    }
-    /*
-    
-    override func prepareForSegue(segue: UIStoryboardSegue,
-        sender: AnyObject!) {
-            // sender is the tapped `UITableViewCell`
-            let cell = sender as UITableViewCell
-            let indexPath = self.tableView.indexPathForCell(cell)
-            
-            // load the selected model
-            let item = self.items[indexPath!.row]
-            
-            let detail = segue.destinationViewController as LocationEditorView
-            // set the model to be viewed
-            detail.item = item
-    }
-*/
-    
-    
+ 
     
     @IBAction func back2initialViewController(Sender: UIButton) {
         // erst mal Daten speichern
@@ -580,12 +529,21 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
 
         Vault.saveLocation(nuPunkt)
         
+        // Das Delegate regelt hier den Viewwechsel zur MapView - MapController
+        if (delegate != nil) {
+            
+            delegate!.createNewSurfSpotDidFinish(self, coords: currentCoordinate)
+        }
+       
+    }
+    
+    @IBAction func backButton(sender: UIButton) {
+        
         // View wechseln
         let secondViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MapView") as MapController
         navigationController?.popViewControllerAnimated(true)
-        //self.presentViewController(secondViewController, animated: true, completion: nil)
-       
         
-        println("zurück zum ersten ViewController")
+        println("Vorgang abgebrochen")
     }
+    
 }

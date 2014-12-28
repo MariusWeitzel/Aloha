@@ -150,10 +150,13 @@ class Vault: UIViewController {
                 
                 if pointItems[16].toInt()! == 1 { nuPunkt.cautionZX = true }
                 else { nuPunkt.cautionZX = false }
+            
+            // FIXME: Besteht keine Internetverbindung, stürzt das Programm bereits an dieser Stelle ab! 
+            // An dieser Stelle ist aus irgendeinem Grund eine NullPointer Exception (fatal error: unexpectedly found nil while unwrapping an Optional value)
+            // TODO: Exception abfangen und dem User darauf hinweisen an seinem Device Internet einzuschalten
+                //nuPunkt._difficulty = pointItems[17].toInt()!
                 
-                nuPunkt._difficulty = pointItems[17].toInt()!
-                
-                nuPunkt.notes = pointItems[18]
+               // nuPunkt.notes = pointItems[18]
                 
                 println("\(nuPunkt.name)")
             }

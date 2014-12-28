@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="g2C-6q-WqA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="g2C-6q-WqA">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -67,7 +67,6 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
                     <connections>
                         <outlet property="adressLabel" destination="8Fi-O9-n79" id="xYU-Va-SDK"/>
-                        <outlet property="mapPin" destination="LD1-cT-bWR" id="Fd0-sC-xP1"/>
                         <outlet property="mapView" destination="yIR-2Y-LO4" id="GJk-Au-sy6"/>
                         <outlet property="searchMarkerSwitch" destination="g30-qg-0on" id="Evw-Mw-9cL"/>
                         <segue destination="bnq-lf-gRm" kind="show" identifier="MapToLocSegue" id="WzD-Qv-jAl"/>
@@ -568,13 +567,23 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nOT-Vn-dj9">
-                                <rect key="frame" x="334" y="937" width="100" height="30"/>
+                                <rect key="frame" x="423" y="937" width="100" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Speichern">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="back2initialViewController:" destination="bnq-lf-gRm" eventType="touchUpInside" id="aDu-Oy-W7p"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="54D-4p-38I">
+                                <rect key="frame" x="211" y="937" width="128" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Abbrechen">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backButton:" destination="bnq-lf-gRm" eventType="touchUpInside" id="j1C-eq-TSL"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -609,7 +618,6 @@
                         <outlet property="_outWaterType" destination="GBU-fF-imj" id="wtT-6g-qRq"/>
                         <outlet property="_outWaveType" destination="PPB-7I-RHY" id="myc-Gg-0MH"/>
                         <outlet property="beachTypeBtn" destination="qMQ-4w-U4x" id="5Bb-EO-NGE"/>
-                        <outlet property="caution_JellyfishBtn" destination="pp6-gs-Ivz" id="Inf-LM-dcg"/>
                         <outlet property="coastBtn" destination="kpG-9J-AQ6" id="YE0-LP-R9u"/>
                         <outlet property="scroller" destination="Gd2-Ot-M2N" id="BBk-Z3-Paq"/>
                         <outlet property="scrollerView" destination="aOZ-fE-tYH" id="H06-NY-4zB"/>
@@ -633,6 +641,9 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="wrr-BI-3zS">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="74D-dC-scz"/>
                     </connections>

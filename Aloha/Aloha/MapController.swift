@@ -10,35 +10,26 @@ import Foundation
 
 import UIKit
 
-class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDelegate  { //MapToLocationViewDelegate,
+
+
+class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDelegate, SurfSpotMarkerDelegate  { //MapToLocationViewDelegate,
     
     
-    @IBOutlet weak var mapView: GMSMapView!
-    @IBOutlet weak var mapPin: UIImageView!
+    @IBOutlet weak var mapView: GMSMapView! // zeigt die Google Map
     
     
-    @IBOutlet weak var pinImageVerticalConstraint: NSLayoutConstraint!
-    var searchedTypes = ["Very Worse", "Worse", "Not Bad", "Good", "Very Good"]
+
+    var marker = GMSMarker() // zeigt die aktuelle Suchposition - Suchpin
+    var surfPlaces: [GMSMarker] = [] // sammelt die gespeicherten Surfspots
+    var tempCoord: CLLocationCoordinate2D! // speichert die temporäre Koordinate
     
-    var marker = GMSMarker()
-    var surfMarker = GMSMarker()
-    var currentSpotLatitude:Double = 0.0
-    var currentSpotLongitude:Double = 0.0
-    var addressText:String = "Adresse von Map"
-    var getNewAddress:String!{
-        get{
-            return addressText
-        }
-    }
-    
-        
-    let locationManager = CLLocationManager()
-    let dataProvider = GoogleDataProvider()
+    let locationManager = CLLocationManager() // sammelt Information der GPS-Daten der eigenen Position
+    let dataProvider = GoogleDataProvider() // Daten die zur Nutzung von Gmaps nötig sind
     
     
-    @IBOutlet weak var searchMarkerSwitch: UISwitch!
+    @IBOutlet weak var searchMarkerSwitch: UISwitch! // kontrolle über aktivierung von Suchpin und Adresslabel
     
-    @IBOutlet weak var adressLabel: UILabel!
+    @IBOutlet weak var adressLabel: UILabel! // zeigt die aktuelle Adresse vom Suchpin an
     
    
     override func viewDidLoad() {
@@ -63,9 +54,6 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
         marker.icon = UIImage(named: "icon_me")
         marker.appearAnimation = kGMSMarkerAnimationPop
         marker.map = mapView
-        
-        
-        
         
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -148,41 +136,93 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
     func mapView(mapView: GMSMapView!, willMove gesture: Bool){
         adressLabel.lock()
     }
+    
+    
     // registriert langes drücken zum erzeugen eines neuen Markers
     func mapView(mapView: GMSMapView!, didLongPressAtCoordinate longPressCoordinate: CLLocationCoordinate2D){
-        var surfMarker = GMSMarker()
-        surfMarker.position = longPressCoordinate //mapView.camera.target
-        surfMarker.snippet = "Surf_Spot"
-        surfMarker.icon = UIImage(named: "surfer") // zum Nutzen des Bildes muss aus Urheberrechtlichen Gründen folgendes bei den Credits, Website angegeben werden <div>Icon made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed under <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div> http://www.flaticon.com/free-icon/surfer-surfing-in-a-big-water-wave_48043
         
-        surfMarker.appearAnimation = kGMSMarkerAnimationPop
-        surfMarker.map = mapView
+        //speichert die gedrückte Koordinate und bereitet die Verbindung zur LocationEditorView vor
        
-        
-        let secondViewController = self.storyboard?.instantiateViewControllerWithIdentifier("LocationView") as LocationEditorView
-        
-        // überträgt die Koordinaten des neuen Markes zur LocationEditorView
-        secondViewController.currentCoordinate = surfMarker.position
-        var text =  String(format: "%f", secondViewController.currentCoordinate.latitude) + ", " + String(format: "%f", secondViewController.currentCoordinate.longitude)
-        println("marker position: \(text)")
+        tempCoord = longPressCoordinate
+        performSegueWithIdentifier("MapToLocSegue", sender: self)
        
-        self.navigationController?.pushViewController(secondViewController, animated: true)
-        
         
     }
     
+    // Übergang zum nächsten ViewController mittels Segue
+    // IMPORTANT: damit das Surfspot-Icon nachdem Speichern auf der Map angezeigt wird
+    // muss der Übergang mittels einer Segue erfolgen. Der Datentransfer erfolgt über
+    // ein Delegate, das in der LocationEditorView ausgelöst wird.
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if(segue.identifier == "MapToLocSegue"){
+            
+            println("ok segue")
+            let vc = segue.destinationViewController as LocationEditorView
+            vc.currentCoordinate = tempCoord
+            vc.delegate = self
+
+        }
+    }
     // öffnet die LocationView nach drücken des Markers und überträgt die dazugehörigen Koordinaten
     func mapView(mapView: GMSMapView!, didTapMarker marker: GMSMarker!) -> Bool {
         
         //FIXME: aus Locations die Koordinate wieder fischen & dem LocationEditorView den Punkt zum anzeigen übergeben
+        tempCoord = marker.position
+        performSegueWithIdentifier("MapToLocSegue", sender: self)
+
         
-        let secondViewController = self.storyboard?.instantiateViewControllerWithIdentifier("LocationView") as LocationEditorView
-        secondViewController.currentCoordinate = marker.position
-        self.marker.position = marker.position
-        self.navigationController?.pushViewController(secondViewController, animated: true)
         return true
     }
+    
+    // IMPORTANT: gehört zum Delegate-Vorgang. Nachdem in der LocationEditorView gespeichert wurde
+    // wird diese Funktion ausgeführt die letztendlich das Anzeigen des Surfspots an der entsprechenden 
+    // Koordinate übernimmt
+    func createNewSurfSpotDidFinish(controller: LocationEditorView, coords: CLLocationCoordinate2D) {
+       
+        // entferne die LocationEditorView
+        controller.navigationController?.popViewControllerAnimated(true)
+        // erstelle neuen Surfspotmarker
+        if(!surfPlaces.isEmpty){
+            for( var i:Int = 0; i < surfPlaces.count; i++){
+                if(surfPlaces[i].position.latitude == coords.latitude && surfPlaces[i].position.longitude == coords.longitude){
+                    println("SurfSpot Icon an dieser Stelle schon Vorhanden")
+                }
+                else{
+                    var surfMarker = GMSMarker()
+                    surfMarker.position = coords
+                    surfMarker.snippet = "Surf_Spot"
+                    
+                    /* IMPORTANT
+                    zum Nutzen des Bildes muss aus Urheberrechtlichen Gründen folgendes bei den Credits, Website angegeben werden <div>Icon made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed under <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div> http://www.flaticon.com/free-icon/surfer-surfing-in-a-big-water-wave_48043
+                    */
+                    surfMarker.icon = UIImage(named: "surfer")
+                    
+                    surfMarker.appearAnimation = kGMSMarkerAnimationPop
+                    surfMarker.map = self.mapView
+                    surfPlaces.append(surfMarker)
+                    println("neue Surfspotlocation: \(coords.latitude, coords.longitude)")
+                              }
+            }
+        }
+        else{
+            var surfMarker = GMSMarker()
+            surfMarker.position = coords
+            surfMarker.snippet = "Surf_Spot"
+            
+            /* IMPORTANT
+            zum Nutzen des Bildes muss aus Urheberrechtlichen Gründen folgendes bei den Credits, Website angegeben werden <div>Icon made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed under <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div> http://www.flaticon.com/free-icon/surfer-surfing-in-a-big-water-wave_48043
+            */
+            surfMarker.icon = UIImage(named: "surfer")
+            
+            surfMarker.appearAnimation = kGMSMarkerAnimationPop
+            surfMarker.map = self.mapView
+            surfPlaces.append(surfMarker)
+            println("neue Surfspotlocation: \(coords.latitude, coords.longitude)")
+        
 
+        }
+    
+    }
 
     // wird aufgerufen wenn der User die Anfrage zur Erlaubnis der Lokalisierung beantwortet hat
     func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
@@ -217,7 +257,7 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
 
     }
     
-    // kalkuliert den sichtbaren Radius der MapView
+    // kalkuliert den sichtbaren Radius der MapView - für die Filterung von Surfspots im Radius
     var mapRadius: Double {
         get {
             let region = mapView.projection.visibleRegion()
@@ -234,12 +274,16 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
         }
     }
     
+    // FIXME: Filtersuche muss hier noch gefixt werden, je nach dem wie Surfspotsgespeichert werden, in Array oder Places
+
     func fetchNearbyPlaces(coordinate: CLLocationCoordinate2D) {
         // lösche aller Marker
         mapView.clear()
         marker.map = mapView
         // sucht in der Nähe nach gefilterten Plätzen
-        dataProvider.fetchPlacesNearCoordinate(coordinate, radius:mapRadius, types: searchedTypes) { places in
+        
+                /*
+        dataProvider.fetchPlacesNearCoordinate(coordinate, radius:mapRadius, types: searchedTypes) { //surfPlaces in
             for place: GooglePlace in places {
                 // erzeugt für jeden gefundenen Platz einen Marker an der Stelle
                 let marker = PlaceMaker(place: place)
@@ -247,6 +291,7 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
                 marker.map = self.mapView
             }
         }
+*/
     }
     
     
@@ -256,23 +301,4 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
     }
     
     
-    
-    /* @IBAction func ladeVC2(Sender: UIButton!) {
-    let secondViewController = self.storyboard?.instantiateViewControllerWithIdentifier("LocationView") as UIViewController
-    
-    self.presentViewController(secondViewController, animated: true, completion: nil)
-    
-    println("lade 2ten ViewController")
-    
-    }
-    
-    @IBAction func mapView(Sender: UIButton!) {
-    let mapViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MapView") as UIViewController
-    
-    self.presentViewController(mapViewController, animated: true, completion: nil)
-    
-    println("lade mapViewController")
-    
-    }
-    */
-}
+   }
