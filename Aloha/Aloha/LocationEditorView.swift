@@ -126,8 +126,7 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
 
     }
     //Caution Buttons
-
-    
+ 
     // CHECKME: Kann man das schöner machen?
     @IBAction func changeBackgroundImageOfBtn(sender: UIButton) {
         
@@ -211,10 +210,19 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
     func setCautionButtonBackgroundToNO(sender: UIButton){
         sender.setBackgroundImage(UIImage(named: "iosCrossHaken.png"), forState: .Normal)
     }
+    
+    // Difficulty Button: 
+    
+    @IBOutlet weak var difficultySegmentCtrl: UISegmentedControl!
+    
+    @IBAction func setSurfSportDifficulty(sender: UISegmentedControl) {
+        let segmentedControl = sender as UISegmentedControl
+        
+        _intDifficulty =  segmentedControl.selectedSegmentIndex
+    }
+    
     /* Buttons and their funcs Ende */
     
-    @IBAction func setDifficultyBySlider(sender: UISlider) {
-    }
     
     @IBOutlet weak var _outTextbox: UITextView!
     
@@ -340,8 +348,8 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         beachTypeBtn.setTitle(_dataBeachType[_intBeachType], forState: .Normal)
         
         //FIXME: Leiste noch ohne Funktion!
-//        nuPunkt._difficulty = 1
-        
+        nuPunkt._difficulty = 1
+        difficultySegmentCtrl.selectedSegmentIndex = nuPunkt._difficulty;
         waveTypeBtn.setTitle(_dataWaveType[_intWaveType], forState: .Normal)
     }
     
@@ -525,7 +533,7 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         nuPunkt.cautionZX = _boolCautionZX
         
         //FIXME: Leiste noch ohne Funktion!
-        nuPunkt._difficulty = 1
+        nuPunkt._difficulty = _intDifficulty
 
         Vault.saveLocation(nuPunkt)
         
