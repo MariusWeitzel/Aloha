@@ -348,7 +348,7 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         beachTypeBtn.setTitle(_dataBeachType[_intBeachType], forState: .Normal)
         
         //FIXME: Leiste noch ohne Funktion!
-        nuPunkt._difficulty = 1
+        _intDifficulty = nuPunkt._difficulty
         difficultySegmentCtrl.selectedSegmentIndex = nuPunkt._difficulty;
         waveTypeBtn.setTitle(_dataWaveType[_intWaveType], forState: .Normal)
     }
