@@ -9,10 +9,7 @@
 import Foundation
 import UIKit
 
-@objc protocol SidebarDelegate{
-    optional func sidebarWillClose()
-    optional func sidebarWillOpen()
-}
+
 
 class Sidebar: NSObject {
     
@@ -23,7 +20,6 @@ class Sidebar: NSObject {
     var barWidth:CGFloat!
     var centerNavigationController: UINavigationController!
     var animator:UIDynamicAnimator!
-    var delegate:SidebarDelegate?
     var isSidebarOpen:Bool = false
     
     override init() {
@@ -63,7 +59,6 @@ class Sidebar: NSObject {
     // Wischen von Links nach Rechts
     func handleLeftSwipe(recognizer:UIScreenEdgePanGestureRecognizer){
         showSidebar(true)
-        delegate?.sidebarWillOpen?()
     }
     
     // Wischen von Rechts nach Links (allerdings im Menü)
@@ -71,7 +66,6 @@ class Sidebar: NSObject {
         let location = recognizer.locationInView(recognizer.view) // Position der Wischgeste
         if location.x < barWidth{ // Wischgeste muss sich innerhalb des Menüs befinden
             showSidebar(false)
-            delegate?.sidebarWillClose?()
         }
     }
     
