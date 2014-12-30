@@ -10,7 +10,7 @@ import Foundation
 
 import UIKit
 
-class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDelegate, SidebarDelegate  { //MapToLocationViewDelegate,
+class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDelegate  { //MapToLocationViewDelegate,
     
     
     @IBOutlet weak var mapView: GMSMapView!
@@ -53,6 +53,8 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
         mapView.myLocationEnabled = true
         // erfragt den Zugriff auf Lokalisierung
         
+        mapView.settings.consumesGesturesInView = false // Andere Gesten werden nich mehr abgefangen
+        
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         mapView.myLocationEnabled = true
@@ -66,7 +68,6 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
         
         //erzeugt die Sidebar
         sidebar = Sidebar(sourceView: self.view)
-        sidebar.delegate = self
         
         
         
@@ -183,7 +184,6 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
             
             mapView.myLocationEnabled = true // erzeugt einen blauen Punkt, wo sich der User befindet
             mapView.settings.myLocationButton = true // erzeugt einen Button auf der Map zum zentrieren der Location
-            mapView.settings.consumesGesturesInView = false // Andere Gesten werden nich mehr abgefangen
             
         }
         else{
