@@ -39,7 +39,7 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
         //Lädt direkt am Anfang alle Locations
         //FIXME: möglicherweise früher notwendig!
         Vault.loadLocations()
-        
+       
         mapView.delegate = self
         mapView.myLocationEnabled = true
         // erfragt den Zugriff auf Lokalisierung
@@ -55,9 +55,33 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
         marker.appearAnimation = kGMSMarkerAnimationPop
         marker.map = mapView
         
+        loadSurfSpots()
+        
+        
+        
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
     
+    func loadSurfSpots() {
+       
+        var localLocations = Vault.getLocations()
+        for var i:Int = 0; i < localLocations.count; i++ {
+            let spot = GMSMarker()
+            
+            spot.position = CLLocationCoordinate2DMake(localLocations[i].lat.doubleValue, localLocations[i].long.doubleValue)
+            spot.snippet = localLocations[i].name
+            
+            spot.icon = UIImage(named: "surfer")
+            
+            spot.appearAnimation = kGMSMarkerAnimationPop
+            spot.map = self.mapView
+            surfPlaces.append(spot)
+            
+        }
+        
+        
+    }
     
     // aktualisiert die Adresse im Label sobald sich die map bewegt und gestoppt hat
     func mapView(mapView: GMSMapView!, idleAtCameraPosition position: GMSCameraPosition!) {
@@ -280,6 +304,9 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
         // lösche aller Marker
         mapView.clear()
         marker.map = mapView
+        for spot: GMSMarker in surfPlaces{
+            spot.map = mapView
+        }
         // sucht in der Nähe nach gefilterten Plätzen
         
                 /*
