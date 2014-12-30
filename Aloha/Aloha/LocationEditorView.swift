@@ -501,11 +501,13 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         nuPunkt.long = self.currentCoordinate.longitude
         
         // to avoid loading errors
-        if _outName.text == "" {
+        if countElements(_outName.text) == 0 {
+            println("Name ist leer")
             nuPunkt.name = " "
         }
         else {
             nuPunkt.name = _outName.text
+            println("Name ist \(_outName.text)")
         }
         nuPunkt.favorite = _outFavorite.on
         nuPunkt.adress = _outAdress.text!
@@ -518,11 +520,11 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         nuPunkt._coastproperties = _intCoastproperty
         nuPunkt._beachtype = _intBeachType
         // to avoid loading errors
-        if _outTextbox.text == "" {
-            nuPunkt.name = " "
+        if countElements(_outTextbox.text) == 0 {
+            nuPunkt.notes = " "
         }
         else {
-            nuPunkt.name = _outTextbox.text
+            nuPunkt.notes = _outTextbox.text
         }
         
         nuPunkt.jellyfisch = _boolJellyfish

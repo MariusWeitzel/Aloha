@@ -25,11 +25,14 @@ class Vault: UIViewController {
         Locations.append(punkt)
         var saveStr = ""
         
+        println(Locations.count)
+        
         // Locations auseinander fuddeln
         for spot in Locations {
             saveStr += spot.lat.stringValue + spotItemSeperator
             saveStr += spot.long.stringValue + spotItemSeperator
             
+            println("Name beim speichern: \(spot.name)")
             saveStr += spot.name + spotItemSeperator
             
             if spot.favorite { saveStr += "1" }
@@ -108,10 +111,9 @@ class Vault: UIViewController {
             
             let splittedLocations = split(loadedStr, {$0=="#"})
             for location in splittedLocations {
+                println("StringLocation: \(location)")
                 var pointItems = split(location, {$0=="|"})
                 var nuPunkt = Location()
-                
-                println("\(pointItems[0]) & \(pointItems[1])")
                 
                 //FIXME: wenn das schief geht, is halt direkt rum :/
                 nuPunkt.lat = NSNumberFormatter().numberFromString(pointItems[0])!
@@ -157,6 +159,8 @@ class Vault: UIViewController {
                 nuPunkt.notes = pointItems[18]
                 
                 println("\(nuPunkt.name)")
+                
+                Locations.append(nuPunkt)
             }
             
             
@@ -164,6 +168,12 @@ class Vault: UIViewController {
         }
         else {
             println("Laden fehlgeschlagen")
+        }
+        
+        println(Locations.count)
+        
+        for x in Locations {
+            println(x.name)
         }
         
         //FIXME: waaaaaas?
