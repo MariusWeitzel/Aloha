@@ -150,7 +150,8 @@ class Vault: UIViewController {
                 
                 if pointItems[16].toInt()! == 1 { nuPunkt.cautionZX = true }
                 else { nuPunkt.cautionZX = false }
-                
+            
+
                 nuPunkt._difficulty = pointItems[17].toInt()!
                 
                 nuPunkt.notes = pointItems[18]
