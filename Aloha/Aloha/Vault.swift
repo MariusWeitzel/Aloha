@@ -207,6 +207,10 @@ class Vault: UIViewController {
 
     }
     
+    class func getLocations() -> [Location] {
+        return Locations
+    }
+    
     //TODO: deleteLocation
     //      editLocation
     
