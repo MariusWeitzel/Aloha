@@ -7,10 +7,3 @@
 //
 
 import Foundation
-import UIKit
-
-class SidebarView: UIViewController {
-    
-   
-    
-}

@@ -18,21 +18,10 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
     @IBOutlet weak var mapView: GMSMapView! // zeigt die Google Map
     
     
+
     var marker = GMSMarker() // zeigt die aktuelle Suchposition - Suchpin
     var surfPlaces: [GMSMarker] = [] // sammelt die gespeicherten Surfspots
     var tempCoord: CLLocationCoordinate2D! // speichert die temporäre Koordinate
-    var sidebar:Sidebar = Sidebar()
-    
-//    var marker = GMSMarker()
-//    var surfMarker = GMSMarker()
-//    var currentSpotLatitude:Double = 0.0
-//    var currentSpotLongitude:Double = 0.0
-    var addressText:String = "Adresse von Map"
-    var getNewAddress:String!{
-        get{
-            return addressText
-        }
-    }
     
     let locationManager = CLLocationManager() // sammelt Information der GPS-Daten der eigenen Position
     let dataProvider = GoogleDataProvider() // Daten die zur Nutzung von Gmaps nötig sind
@@ -46,7 +35,7 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
     override func viewDidLoad() {
         
         super.viewDidLoad()
-
+        
         //Lädt direkt am Anfang alle Locations
         //FIXME: möglicherweise früher notwendig!
         Vault.loadLocations()
@@ -57,8 +46,6 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
         mapView.settings.compassButton = true
         // erfragt den Zugriff auf Lokalisierung
         
-        mapView.settings.consumesGesturesInView = false // Andere Gesten werden nich mehr abgefangen
-        
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         mapView.myLocationEnabled = true
@@ -68,11 +55,8 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
         marker.snippet = "New Surfspot"
         marker.icon = UIImage(named: "icon_me")
         marker.appearAnimation = kGMSMarkerAnimationPop
-        marker.map = mapView
+        marker.map = nil
         
-        //erzeugt die Sidebar
-        sidebar = Sidebar(sourceView: self.view)
-
         loadSurfSpots()
         
         // Do any additional setup after loading the view, typically from a nib.
