@@ -20,12 +20,15 @@ var Locations = [Location]()
 
 class Vault: UIViewController {
     
-    class func saveLocation(punkt: Location) {
+    class func saveLocation(punkt: Location?) {
         // anzulegenden Punkt an bisherige Locations anfügen
-        Locations.append(punkt)
+        // falls leer (gelöscht) wird nil übergeben, das will man natürlich nicht anfügen
+        if punkt != nil {
+            Locations.append(punkt!)
+        }
         var saveStr = ""
         
-        println(Locations.count)
+        println("beim Speichern sind es \(Locations.count) Punkte")
         
         // Locations auseinander fuddeln
         for spot in Locations {

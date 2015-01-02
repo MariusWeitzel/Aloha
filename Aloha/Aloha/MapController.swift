@@ -42,6 +42,8 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
        
         mapView.delegate = self
         mapView.myLocationEnabled = true
+//        mapView.settings.rotateGestures = false
+        mapView.settings.compassButton = true
         // erfragt den Zugriff auf Lokalisierung
         
         locationManager.delegate = self
@@ -57,14 +59,11 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
         
         loadSurfSpots()
         
-        
-        
-        
         // Do any additional setup after loading the view, typically from a nib.
     }
     
     func loadSurfSpots() {
-       
+        surfPlaces.removeAll(keepCapacity: true)
         var localLocations = Vault.getLocations()
         for var i:Int = 0; i < localLocations.count; i++ {
             let spot = GMSMarker()
@@ -79,8 +78,6 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
             surfPlaces.append(spot)
             
         }
-        
-        
     }
     
     // aktualisiert die Adresse im Label sobald sich die map bewegt und gestoppt hat
@@ -105,6 +102,7 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
     
     // aktualisiert die Marker auf der Map
     @IBAction func refreshPlaces(sender: UIBarButtonItem) {
+        loadSurfSpots()
         fetchNearbyPlaces(mapView.camera.target)
     }
     
@@ -180,7 +178,7 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "MapToLocSegue"){
             
-            println("ok segue")
+//            println("ok segue")
             let vc = segue.destinationViewController as LocationEditorView
             vc.currentCoordinate = tempCoord
             vc.delegate = self
@@ -209,7 +207,7 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
         if(!surfPlaces.isEmpty){
             for( var i:Int = 0; i < surfPlaces.count; i++){
                 if(surfPlaces[i].position.latitude == coords.latitude && surfPlaces[i].position.longitude == coords.longitude){
-                    println("SurfSpot Icon an dieser Stelle schon Vorhanden")
+//                    println("SurfSpot Icon an dieser Stelle schon vorhanden")
                 }
                 else{
                     var surfMarker = GMSMarker()
@@ -224,7 +222,7 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
                     surfMarker.appearAnimation = kGMSMarkerAnimationPop
                     surfMarker.map = self.mapView
                     surfPlaces.append(surfMarker)
-                    println("neue Surfspotlocation: \(coords.latitude, coords.longitude)")
+//                    println("neue Surfspotlocation: \(coords.latitude, coords.longitude)")
                               }
             }
         }
@@ -241,19 +239,37 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
             surfMarker.appearAnimation = kGMSMarkerAnimationPop
             surfMarker.map = self.mapView
             surfPlaces.append(surfMarker)
-            println("neue Surfspotlocation: \(coords.latitude, coords.longitude)")
+//            println("neue Surfspotlocation: \(coords.latitude, coords.longitude)")
         
 
         }
     
     }
+    
+    func deleteSurfSpotDidFinish(controller: LocationEditorView, coords: CLLocationCoordinate2D) {
+        
+            // entferne die LocationEditorView
+            controller.navigationController?.popViewControllerAnimated(true)
+            // erstelle neuen Surfspotmarker
+            if(!surfPlaces.isEmpty){
+                for( var i:Int = 0; i < surfPlaces.count; i++){
+                    if (surfPlaces[i].position.latitude == coords.latitude && surfPlaces[i].position.longitude == coords.longitude) {
+                        println("Da isser")
+                        surfPlaces.removeAtIndex(i)
+                        loadSurfSpots()
+                        fetchNearbyPlaces(coords)
+                        return
+                    }
+                }
+            }
+        }
 
     // wird aufgerufen wenn der User die Anfrage zur Erlaubnis der Lokalisierung beantwortet hat
     func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         
         if status == .AuthorizedWhenInUse {
             
-            println("authorisiert")
+//            println("authorisiert")
             locationManager.startUpdatingLocation()
             
             mapView.myLocationEnabled = true // erzeugt einen blauen Punkt, wo sich der User befindet
@@ -274,7 +290,7 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
             mapView.camera = GMSCameraPosition(target: location.coordinate, zoom: 1, bearing: 0, viewingAngle: 0)
             marker.position = mapView.camera.target
             
-            println("lokalisierung abgschlossen")
+//            println("lokalisierung abgschlossen")
             locationManager.stopUpdatingLocation()
             fetchNearbyPlaces(location.coordinate)
         }

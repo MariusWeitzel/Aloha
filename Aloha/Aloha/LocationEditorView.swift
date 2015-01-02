@@ -11,6 +11,7 @@ import UIKit
 // zur Regelung der Anzeige des Surfspot-Icons
 protocol SurfSpotMarkerDelegate {
     func createNewSurfSpotDidFinish(controller: LocationEditorView, coords: CLLocationCoordinate2D)
+    func deleteSurfSpotDidFinish(controller: LocationEditorView, coords: CLLocationCoordinate2D)
 }
 
 
@@ -54,10 +55,10 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         
         if(!_outWaterType.hidden){
            _outWaveType.hidden = true
-           println("aktiv")
+//           println("aktiv")
         }
         else {
-            println("gedrückt")
+//            println("gedrückt")
             _outWaveType.hidden = false
         }
 
@@ -411,7 +412,7 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
                 self._outAdress.text = newAddress
             }
         }
-        println(newAddress)
+//        println(newAddress)
         return newAddress
     }
     
@@ -427,12 +428,12 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         
         // falls der Punkt keinen Namen bekommen hat!
         if countElements(_outName.text) == 0 {
-            println("Name ist leer!")
+//            println("Name ist leer!")
             nuPunkt.name = " "
         }
         else {
             nuPunkt.name = _outName.text
-            println("Name ist \(_outName.text)")
+//            println("Name ist \(_outName.text)")
         }
         nuPunkt.favorite = _outFavorite.on
         nuPunkt.adress = _outAdress.text!
@@ -465,24 +466,34 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         
         // Das Delegate regelt hier den Viewwechsel zur MapView - MapController
         if (delegate != nil) {
-            
             delegate!.createNewSurfSpotDidFinish(self, coords: currentCoordinate)
         }
-       
     }
-    
     
     @IBAction func deleteSurfSpot(sender: UIButton) {
+        for var i=0; i < Locations.count; i++ {
+            if (currentCoordinate.latitude == Locations[i].lat && currentCoordinate.longitude == Locations[i].long) {
+//                println("Punkt: \(Locations[i].name)")
+                Locations.removeAtIndex(i)
+                
+//                println("nach dem Löschen noch \(Locations.count) Punkte")
+                Vault.saveLocation(nil)
+                
+                // View wechseln
+                if (delegate != nil) {
+                    delegate!.deleteSurfSpotDidFinish(self, coords: currentCoordinate)
+                }
+            }
+        }
     }
-    
+
     
     @IBAction func backButton(sender: UIButton) {
-        
         // View wechseln
         let secondViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MapView") as MapController
         navigationController?.popViewControllerAnimated(true)
         
-        println("Vorgang abgebrochen")
+//        println("Vorgang abgebrochen")
     }
     
 }
