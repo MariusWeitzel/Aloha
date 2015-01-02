@@ -272,21 +272,13 @@
         <!--SidebarView-->
         <scene sceneID="tyX-uX-wGf">
             <objects>
-                <viewController storyboardIdentifier="SidebarViewController" id="KOH-8R-wUN" userLabel="SidebarView" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SidebarViewController" id="KOH-8R-wUN" userLabel="SidebarView" customClass="SidebarView" customModule="Aloha" customModuleProvider="target" sceneMemberID="viewController">
                     <visualEffectView key="view" opaque="NO" contentMode="scaleToFill" id="qFT-eO-FfS">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="asU-gC-uYQ">
                             <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Menü" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rgW-5y-dPc">
-                                    <rect key="frame" x="718" y="96" width="44" height="21"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                            </subviews>
                         </view>
                         <blurEffect style="light"/>
                     </visualEffectView>
