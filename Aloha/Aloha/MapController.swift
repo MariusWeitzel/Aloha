@@ -243,6 +243,24 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
         }
     
     }
+    
+    func deleteSurfSpotDidFinish(controller: LocationEditorView, coords: CLLocationCoordinate2D) {
+        
+            // entferne die LocationEditorView
+            controller.navigationController?.popViewControllerAnimated(true)
+            // erstelle neuen Surfspotmarker
+            if(!surfPlaces.isEmpty){
+                for( var i:Int = 0; i < surfPlaces.count; i++){
+                    if (surfPlaces[i].position.latitude == coords.latitude && surfPlaces[i].position.longitude == coords.longitude) {
+                        println("Da isser")
+                        surfPlaces.removeAtIndex(i)
+                        loadSurfSpots()
+                        fetchNearbyPlaces(coords)
+                        return
+                    }
+                }
+            }
+        }
 
     // wird aufgerufen wenn der User die Anfrage zur Erlaubnis der Lokalisierung beantwortet hat
     func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {

@@ -11,6 +11,7 @@ import UIKit
 // zur Regelung der Anzeige des Surfspot-Icons
 protocol SurfSpotMarkerDelegate {
     func createNewSurfSpotDidFinish(controller: LocationEditorView, coords: CLLocationCoordinate2D)
+    func deleteSurfSpotDidFinish(controller: LocationEditorView, coords: CLLocationCoordinate2D)
 }
 
 
@@ -479,8 +480,9 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
                 Vault.saveLocation(nil)
                 
                 // View wechseln
-                let secondViewController = self.storyboard?.instantiateViewControllerWithIdentifier("MapView") as MapController
-                navigationController?.popViewControllerAnimated(true)
+                if (delegate != nil) {
+                    delegate!.deleteSurfSpotDidFinish(self, coords: currentCoordinate)
+                }
             }
         }
     }
