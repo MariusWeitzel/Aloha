@@ -465,14 +465,23 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         
         // Das Delegate regelt hier den Viewwechsel zur MapView - MapController
         if (delegate != nil) {
-            
             delegate!.createNewSurfSpotDidFinish(self, coords: currentCoordinate)
         }
-       
     }
     
-    
     @IBAction func deleteSurfSpot(sender: UIButton) {
+        for var i=0; i < Locations.count; i++ {
+            if (currentCoordinate.latitude == Locations[i].lat && currentCoordinate.longitude == Locations[i].long) {
+                println("Punkt: \(Locations[i].name)")
+                Locations.removeAtIndex(i)
+                
+                // Das Delegate regelt hier den Viewwechsel zur MapView - MapController
+                if (delegate != nil) {
+                    delegate!.createNewSurfSpotDidFinish(self, coords: currentCoordinate)
+                }
+
+            }
+        }
     }
     
     
