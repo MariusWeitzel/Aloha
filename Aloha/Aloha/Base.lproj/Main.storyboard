@@ -650,6 +650,25 @@
             </objects>
             <point key="canvasLocation" x="380" y="-768"/>
         </scene>
+        <!--SidebarView-->
+        <scene sceneID="tyX-uX-wGf">
+            <objects>
+                <viewController storyboardIdentifier="SidebarViewController" id="KOH-8R-wUN" userLabel="SidebarView" customClass="SidebarView" customModule="Aloha" customModuleProvider="target" sceneMemberID="viewController">
+                    <visualEffectView key="view" opaque="NO" contentMode="scaleToFill" id="qFT-eO-FfS">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="asU-gC-uYQ">
+                            <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </view>
+                        <blurEffect style="light"/>
+                    </visualEffectView>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NI3-0G-I0Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2142" y="469"/>
+        </scene>
     </scenes>
     <resources>
         <image name="icon_me" width="30" height="55"/>
