@@ -53,7 +53,7 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
         marker.snippet = "New Surfspot"
         marker.icon = UIImage(named: "icon_me")
         marker.appearAnimation = kGMSMarkerAnimationPop
-        marker.map = mapView
+        marker.map = nil
         
         loadSurfSpots()
         
@@ -303,7 +303,8 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
     func fetchNearbyPlaces(coordinate: CLLocationCoordinate2D) {
         // lösche aller Marker
         mapView.clear()
-        marker.map = mapView
+        marker.map = nil
+        searchMarkerSwitch.setOn(false, animated: true)
         for spot: GMSMarker in surfPlaces{
             spot.map = mapView
         }

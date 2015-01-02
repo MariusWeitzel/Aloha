@@ -201,6 +201,7 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         _intDifficulty =  segmentedControl.selectedSegmentIndex
     }
     
+    
     /* Buttons and their funcs Ende */
     
     /* PickerView und weitere Attributeinstellungen */
@@ -469,6 +470,11 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         }
        
     }
+    
+    
+    @IBAction func deleteSurfSpot(sender: UIButton) {
+    }
+    
     
     @IBAction func backButton(sender: UIButton) {
         
