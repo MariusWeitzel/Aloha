@@ -27,7 +27,6 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
     @IBOutlet var _outAdress: UILabel!
     var addressText:String = "Adresse wird geladen"
 
-    
     // PickerViews
     @IBOutlet var _outWaveType: UIPickerView!
     @IBOutlet var _outWaterDepth: UIPickerView!
@@ -37,6 +36,11 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
     @IBOutlet weak var _outCoastProperty: UIPickerView!
     @IBOutlet weak var _outBeachType: UIPickerView!
    
+    // Schwierigkeitsgrad
+    @IBOutlet weak var difficultySegmentCtrl: UISegmentedControl!
+    
+    // Textbox der Notizen
+    @IBOutlet weak var _outTextbox: UITextView!
     
     // Switch
     @IBOutlet var _outFavorite: UISwitch!
@@ -63,11 +67,9 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
     @IBAction func settingWaterDepthByPressingBtn(sender: UIButton) {
         if(_outWaterDepth.hidden){
             _outWaterDepth.hidden = false
-            
         }
         else{
             _outWaterDepth.hidden = true
-          
         }
     }
     
@@ -76,59 +78,43 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         
         if(_outWaterTemp.hidden){
             _outWaterTemp.hidden = false
-           
         }
         else{
             _outWaterTemp.hidden = true
-          
         }
-
     }
     
     @IBOutlet weak var waterTypeBtn: UIButton!
     @IBAction func settingWatertypeByPressingBtn(sender: UIButton) {
-       
-        if(_outWaterType.hidden){
+       if(_outWaterType.hidden){
              _outWaterType.hidden = false
-           
         }
         else{
              _outWaterType.hidden = true
-           
         }
-
     }
     
     @IBOutlet weak var coastBtn: UIButton!
     @IBAction func setCoastPropertyByPressingBtn(sender: UIButton) {
-        
         if(_outCoastProperty.hidden){
             _outCoastProperty.hidden = false
-            
         }
         else{
             _outCoastProperty.hidden = true
-            
         }
-
     }
     
     @IBOutlet weak var beachTypeBtn: UIButton!
     @IBAction func setBeachTypeByPressingBtn(sender: UIButton) {
         if(_outBeachType.hidden){
             _outBeachType.hidden = false
-            
         }
         else{
             _outBeachType.hidden = true
-            
         }
-
     }
     //Caution Buttons
- 
-    // CHECKME: Kann man das schöner machen?
-    @IBAction func changeBackgroundImageOfBtn(sender: UIButton) {
+     @IBAction func changeBackgroundImageOfBtn(sender: UIButton) {
         
         switch(sender.tag){
         case 0:
@@ -196,35 +182,26 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
                 _boolCautionZX = false
             }
             break
-
             
         default: break
         }
-        
     }
     
     func setCautionButtonBackgroundToYES(sender: UIButton){
         sender.setBackgroundImage(UIImage(named: "iosOKHaken.png"), forState: .Normal)
-        
     }
+    
     func setCautionButtonBackgroundToNO(sender: UIButton){
         sender.setBackgroundImage(UIImage(named: "iosCrossHaken.png"), forState: .Normal)
     }
     
-    // Difficulty Button: 
-    
-    @IBOutlet weak var difficultySegmentCtrl: UISegmentedControl!
-    
+    // Difficulty Button:
     @IBAction func setSurfSportDifficulty(sender: UISegmentedControl) {
         let segmentedControl = sender as UISegmentedControl
-        
         _intDifficulty =  segmentedControl.selectedSegmentIndex
     }
     
     /* Buttons and their funcs Ende */
-    
-    
-    @IBOutlet weak var _outTextbox: UITextView!
     
     /* PickerView und weitere Attributeinstellungen */
     var _intWaveType = 0
@@ -257,8 +234,6 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
         scroller.contentSize = CGSizeMake(730, 750)
         scroller.scrollEnabled = true
         scroller.showsVerticalScrollIndicator = true
@@ -270,13 +245,9 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         _outWaterDepth.delegate = self
         _outWaterTemp.delegate = self
         _outWaterType.delegate = self
-        
         _outCoastProperty.delegate = self
         _outBeachType.delegate = self
         
-        
-        
-        //FIXME: brauchen wir das noch?
         _outAdress.text = getAddress(currentCoordinate)
         
         _outWaveType.dataSource = self
@@ -296,31 +267,18 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         
 // Do any additional setup after loading the view, typically from a nib.
         
-        //FIXME: ob das nicht auch schöner geht?
-        //       leeren Punkt übergeben für neu
-        //       bestehenden Punkt falls vorhanden
-        //TODO:  rausfinden, wie man aus func mapview() dem Aufruf was übergibt
-        //raus finden ob es den Punkt schon gibt oder es ein neuer sein soll
         for spot in Locations {
             if (spot.lat == self.currentCoordinate.latitude && spot.long == self.currentCoordinate.longitude) {
                 nuPunkt = spot
             }
         }
         
-        //TODO: jetzt nur noch alle Items durch nuPunkt setzen
-        //falls if:    Werte des bestehenden Punktes
-        //andernfalls: dann eben die Defaultwerte -> wie nen neuer Punkt
         _outName.text = nuPunkt.name
-        
-        //CHECKME: überflüssig?
-//        nuPunkt.lat = self.currentCoordinate.latitude
-//        nuPunkt.long = self.currentCoordinate.longitude
         
         _outFavorite.on = nuPunkt.favorite
         _outAdress.text = nuPunkt.adress
         
         _intWaveType = nuPunkt._wavetype
-        //FIXME: das stimmt so noch nicht so ganz... :(
         _outWaveType.selectRow(_intWaveType, inComponent: 0, animated: false)
         _intWaterDepth = nuPunkt._waterdepth
         _intWaterTemp = nuPunkt._watertemperature
@@ -347,7 +305,6 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         coastBtn.setTitle(_dataCoastProperty[_intCoastproperty], forState: .Normal)
         beachTypeBtn.setTitle(_dataBeachType[_intBeachType], forState: .Normal)
         
-        //FIXME: Leiste noch ohne Funktion!
         _intDifficulty = nuPunkt._difficulty
         difficultySegmentCtrl.selectedSegmentIndex = nuPunkt._difficulty;
         waveTypeBtn.setTitle(_dataWaveType[_intWaveType], forState: .Normal)
@@ -356,7 +313,6 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
     /*
     **************************************************************************
     PickerView Settings:
-    
     **************************************************************************
     */
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
@@ -379,7 +335,6 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         } else if  pickerView.tag == 5 {
             return _dataBeachType.count
         }
-
         return 1
     }
     
@@ -398,7 +353,6 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         } else if pickerView.tag == 5 {
             return _dataBeachType[row]
         }
-
         return ""
     }
     
@@ -408,53 +362,33 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
             _intWaveType = row
            waveTypeBtn.setTitle(_dataWaveType[row], forState: UIControlState.Normal)
             _outWaveType.hidden = true
-          
-            
-        } else if pickerView.tag == 1 {
+        }
+        else if pickerView.tag == 1 {
             _intWaterDepth = row
             waterDepthBtn.setTitle(_dataWaterDepth[row], forState: .Normal)
             _outWaterDepth.hidden = true
-          
-        } else if pickerView.tag == 2 {
+        }
+        else if pickerView.tag == 2 {
             _intWaterTemp = row
              waterTempBtn.setTitle(_dataWaterTemp[row], forState: .Normal)
             _outWaterTemp.hidden = true
-            
-        } else if pickerView.tag == 3 {
+        }
+        else if pickerView.tag == 3 {
             _intWaterType = row
              waterTypeBtn.setTitle(_dataWaterType[row], forState: .Normal)
             _outWaterType.hidden = true
-            
         }
         else if pickerView.tag == 4 {
             _intCoastproperty = row
             coastBtn.setTitle(_dataCoastProperty[row], forState: .Normal)
             _outCoastProperty.hidden = true
-            
-        } else if pickerView.tag == 5 {
+        }
+        else if pickerView.tag == 5 {
             _intBeachType = row
             beachTypeBtn.setTitle(_dataBeachType[row], forState: .Normal)
             _outBeachType.hidden = true
-            
         }
-
     }
-    
-    
-    // --------------------------------------------------------
-    
-//    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-//        return _dataWaterType.count
-////        return pickerData[component].count
-//    }
-//
-//    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-//        return _dataWaterType[row]
-//    }
-//    
-//    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-////        println(pickerData[row])
-//    }
     
     /*
     **************************************************************************
@@ -467,42 +401,32 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
     func getAddress(coord: CLLocationCoordinate2D) -> String{
         let geocoder = GMSGeocoder()
         
-        
         var newAddress: String = "Adresse wird geladen"
         geocoder.reverseGeocodeCoordinate (coord){ response , error in
-        
             if let address = response?.firstResult() {
                 let lines = address.lines as [String]
                 newAddress = join(" ", lines)
                 self.addressText = newAddress
                 self._outAdress.text = newAddress
-                
             }
         }
         println(newAddress)
-       return newAddress
+        return newAddress
     }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
- 
-    
     @IBAction func back2initialViewController(Sender: UIButton) {
         // erst mal Daten speichern
-        
-        //FIXME: falls bestehender Punkt ausgewählt wurde, muss der alte erst aus den Locations raus!!
-        
-        
         nuPunkt.lat = self.currentCoordinate.latitude
         nuPunkt.long = self.currentCoordinate.longitude
         
-        // to avoid loading errors
+        // falls der Punkt keinen Namen bekommen hat!
         if countElements(_outName.text) == 0 {
-            println("Name ist leer")
+            println("Name ist leer!")
             nuPunkt.name = " "
         }
         else {
@@ -534,7 +458,6 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         nuPunkt.cautionXY = _boolCautionXY
         nuPunkt.cautionZX = _boolCautionZX
         
-        //FIXME: Leiste noch ohne Funktion!
         nuPunkt._difficulty = _intDifficulty
 
         Vault.saveLocation(nuPunkt)
