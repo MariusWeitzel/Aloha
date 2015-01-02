@@ -16,11 +16,18 @@ class Sidebar: NSObject {
     
     let sidebarContainerView:UIView = UIStoryboard.SidebarViewController()!.view!
     let originView:UIView!
+    let _dataWaveType = wavetype()
+    let _dataWaterDepth = waterdepth()
+    let _dataWaterTemp = watertemperature()
+    let _dataWaterType = watertype()
+    let location = Location()
     
     var barWidth:CGFloat!
     var centerNavigationController: UINavigationController!
     var animator:UIDynamicAnimator!
     var isSidebarOpen:Bool = false
+    var switches  = [UISwitch]()
+    var names = [String]()
     
     override init() {
         super.init()
@@ -53,7 +60,116 @@ class Sidebar: NSObject {
         sidebarContainerView.backgroundColor = UIColor.clearColor()
         sidebarContainerView.clipsToBounds = false
         originView.addSubview(sidebarContainerView) // Sidebar zum Ursprungs View hinzufügen
+        createSwitches()
         
+        
+
+    }
+    
+    func createSwitches(){
+        var yPos = CGFloat(100)
+        var spacing = CGFloat(40)
+        
+        
+        var filterNameLabel1 = UILabel(frame: CGRectMake(550, yPos, 200, 21))
+        filterNameLabel1.text = "Wellentyp"
+        sidebarContainerView.addSubview(filterNameLabel1)
+        yPos = yPos + spacing
+        
+        for var i = 0; i < _dataWaveType.count; i++ {
+            
+            var filterLabel = UILabel(frame: CGRectMake(600, yPos, 200, 21))
+            filterLabel.text = _dataWaveType[i]
+            sidebarContainerView.addSubview(filterLabel)
+            
+            
+            var filterSwitch = UISwitch(frame:CGRectMake(700, yPos, 0, 0))
+            sidebarContainerView.addSubview(filterSwitch)
+            filterSwitch.addTarget(self, action: Selector("stateChanged:"), forControlEvents: UIControlEvents.ValueChanged)
+            switches.append(filterSwitch)
+            names.append(_dataWaveType[i])
+            yPos = yPos + spacing
+        }
+        
+        var filterNameLabel2 = UILabel(frame: CGRectMake(550, yPos, 200, 21))
+        filterNameLabel2.text = "Wassertiefe"
+        sidebarContainerView.addSubview(filterNameLabel2)
+        yPos = yPos + spacing
+        
+        for var i = 0; i < _dataWaterDepth.count; i++ {
+            
+            var filterLabel = UILabel(frame: CGRectMake(600, yPos, 200, 21))
+            filterLabel.text = _dataWaterDepth[i]
+            sidebarContainerView.addSubview(filterLabel)
+            
+            
+            var filterSwitch = UISwitch(frame:CGRectMake(700, yPos, 0, 0))
+            sidebarContainerView.addSubview(filterSwitch)
+            filterSwitch.addTarget(self, action: Selector("stateChanged:"), forControlEvents: UIControlEvents.ValueChanged)
+            switches.append(filterSwitch)
+            names.append(_dataWaterDepth[i])
+            yPos = yPos + spacing
+        }
+        
+        var filterNameLabel3 = UILabel(frame: CGRectMake(550, yPos, 200, 21))
+        filterNameLabel3.text = "Wassertemperatur"
+        sidebarContainerView.addSubview(filterNameLabel3)
+        yPos = yPos + spacing
+        
+        for var i = 0; i < _dataWaterTemp.count; i++ {
+            
+            var filterLabel = UILabel(frame: CGRectMake(600, yPos, 200, 21))
+            filterLabel.text = _dataWaterTemp[i]
+            sidebarContainerView.addSubview(filterLabel)
+            
+            
+            var filterSwitch = UISwitch(frame:CGRectMake(700, yPos, 0, 0))
+            sidebarContainerView.addSubview(filterSwitch)
+            filterSwitch.addTarget(self, action: Selector("stateChanged:"), forControlEvents: UIControlEvents.ValueChanged)
+            switches.append(filterSwitch)
+            names.append(_dataWaterTemp[i])
+            yPos = yPos + spacing
+        }
+        
+        var filterNameLabel4 = UILabel(frame: CGRectMake(550, yPos, 200, 21))
+        filterNameLabel4.text = "Wassertyp"
+        sidebarContainerView.addSubview(filterNameLabel4)
+        yPos = yPos + spacing
+        
+        for var i = 0; i < _dataWaterType.count; i++ {
+            
+            var filterLabel = UILabel(frame: CGRectMake(600, yPos, 200, 21))
+            filterLabel.text = _dataWaterType[i]
+            sidebarContainerView.addSubview(filterLabel)
+            
+            
+            var filterSwitch = UISwitch(frame:CGRectMake(700, yPos, 0, 0))
+            sidebarContainerView.addSubview(filterSwitch)
+            filterSwitch.addTarget(self, action: Selector("stateChanged:"), forControlEvents: UIControlEvents.ValueChanged)
+            switches.append(filterSwitch)
+            names.append(_dataWaterType[i])
+            yPos = yPos + spacing
+        }
+    }
+    
+    
+    func stateChanged(switchState: UISwitch) {
+        if switchState.on {
+            for var i = 0; i < switches.count; i++ {
+                if (switchState == switches[i]){
+                    println("Switch \(names[i]) ist an")
+                    // ToDo: Filtermethode einbinden
+                }
+            }
+            
+        } else {
+            for var i = 0; i < switches.count; i++ {
+                if (switchState == switches[i]){
+                    println("Switch \(names[i]) ist aus")
+                    // ToDo: Filtermethode einbinden
+                }
+            }
+        }
     }
     
     // Wischen von Links nach Rechts
