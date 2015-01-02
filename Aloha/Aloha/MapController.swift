@@ -42,6 +42,8 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
        
         mapView.delegate = self
         mapView.myLocationEnabled = true
+//        mapView.settings.rotateGestures = false
+        mapView.settings.compassButton = true
         // erfragt den Zugriff auf Lokalisierung
         
         locationManager.delegate = self
