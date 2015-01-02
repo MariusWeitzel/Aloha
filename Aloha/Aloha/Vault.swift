@@ -28,7 +28,7 @@ class Vault: UIViewController {
         }
         var saveStr = ""
         
-        println(Locations.count)
+        println("beim Speichern sind es \(Locations.count) Punkte")
         
         // Locations auseinander fuddeln
         for spot in Locations {
