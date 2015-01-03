@@ -22,6 +22,7 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
     
     //spot Location global für diese View anlegen
     var nuPunkt = Location()
+    var me:Int = -1
     
     // Elemente des UI
     @IBOutlet var _outName: UITextField!
@@ -269,9 +270,11 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         
 // Do any additional setup after loading the view, typically from a nib.
         
-        for spot in Locations {
-            if (spot.lat == self.currentCoordinate.latitude && spot.long == self.currentCoordinate.longitude) {
-                nuPunkt = spot
+        
+        for var i:Int=0; i < Locations.count; i++ {
+            if (Locations[i].lat == self.currentCoordinate.latitude && Locations[i].long == self.currentCoordinate.longitude) {
+                nuPunkt = Locations[i]
+                me = i
             }
         }
         
@@ -461,7 +464,11 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         nuPunkt.cautionZX = _boolCautionZX
         
         nuPunkt._difficulty = _intDifficulty
-
+        
+        if me >= 0 {
+            Locations.removeAtIndex(me)
+            me = -1
+        }
         Vault.saveLocation(nuPunkt)
         
         // Das Delegate regelt hier den Viewwechsel zur MapView - MapController

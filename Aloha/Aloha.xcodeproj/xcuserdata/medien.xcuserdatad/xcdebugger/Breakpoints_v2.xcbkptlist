@@ -40,11 +40,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Aloha/LocationEditorView.swift"
-            timestampString = "441913131.355772"
+            timestampString = "442008351.757898"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "474"
-            endingLineNumber = "474"
+            startingLineNumber = "481"
+            endingLineNumber = "481"
             landmarkName = "deleteSurfSpot(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -56,11 +56,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Aloha/LocationEditorView.swift"
-            timestampString = "441912699.045227"
+            timestampString = "442008351.757898"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "468"
-            endingLineNumber = "468"
+            startingLineNumber = "475"
+            endingLineNumber = "475"
             landmarkName = "back2initialViewController(_:)"
             landmarkType = "5">
          </BreakpointContent>
