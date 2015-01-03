@@ -109,6 +109,7 @@ class Vault: UIViewController {
         if (checkValidation.fileExistsAtPath(path!)) {
             loadedStr = String(contentsOfFile: path!, encoding: NSUTF8StringEncoding, error: nil)!
             
+            //FIXME: spotSeperator (die Konstante) wirft an der Stelle nen Fehler!
             let splittedLocations = split(loadedStr, {$0=="#"})
             for location in splittedLocations {
                 println("StringLocation: \(location)")
@@ -210,8 +211,4 @@ class Vault: UIViewController {
     class func getLocations() -> [Location] {
         return Locations
     }
-    
-    //TODO: deleteLocation
-    //      editLocation
-    
 }

@@ -541,7 +541,6 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         
         // Das Delegate regelt hier den Viewwechsel zur MapView - MapController
         if (delegate != nil) {
-            
             delegate!.createNewSurfSpotDidFinish(self, coords: currentCoordinate)
         }
        
