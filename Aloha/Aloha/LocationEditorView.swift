@@ -292,7 +292,7 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         _intCoastproperty = nuPunkt._coastproperties
         _intBeachType = nuPunkt._beachtype
         
-        _outTextbox.text = nuPunkt.name
+        _outTextbox.text = nuPunkt.notes
         
         _boolJellyfish = nuPunkt.jellyfisch
         _boolSharks = nuPunkt.sharks
