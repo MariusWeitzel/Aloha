@@ -94,6 +94,15 @@ public struct difficulty {
     init() {
         difficulty = ["einfach", "mittel", "schwierig"]
     }
+    
+    subscript(index: Int) -> String {
+        get {
+            return difficulty[index]
+        }
+        set(newValue) {
+            // perform a suitable setting action here
+        }
+    }
 }
 
 public struct wavetype {
