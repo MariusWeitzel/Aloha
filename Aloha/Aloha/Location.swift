@@ -19,11 +19,6 @@ public struct Location {
     //aus dem MapKit gelieferte Adresse zu dem Punkt (falls möglich)
     var adress: String
     
-    //FIXME: welche Form hat das genau?
-    //CAUTION: erstmal raus genommen, Aufwand zu hoch/Nutzen zu gering
-    //var tags: [String]
-    
-    //FIXME: hier stattdessen 4x nen Int speichern?
     //all waterproperties
     var _wavetype: Int
     var _waterdepth: Int
