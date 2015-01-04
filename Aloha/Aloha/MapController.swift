@@ -12,7 +12,7 @@ import UIKit
 
 
 
-class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDelegate, SurfSpotMarkerDelegate  { //MapToLocationViewDelegate,
+class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDelegate, SurfSpotMarkerDelegate, SpotFilterDelegate { //MapToLocationViewDelegate,
     
     
     @IBOutlet weak var mapView: GMSMapView! // zeigt die Google Map
@@ -66,20 +66,149 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
         // erzeugt Marker
         marker.position = CLLocationCoordinate2DMake(-33.86, 151.20)
         marker.snippet = "New Surfspot"
-        marker.icon = UIImage(named: "icon_me")
+       // marker.icon = UIImage(named: "icon_me")
         marker.appearAnimation = kGMSMarkerAnimationPop
-        marker.map = mapView
+        marker.map = nil
         
         //erzeugt die Sidebar
         sidebar = Sidebar(sourceView: self.view)
-
+        sidebar.filterDelegate = self
         loadSurfSpots()
         
         // Do any additional setup after loading the view, typically from a nib.
     }
     
+    
+    let _dataWaveType = wavetype()
+    let _dataWaterDepth = waterdepth()
+    let _dataWaterTemp = watertemperature()
+    let _dataWaterType = watertype()
+    
+    
+    func showSpotsWithSpecificFilter(filterName: String, isSwitchActive: Bool){
+        println("Delegate works: \(filterName)")
+        var waveTypeIndex: Int = -1
+        var waterDepthIndex: Int = -1
+        var waterTempIndex: Int = -1
+        var waterTypeIndex: Int = -1
+        
+        
+        if let waveTypeIndexCheck: Int = find(_dataWaveType.wavetype, filterName){
+            waveTypeIndex = find(_dataWaveType.wavetype, filterName)!
+        }
+        if let waterDepthIndexCheck: Int = find(_dataWaterDepth.waterdepth, filterName){
+           waterDepthIndex = find(_dataWaterDepth.waterdepth, filterName)!
+        }
+        if let waterTempIndexCheck: Int = find(_dataWaterDepth.waterdepth, filterName){
+            waterTempIndex = find(_dataWaterDepth.waterdepth, filterName)!
+        }
+        if let waterTypeIndexCheck: Int = find(_dataWaterDepth.waterdepth, filterName){
+            waterTypeIndex = find(_dataWaterDepth.waterdepth, filterName)!
+        }
+        
+        
+        
+        for spot in  surfPlaces {
+            spot.map = nil
+            
+        }
+        var localLocations = Vault.getLocations()
+        
+        for var i:Int = 0; i < localLocations.count; i++ {
+            
+            var foundWaveTypeIndex: Int = localLocations[i]._wavetype as Int
+            var foundWaterDepthIndex: Int = localLocations[i]._waterdepth as Int
+            var foundWaterTempIndex: Int = localLocations[i]._watertemperature as Int
+            var foundWaterTypeIndex: Int = localLocations[i]._watertype as Int
+            
+            if(foundWaveTypeIndex == waveTypeIndex ){
+                
+                for spot in  surfPlaces {
+                    if(spot.position.latitude == localLocations[i].lat && spot.position.longitude == localLocations[i].long){
+                        spot.map = mapView
+                    }
+                    
+                    
+                }
+
+            }
+            else{
+                for spot in surfPlaces{
+                    if(spot.map == nil && !isSwitchActive){
+                        spot.map = mapView
+                    }
+                }
+            }
+            
+            if(foundWaterDepthIndex == waterDepthIndex){
+                
+                for spot in  surfPlaces {
+                    if(spot.position.latitude == localLocations[i].lat && spot.position.longitude == localLocations[i].long){
+                        spot.map = mapView
+                    }
+                    
+                    
+                }
+                
+            }
+            else{
+                for spot in surfPlaces{
+                    if(spot.map == nil && !isSwitchActive){
+                        spot.map = mapView
+                    }
+                }
+            }
+            
+            if(foundWaterTempIndex == waterTempIndex ){
+                
+                for spot in  surfPlaces {
+                    if(spot.position.latitude == localLocations[i].lat && spot.position.longitude == localLocations[i].long){
+                        spot.map = mapView
+                    }
+                    
+                    
+                }
+                
+            }
+            else{
+                for spot in surfPlaces{
+                    if(spot.map == nil && !isSwitchActive){
+                        spot.map = mapView
+                    }
+                }
+            }
+            
+            if(foundWaterTypeIndex == waterTypeIndex ){
+                
+                for spot in  surfPlaces {
+                    if(spot.position.latitude == localLocations[i].lat && spot.position.longitude == localLocations[i].long){
+                        spot.map = mapView
+                    }
+                    
+                    
+                }
+                
+            }
+            else{
+                for spot in surfPlaces{
+                    if(spot.map == nil && !isSwitchActive){
+                        spot.map = mapView
+                    }
+                }
+            }
+
+
+
+            
+        }
+        
+        
+
+        
+    }
+    
     func loadSurfSpots() {
-        surfPlaces.removeAll(keepCapacity: true)
+        surfPlaces.removeAll(keepCapacity: false)
         var localLocations = Vault.getLocations()
         for var i:Int = 0; i < localLocations.count; i++ {
             let spot = GMSMarker()
