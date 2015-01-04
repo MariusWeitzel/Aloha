@@ -70,15 +70,17 @@ class Sidebar: NSObject {
     func getFilterData(){
         var filter = [String]()
         
-        /*filter[0] = "Schwierigkeit"
-        for var i = 0; i < _dataDifficulty.count; i++ {
-            filter[i+1] = _dataDifficulty[i]
-        }
-        filterArray.append(filter)
-        filter.removeAll(keepCapacity: false)*/
+
         
         filter.append("Favorit")
         filter.append("Ja / Nein")
+        filterArray.append(filter)
+        filter.removeAll(keepCapacity: false)
+        
+        filter.append("Schwierigkeit")
+        for var i = 0; i < _dataDifficulty.count; i++ {
+            filter.append(_dataDifficulty[i])
+        }
         filterArray.append(filter)
         filter.removeAll(keepCapacity: false)
         
