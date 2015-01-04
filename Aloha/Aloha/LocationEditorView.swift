@@ -44,7 +44,10 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
     // Textbox der Notizen
     @IBOutlet weak var _outTextbox: UITextView!
     
-    // Switch
+    //Löschen Button
+    @IBOutlet var _outDeleteBtn: UIButton!
+    
+    // Favorit
     @IBOutlet var _outFavorite: UISwitch!
     
     @IBOutlet weak var scroller: UIScrollView!
@@ -275,6 +278,7 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
             if (Locations[i].lat == self.currentCoordinate.latitude && Locations[i].long == self.currentCoordinate.longitude) {
                 nuPunkt = Locations[i]
                 me = i
+                _outDeleteBtn.enabled = true
             }
         }
         

@@ -575,6 +575,10 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tsr-5P-EYm">
                                 <rect key="frame" x="20" y="937" width="94" height="30"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" none="YES" button="YES"/>
+                                    <bool key="isElement" value="NO"/>
+                                </accessibility>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Löschen">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -607,6 +611,7 @@
                         <outlet property="_outAdress" destination="ece-3d-gTN" id="iu8-kE-gp1"/>
                         <outlet property="_outBeachType" destination="eJg-Df-33s" id="kcD-dU-ey4"/>
                         <outlet property="_outCoastProperty" destination="ZIf-fo-Ccz" id="kaB-NE-aSf"/>
+                        <outlet property="_outDeleteBtn" destination="Tsr-5P-EYm" id="P1p-0c-k8x"/>
                         <outlet property="_outFavorite" destination="zSK-UQ-GFh" id="Z6d-bQ-2tM"/>
                         <outlet property="_outName" destination="dPc-ep-cGI" id="ZV0-rE-YHD"/>
                         <outlet property="_outTextbox" destination="S5h-UW-Acn" id="fpJ-QV-yVn"/>
