@@ -9,12 +9,17 @@
 import Foundation
 import UIKit
 
+protocol SpotFilterDelegate {
+    func showSpotsWithSpecificFilter(filterType: String, isSwitchActive: Bool)
+    
+}
 
 
 class Sidebar: NSObject {
     
+    var filterDelegate: SpotFilterDelegate? = nil
     
-    let sidebarContainerView:UIView = UIStoryboard.SidebarViewController()!.view!
+    let sidebarContainerView:UIView = UIStoryboard.SidebarViewController()!.view
     let originView:UIView!
     
     let _dataDifficulty = difficulty()
@@ -62,6 +67,7 @@ class Sidebar: NSObject {
         let hideGestureRecognizer:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "handleRightSwipe:")
         hideGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Left
         originView.addGestureRecognizer(hideGestureRecognizer)
+        
     }
     
     // Sidebar erzeugen
@@ -249,6 +255,10 @@ class Sidebar: NSObject {
                 if (switchState == switches[i]){
                     println("Switch \(names[i]) ist an")
                     // ToDo: Filtermethode einbinden
+                    if (filterDelegate != nil) {
+                        filterDelegate!.showSpotsWithSpecificFilter(names[i], isSwitchActive: true)
+                    }
+
                 }
             }
             
@@ -257,6 +267,10 @@ class Sidebar: NSObject {
                 if (switchState == switches[i]){
                     println("Switch \(names[i]) ist aus")
                     // ToDo: Filtermethode einbinden
+                    if (filterDelegate != nil) {
+                        filterDelegate!.showSpotsWithSpecificFilter(names[i], isSwitchActive: false)
+                    }
+
                 }
             }
         }
