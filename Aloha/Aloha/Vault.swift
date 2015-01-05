@@ -36,6 +36,7 @@ class Vault: UIViewController {
             saveStr += spot.long.stringValue + spotItemSeperator
             
             println("Name beim speichern: \(spot.name)")
+            //FIXME: spot & itemseperator aus Name und Notizen entfernen -> safe
             saveStr += spot.name + spotItemSeperator
             
             if spot.favorite { saveStr += "1" }
@@ -89,7 +90,7 @@ class Vault: UIViewController {
             saveStr += spotSeperator;
         }
         
-        let dirs = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true) as? [String]
+        let dirs = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
         
         let path = dirs?[0].stringByAppendingPathComponent("locations.csv")
         
@@ -101,7 +102,7 @@ class Vault: UIViewController {
     
     class func loadLocations() {
         var loadedStr: String
-        let dirs = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true) as? [String]
+        let dirs = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
         
         let path = dirs?[0].stringByAppendingPathComponent("locations.csv")
         
