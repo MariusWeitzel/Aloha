@@ -37,13 +37,23 @@ class Vault: UIViewController {
             
             println("Name beim speichern: \(spot.name)")
             //FIXME: spot & itemseperator aus Name und Notizen entfernen -> safe
+            if countElements(spot.name) > 0 {
             saveStr += spot.name + spotItemSeperator
-            
+            }
+            else {
+                saveStr += " " + spotItemSeperator
+            }
+
             if spot.favorite { saveStr += "1" }
             else { saveStr += "0" }
             saveStr += spotItemSeperator
 
-            saveStr += spot.adress + spotItemSeperator
+            if countElements(spot.adress) > 0 {
+                saveStr += spot.adress + spotItemSeperator
+            }
+            else {
+                saveStr += " " + spotItemSeperator
+            }
             
             //waterproperties
             saveStr += String(spot._wavetype) + spotItemSeperator
@@ -85,7 +95,12 @@ class Vault: UIViewController {
             
             saveStr += String(spot._difficulty) + spotItemSeperator
 
-            saveStr += spot.notes + spotItemSeperator
+            if countElements(spot.notes) > 0 {
+                saveStr += spot.notes + spotItemSeperator
+            }
+            else {
+                saveStr += " " + spotItemSeperator
+            }
 
             saveStr += spotSeperator;
         }
@@ -122,13 +137,13 @@ class Vault: UIViewController {
                 //FIXME: ohne die Zeile crachsts aufm iPad, aber zeigt die Punkte nachm starten nicht mehr an?! o.O
                 // iPad Bugfix - kP warum der Simulator das "überlebt"
                 //DEBUG:
-//                println("Anzahl pointItems: \(pointItems.count)")
-//                if pointItems.count > 0 { continue }
+                println("Anzahl pointItems: \(pointItems.count)")
+                if pointItems.count < 19 { continue }
                 var nuPunkt = Location()
                 
                 //FIXME: wenn das schief geht, is halt direkt rum :/
-                nuPunkt.lat = NSNumberFormatter().numberFromString(pointItems[0])!
-                nuPunkt.long = NSNumberFormatter().numberFromString(pointItems[1])!
+                nuPunkt.lat = (pointItems[0] as NSString).doubleValue
+                nuPunkt.long = (pointItems[1] as NSString).doubleValue
                 
                 nuPunkt.name = pointItems[2]
                 
