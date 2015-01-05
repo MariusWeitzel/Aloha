@@ -216,7 +216,12 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
             spot.position = CLLocationCoordinate2DMake(localLocations[i].lat.doubleValue, localLocations[i].long.doubleValue)
             spot.snippet = localLocations[i].name
             
-            spot.icon = UIImage(named: "surfer")
+            if(!localLocations[i].favorite){
+                spot.icon = UIImage(named: "Pin_normal")
+            }
+            else{
+                 spot.icon = UIImage(named: "Pin_Fav")
+            }
             
             spot.appearAnimation = kGMSMarkerAnimationPop
             spot.map = self.mapView
@@ -344,7 +349,7 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
     // IMPORTANT: gehört zum Delegate-Vorgang. Nachdem in der LocationEditorView gespeichert wurde
     // wird diese Funktion ausgeführt die letztendlich das Anzeigen des Surfspots an der entsprechenden 
     // Koordinate übernimmt
-    func createNewSurfSpotDidFinish(controller: LocationEditorView, coords: CLLocationCoordinate2D) {
+    func createNewSurfSpotDidFinish(controller: LocationEditorView, coords: CLLocationCoordinate2D, isFavActive: Bool) {
        
         // entferne die LocationEditorView
         controller.navigationController?.popViewControllerAnimated(true)
@@ -357,13 +362,18 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
                 else{
                     var surfMarker = GMSMarker()
                     surfMarker.position = coords
+                    
                     surfMarker.snippet = "Surf_Spot"
                     
                     /* IMPORTANT
                     zum Nutzen des Bildes muss aus Urheberrechtlichen Gründen folgendes bei den Credits, Website angegeben werden <div>Icon made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed under <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div> http://www.flaticon.com/free-icon/surfer-surfing-in-a-big-water-wave_48043
                     */
-                    surfMarker.icon = UIImage(named: "surfer")
-                    
+                    if(!isFavActive){
+                        surfMarker.icon = UIImage(named: "Pin_normal")
+                    }
+                    else{
+                        surfMarker.icon = UIImage(named: "Pin_Fav")
+                    }
                     surfMarker.appearAnimation = kGMSMarkerAnimationPop
                     surfMarker.map = self.mapView
                     surfPlaces.append(surfMarker)
@@ -379,7 +389,13 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
             /* IMPORTANT
             zum Nutzen des Bildes muss aus Urheberrechtlichen Gründen folgendes bei den Credits, Website angegeben werden <div>Icon made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed under <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div> http://www.flaticon.com/free-icon/surfer-surfing-in-a-big-water-wave_48043
             */
-            surfMarker.icon = UIImage(named: "surfer")
+            if(!isFavActive){
+                surfMarker.icon = UIImage(named: "Pin_normal")
+            }
+            else{
+                surfMarker.icon = UIImage(named: "Pin_Fav")
+            }
+
             
             surfMarker.appearAnimation = kGMSMarkerAnimationPop
             surfMarker.map = self.mapView

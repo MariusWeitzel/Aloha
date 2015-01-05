@@ -10,7 +10,7 @@ import UIKit
 // Wichtig für die Übertragung der Koordinaten von MapController zu LocationViewEditor und zurück
 // zur Regelung der Anzeige des Surfspot-Icons
 protocol SurfSpotMarkerDelegate {
-    func createNewSurfSpotDidFinish(controller: LocationEditorView, coords: CLLocationCoordinate2D)
+    func createNewSurfSpotDidFinish(controller: LocationEditorView, coords: CLLocationCoordinate2D, isFavActive: Bool)
     func deleteSurfSpotDidFinish(controller: LocationEditorView, coords: CLLocationCoordinate2D)
 }
 
@@ -477,7 +477,7 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         
         // Das Delegate regelt hier den Viewwechsel zur MapView - MapController
         if (delegate != nil) {
-            delegate!.createNewSurfSpotDidFinish(self, coords: currentCoordinate)
+            delegate!.createNewSurfSpotDidFinish(self, coords: currentCoordinate, isFavActive: nuPunkt.favorite )
         }
     }
     
