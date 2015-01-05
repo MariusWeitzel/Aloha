@@ -43,6 +43,7 @@
 		DEA8C9421A10F91F003C5761 /* SidebarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA8C9411A10F91F003C5761 /* SidebarController.swift */; };
 		DEA8C9441A10F928003C5761 /* SiderbarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA8C9431A10F928003C5761 /* SiderbarModel.swift */; };
 		DEA8C9461A10F92D003C5761 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA8C9451A10F92D003C5761 /* SidebarView.swift */; };
+		DEAD7EC31A5B5452007A3A67 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEAD7EC21A5B5452007A3A67 /* Media.xcassets */; };
 		DECF2B621A56A8CD003F2862 /* thm.gpx in Resources */ = {isa = PBXBuildFile; fileRef = DECF2B611A56A8CD003F2862 /* thm.gpx */; };
 /* End PBXBuildFile section */
 
@@ -97,6 +98,7 @@
 		DEA8C9411A10F91F003C5761 /* SidebarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarController.swift; sourceTree = "<group>"; };
 		DEA8C9431A10F928003C5761 /* SiderbarModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SiderbarModel.swift; sourceTree = "<group>"; };
 		DEA8C9451A10F92D003C5761 /* SidebarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
+		DEAD7EC21A5B5452007A3A67 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Media.xcassets; path = Aloha/Images/Media.xcassets; sourceTree = "<group>"; };
 		DECF2B611A56A8CD003F2862 /* thm.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = thm.gpx; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -192,6 +194,7 @@
 		DE7B4B171A0D0EF100FF1140 = {
 			isa = PBXGroup;
 			children = (
+				DEAD7EC21A5B5452007A3A67 /* Media.xcassets */,
 				DECF2B611A56A8CD003F2862 /* thm.gpx */,
 				DE7B4B221A0D0EF100FF1140 /* Aloha */,
 				DE7B4B381A0D0EF100FF1140 /* AlohaTests */,
@@ -333,6 +336,7 @@
 			files = (
 				DE7B4B2B1A0D0EF100FF1140 /* Main.storyboard in Resources */,
 				DECF2B621A56A8CD003F2862 /* thm.gpx in Resources */,
+				DEAD7EC31A5B5452007A3A67 /* Media.xcassets in Resources */,
 				DE7B4B301A0D0EF100FF1140 /* LaunchScreen.xib in Resources */,
 				DE54748D1A110BF800AAE49F /* Location_Plist_test.plist in Resources */,
 				DE7B4B2D1A0D0EF100FF1140 /* Images.xcassets in Resources */,
