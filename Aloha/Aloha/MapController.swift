@@ -79,130 +79,103 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
     }
     
     
-    let _dataWaveType = wavetype()
+    // Filter Daten
+    let _dataDifficulty = difficulty()
+    let _dataCoastproperties = coastproperties()
     let _dataWaterDepth = waterdepth()
     let _dataWaterTemp = watertemperature()
-    let _dataWaterType = watertype()
+
     
     
-    func showSpotsWithSpecificFilter(filterName: String, isSwitchActive: Bool){
-        println("Delegate works: \(filterName)")
-        var waveTypeIndex: Int = -1
-        var waterDepthIndex: Int = -1
-        var waterTempIndex: Int = -1
-        var waterTypeIndex: Int = -1
+    // Funktion zum Filtern der Locations
+    func showSpotsWithSpecificFilter(filterNames:[String], filterState:[Int], isSwitchActive: Bool){
+        
+        // Holt die benötigten Index
         
         
-        if let waveTypeIndexCheck: Int = find(_dataWaveType.wavetype, filterName){
-            waveTypeIndex = find(_dataWaveType.wavetype, filterName)!
-        }
-        if let waterDepthIndexCheck: Int = find(_dataWaterDepth.waterdepth, filterName){
-           waterDepthIndex = find(_dataWaterDepth.waterdepth, filterName)!
-        }
-        if let waterTempIndexCheck: Int = find(_dataWaterDepth.waterdepth, filterName){
-            waterTempIndex = find(_dataWaterDepth.waterdepth, filterName)!
-        }
-        if let waterTypeIndexCheck: Int = find(_dataWaterDepth.waterdepth, filterName){
-            waterTypeIndex = find(_dataWaterDepth.waterdepth, filterName)!
-        }
-        
-        
-        
+        // Alle Spots löschen
         for spot in  surfPlaces {
             spot.map = nil
-            
         }
+        
+        // Holt alle Locations
         var localLocations = Vault.getLocations()
+        
+        // Leeres Location Array. Locations werden nach dem Filtern hinzugefügt
+        var filteredLocations = [Location]()
+
         
         for var i:Int = 0; i < localLocations.count; i++ {
             
-            var foundWaveTypeIndex: Int = localLocations[i]._wavetype as Int
-            var foundWaterDepthIndex: Int = localLocations[i]._waterdepth as Int
-            var foundWaterTempIndex: Int = localLocations[i]._watertemperature as Int
-            var foundWaterTypeIndex: Int = localLocations[i]._watertype as Int
             
-            if(foundWaveTypeIndex == waveTypeIndex ){
+            // Index der Locations
+            var locationDifficultyIndex: Int = localLocations[i]._difficulty as Int
+            var locationCoastpropertiesIndex: Int = localLocations[i]._coastproperties as Int
+            var locationWaterDepthIndex: Int = localLocations[i]._waterdepth as Int
+            var locationWaterTempIndex: Int = localLocations[i]._watertemperature as Int
+            
+           
+            var filterCounter = 0
+            var locationState = false
+            
+            // Filter werden angewandt
+            for filterName in filterNames {
                 
-                for spot in  surfPlaces {
-                    if(spot.position.latitude == localLocations[i].lat && spot.position.longitude == localLocations[i].long){
-                        spot.map = mapView
-                    }
-                    
-                    
+                if (filterName == "Ja" && filterState[filterCounter] == 1 && localLocations[i].favorite == true){
+                    locationState = true
+                } else if (filterName == "Ja" && filterState[filterCounter] == 0 && localLocations[i].favorite == true){
+                    locationState = false
+                    break
                 }
+                
 
-            }
-            else{
-                for spot in surfPlaces{
-                    if(spot.map == nil && !isSwitchActive){
-                        spot.map = mapView
-                    }
+                if (filterState[filterCounter] == 1 && find(_dataDifficulty.difficulty, filterName) == locationDifficultyIndex ){
+                    locationState = true
+                } else if (filterState[filterCounter] == 0 && find(_dataDifficulty.difficulty, filterName) == locationDifficultyIndex){
+                    locationState = false
+                    break
                 }
+                
+                if (filterState[filterCounter] == 1 && find(_dataCoastproperties.coastproperties, filterName) == locationCoastpropertiesIndex){
+                    locationState = true
+                } else if (filterState[filterCounter] == 0 && find(_dataCoastproperties.coastproperties, filterName) == locationCoastpropertiesIndex){
+                    locationState = false
+                    break
+                }
+                
+                if (filterState[filterCounter] == 1 && find(_dataWaterDepth.waterdepth, filterName) == locationWaterDepthIndex){
+                    locationState = true
+                } else if (filterState[filterCounter] == 0 && find(_dataWaterDepth.waterdepth, filterName) == locationWaterDepthIndex){
+                    locationState = false
+                    break
+                }
+                
+                if (filterState[filterCounter] == 1 && find(_dataWaterTemp.watertemperature, filterName) == locationWaterTempIndex){
+                    locationState = true
+                } else if (filterState[filterCounter] == 0 && find(_dataWaterTemp.watertemperature, filterName) == locationWaterTempIndex){
+                    locationState = false
+                    break
+                }
+                
+                filterCounter++
             }
             
-            if(foundWaterDepthIndex == waterDepthIndex){
-                
-                for spot in  surfPlaces {
-                    if(spot.position.latitude == localLocations[i].lat && spot.position.longitude == localLocations[i].long){
-                        spot.map = mapView
-                    }
-                    
-                    
-                }
-                
-            }
-            else{
-                for spot in surfPlaces{
-                    if(spot.map == nil && !isSwitchActive){
-                        spot.map = mapView
-                    }
-                }
-            }
-            
-            if(foundWaterTempIndex == waterTempIndex ){
-                
-                for spot in  surfPlaces {
-                    if(spot.position.latitude == localLocations[i].lat && spot.position.longitude == localLocations[i].long){
-                        spot.map = mapView
-                    }
-                    
-                    
-                }
-                
-            }
-            else{
-                for spot in surfPlaces{
-                    if(spot.map == nil && !isSwitchActive){
-                        spot.map = mapView
-                    }
-                }
-            }
-            
-            if(foundWaterTypeIndex == waterTypeIndex ){
-                
-                for spot in  surfPlaces {
-                    if(spot.position.latitude == localLocations[i].lat && spot.position.longitude == localLocations[i].long){
-                        spot.map = mapView
-                    }
-                    
-                    
-                }
-                
-            }
-            else{
-                for spot in surfPlaces{
-                    if(spot.map == nil && !isSwitchActive){
-                        spot.map = mapView
-                    }
-                }
+            // gefilterte Locations werden aufgenommen
+            if locationState == true {
+                filteredLocations.append(localLocations[i])
             }
 
-
-
-            
         }
         
-        
+        // gefilterte Locations werden ausgegeben
+        for var i:Int = 0; i < filteredLocations.count; i++ {
+            for spot in  surfPlaces {
+                if(spot.position.latitude == filteredLocations[i].lat && spot.position.longitude == filteredLocations[i].long){
+                    spot.map = mapView
+                }
+                
+            }
+        }
 
         
     }
