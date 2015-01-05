@@ -114,9 +114,12 @@ class Vault: UIViewController {
             
             //FIXME: spotSeperator (die Konstante) wirft an der Stelle nen Fehler!
             let splittedLocations = split(loadedStr, {$0=="#"})
+            println("splitted Locations: \(splittedLocations.count)")
             for location in splittedLocations {
                 println("StringLocation: \(location)")
                 var pointItems = split(location, {$0=="|"})
+                // iPad Bugfix - kP warum der Simulator das "überlebt"
+                if pointItems.count > 0 { continue }
                 var nuPunkt = Location()
                 
                 //FIXME: wenn das schief geht, is halt direkt rum :/
@@ -125,7 +128,7 @@ class Vault: UIViewController {
                 
                 nuPunkt.name = pointItems[2]
                 
-                if pointItems[3].toInt()! == 1 { nuPunkt.favorite = true }
+                if pointItems[3] == "1" { nuPunkt.favorite = true }
                 else { nuPunkt.favorite = false }
                 
                 nuPunkt.adress = pointItems[4]
