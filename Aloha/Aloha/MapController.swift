@@ -62,7 +62,7 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         mapView.myLocationEnabled = true
-        
+        adressLabel.hidden = true
         // erzeugt Marker
         marker.position = CLLocationCoordinate2DMake(-33.86, 151.20)
         marker.snippet = "New Surfspot"
@@ -364,10 +364,7 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
                     surfMarker.position = coords
                     
                     surfMarker.snippet = "Surf_Spot"
-                    
-                    /* IMPORTANT
-                    zum Nutzen des Bildes muss aus Urheberrechtlichen Gründen folgendes bei den Credits, Website angegeben werden <div>Icon made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed under <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div> http://www.flaticon.com/free-icon/surfer-surfing-in-a-big-water-wave_48043
-                    */
+          
                     if(!isFavActive){
                         surfMarker.icon = UIImage(named: "Pin_normal")
                     }
@@ -386,10 +383,7 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
             surfMarker.position = coords
             surfMarker.snippet = "Surf_Spot"
             
-            /* IMPORTANT
-            zum Nutzen des Bildes muss aus Urheberrechtlichen Gründen folgendes bei den Credits, Website angegeben werden <div>Icon made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed under <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div> http://www.flaticon.com/free-icon/surfer-surfing-in-a-big-water-wave_48043
-            */
-            if(!isFavActive){
+                       if(!isFavActive){
                 surfMarker.icon = UIImage(named: "Pin_normal")
             }
             else{
@@ -415,7 +409,7 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
             if(!surfPlaces.isEmpty){
                 for( var i:Int = 0; i < surfPlaces.count; i++){
                     if (surfPlaces[i].position.latitude == coords.latitude && surfPlaces[i].position.longitude == coords.longitude) {
-                        println("Da isser")
+                       
                         surfPlaces.removeAtIndex(i)
                         loadSurfSpots()
                         fetchNearbyPlaces(coords)
@@ -437,10 +431,10 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
             mapView.settings.myLocationButton = true // erzeugt einen Button auf der Map zum zentrieren der Location
             
         }
-        else{
-            locationManager.delegate = self
-            locationManager.requestWhenInUseAuthorization()
-        }
+//        else{
+//            locationManager.delegate = self
+//            locationManager.requestWhenInUseAuthorization()
+//        }
     }
     
     // wird aufgerufen wenn LocationManager neue Lokalisierungsdaten erhalten hat

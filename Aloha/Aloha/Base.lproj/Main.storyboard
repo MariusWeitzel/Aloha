@@ -315,7 +315,7 @@
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Hier können weitere Informationen zu Deinem Surfspot stehen" translatesAutoresizingMaskIntoConstraints="NO" id="S5h-UW-Acn">
                                                 <rect key="frame" x="25" y="873" width="724" height="167"/>
-                                                <color key="backgroundColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" red="0.00060984911907779882" green="0.54697431343101444" blue="1" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="167" id="GJV-WX-HTh"/>
                                                     <constraint firstAttribute="width" constant="724" id="h6s-dl-gEn"/>
@@ -345,7 +345,7 @@
                                                     <action selector="changeBackgroundImageOfBtn:" destination="bnq-lf-gRm" eventType="touchUpInside" id="HbO-z8-AR7"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GefahrZX" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EFp-Bh-Dsu">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Strömungen" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EFp-Bh-Dsu">
                                                 <rect key="frame" x="618" y="672" width="106" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -365,7 +365,7 @@
                                                 </constraints>
                                                 <state key="normal" backgroundImage="iosChoiceCircle"/>
                                                 <connections>
-                                                    <action selector="changeBackgroundImageOfBtn:" destination="bnq-lf-gRm" eventType="touchUpInside" id="tKb-P3-vNn"/>
+                                                    <action selector="changeBackgroundImageOfBtn:" destination="bnq-lf-gRm" eventType="touchUpInside" id="HJK-Hb-C0w"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Riffs" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dOh-NA-DnH">
@@ -408,7 +408,7 @@
                                                     <action selector="changeBackgroundImageOfBtn:" destination="bnq-lf-gRm" eventType="touchUpInside" id="AR1-aF-TYr"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gefahr XY" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2QC-Qh-Uu0">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Algen" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2QC-Qh-Uu0">
                                                 <rect key="frame" x="331" y="672" width="108" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="108" id="fyx-Zs-gDa"/>
@@ -620,6 +620,12 @@
                         <outlet property="_outWaterType" destination="GBU-fF-imj" id="wtT-6g-qRq"/>
                         <outlet property="_outWaveType" destination="PPB-7I-RHY" id="myc-Gg-0MH"/>
                         <outlet property="beachTypeBtn" destination="qMQ-4w-U4x" id="5Bb-EO-NGE"/>
+                        <outlet property="cautionBtn_Alga" destination="hGL-aI-IUZ" id="55d-2m-ZGE"/>
+                        <outlet property="cautionBtn_Dirt" destination="nOj-mc-JjK" id="ckN-Mc-2IX"/>
+                        <outlet property="cautionBtn_Jellyfish" destination="pp6-gs-Ivz" id="1Cg-nU-gnd"/>
+                        <outlet property="cautionBtn_Riffs" destination="KIQ-za-8Pq" id="hFX-Nm-WWA"/>
+                        <outlet property="cautionBtn_Sharks" destination="nsK-Wf-29L" id="kwh-q7-0Nj"/>
+                        <outlet property="cautionBtn_Stream" destination="37R-h5-w5f" id="AA9-3V-aaZ"/>
                         <outlet property="coastBtn" destination="kpG-9J-AQ6" id="YE0-LP-R9u"/>
                         <outlet property="difficultySegmentCtrl" destination="h5H-rf-KIR" id="QFN-n7-uvl"/>
                         <outlet property="scroller" destination="Gd2-Ot-M2N" id="BBk-Z3-Paq"/>
