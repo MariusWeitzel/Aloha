@@ -118,8 +118,11 @@ class Vault: UIViewController {
             for location in splittedLocations {
                 println("StringLocation: \(location)")
                 var pointItems = split(location, {$0=="|"})
+                //FIXME: ohne die Zeile crachsts aufm iPad, aber zeigt die Punkte nachm starten nicht mehr an?! o.O
                 // iPad Bugfix - kP warum der Simulator das "überlebt"
-                if pointItems.count > 0 { continue }
+                //DEBUG:
+//                println("Anzahl pointItems: \(pointItems.count)")
+//                if pointItems.count > 0 { continue }
                 var nuPunkt = Location()
                 
                 //FIXME: wenn das schief geht, is halt direkt rum :/
