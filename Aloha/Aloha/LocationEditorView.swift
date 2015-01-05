@@ -119,6 +119,20 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         }
     }
     //Caution Buttons
+    
+    @IBOutlet weak var cautionBtn_Jellyfish: UIButton!
+    
+    
+    @IBOutlet weak var cautionBtn_Dirt: UIButton!
+    
+    
+    @IBOutlet weak var cautionBtn_Sharks: UIButton!
+    
+    @IBOutlet weak var cautionBtn_Alga: UIButton! //CautionXY
+    
+    @IBOutlet weak var cautionBtn_Riffs: UIButton!
+    
+    @IBOutlet weak var cautionBtn_Stream: UIButton! //CautionZX
      @IBAction func changeBackgroundImageOfBtn(sender: UIButton) {
         
         switch(sender.tag){
@@ -279,6 +293,60 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
                 nuPunkt = Locations[i]
                 me = i
                 _outDeleteBtn.enabled = true
+                if(nuPunkt.cautionXY){
+                    cautionBtn_Alga.setBackgroundImage(UIImage(named: "iosOKHaken.png"), forState: .Normal)
+                }
+                
+                else{
+                   cautionBtn_Alga.setBackgroundImage(UIImage(named: "iosCrossHaken.png"), forState: .Normal)
+
+                }
+                
+                if(nuPunkt.cautionZX){
+                    cautionBtn_Stream.setBackgroundImage(UIImage(named: "iosOKHaken.png"), forState: .Normal)
+                }
+                    
+                else{
+                    cautionBtn_Stream.setBackgroundImage(UIImage(named: "iosCrossHaken.png"), forState: .Normal)
+                    
+                }
+                
+                if(nuPunkt.dirt){
+                    cautionBtn_Dirt.setBackgroundImage(UIImage(named: "iosOKHaken.png"), forState: .Normal)
+                }
+                    
+                else{
+                    cautionBtn_Dirt.setBackgroundImage(UIImage(named: "iosCrossHaken.png"), forState: .Normal)
+                    
+                }
+                
+                if(nuPunkt.jellyfisch){
+                    cautionBtn_Jellyfish.setBackgroundImage(UIImage(named: "iosOKHaken.png"), forState: .Normal)
+                }
+                    
+                else{
+                    cautionBtn_Jellyfish.setBackgroundImage(UIImage(named: "iosCrossHaken.png"), forState: .Normal)
+                    
+                }
+                
+                if(nuPunkt.riffs){
+                    cautionBtn_Riffs.setBackgroundImage(UIImage(named: "iosOKHaken.png"), forState: .Normal)
+                }
+                    
+                else{
+                    cautionBtn_Riffs.setBackgroundImage(UIImage(named: "iosCrossHaken.png"), forState: .Normal)
+                    
+                }
+                
+                if(nuPunkt.sharks){
+                    cautionBtn_Sharks.setBackgroundImage(UIImage(named: "iosOKHaken.png"), forState: .Normal)
+                }
+                    
+                else{
+                    cautionBtn_Sharks.setBackgroundImage(UIImage(named: "iosCrossHaken.png"), forState: .Normal)
+                    
+                }
+
             }
         }
         
