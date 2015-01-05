@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol SpotFilterDelegate {
-    func showSpotsWithSpecificFilter(filterType: String, isSwitchActive: Bool)
+    func showSpotsWithSpecificFilter(filterNames:[String], filterState:[Int], isSwitchActive: Bool)
     
 }
 
@@ -32,11 +32,11 @@ class Sidebar: NSObject {
     let _dataWaterType = watertype()
     
     var barWidth:CGFloat!
-    var centerNavigationController: UINavigationController!
     var animator:UIDynamicAnimator!
     var isSidebarOpen:Bool = false
     var switches  = [UISwitch]()
-    var names = [String]()
+    var filterNames = [String]()
+    var filterState = [Int]()
     var filterArray = Array<Array<String>>()
     
     override init() {
@@ -75,11 +75,10 @@ class Sidebar: NSObject {
     // Erzeugt die Daten für die Switches
     func getFilterData(){
         var filter = [String]()
-        
 
         
         filter.append("Favorit")
-        filter.append("Ja / Nein")
+        filter.append("Ja")
         filterArray.append(filter)
         filter.removeAll(keepCapacity: false)
         
@@ -97,19 +96,19 @@ class Sidebar: NSObject {
         filterArray.append(filter)
         filter.removeAll(keepCapacity: false)
         
-        filter.append("Strandart")
+        /*filter.append("Strandart")
         for var i = 0; i < _dataBeachtype.count; i++ {
             filter.append(_dataBeachtype[i])
         }
         filterArray.append(filter)
-        filter.removeAll(keepCapacity: false)
+        filter.removeAll(keepCapacity: false)*/
         
-        filter.append("Wellentyp")
+        /*filter.append("Wellentyp")
         for var i = 0; i < _dataWaveType.count; i++ {
             filter.append(_dataWaveType[i])
         }
         filterArray.append(filter)
-        filter.removeAll(keepCapacity: false)
+        filter.removeAll(keepCapacity: false)*/
         
         filter.append("Wassertiefe")
         for var i = 0; i < _dataWaterDepth.count; i++ {
@@ -125,12 +124,12 @@ class Sidebar: NSObject {
         filterArray.append(filter)
         filter.removeAll(keepCapacity: false)
         
-        filter.append("Wassertyp")
+        /*filter.append("Wassertyp")
         for var i = 0; i < _dataWaterType.count; i++ {
             filter.append(_dataWaterType[i])
         }
         filterArray.append(filter)
-        filter.removeAll(keepCapacity: false)
+        filter.removeAll(keepCapacity: false)*/
     }
     
     // Erzeugt die Switches
@@ -149,11 +148,13 @@ class Sidebar: NSObject {
                 
                 var filterLabel = UILabel(frame: CGRectMake(600, yPos, 200, 21))
                 filterLabel.text = item[i]
-                names.append(item[i])
+                filterNames.append(item[i])
+                filterState.append(1)
                 sidebarContainerView.addSubview(filterLabel)
                 
                 
                 var filterSwitch = UISwitch(frame:CGRectMake(700, yPos, 0, 0))
+                filterSwitch.on = true
                 sidebarContainerView.addSubview(filterSwitch)
                 filterSwitch.addTarget(self, action: Selector("stateChanged:"), forControlEvents: UIControlEvents.ValueChanged)
                 switches.append(filterSwitch)
@@ -167,10 +168,11 @@ class Sidebar: NSObject {
         if switchState.on {
             for var i = 0; i < switches.count; i++ {
                 if (switchState == switches[i]){
-                    println("Switch \(names[i]) ist an")
+                    println("Switch \(filterNames[i]) ist an")
                     // ToDo: Filtermethode einbinden
+                    filterState[i] = 1
                     if (filterDelegate != nil) {
-                        filterDelegate!.showSpotsWithSpecificFilter(names[i], isSwitchActive: true)
+                        filterDelegate!.showSpotsWithSpecificFilter(filterNames,filterState: filterState,isSwitchActive: true)
                     }
 
                 }
@@ -179,10 +181,11 @@ class Sidebar: NSObject {
         } else {
             for var i = 0; i < switches.count; i++ {
                 if (switchState == switches[i]){
-                    println("Switch \(names[i]) ist aus")
+                    println("Switch \(filterNames[i]) ist aus")
                     // ToDo: Filtermethode einbinden
+                    filterState[i] = 0
                     if (filterDelegate != nil) {
-                        filterDelegate!.showSpotsWithSpecificFilter(names[i], isSwitchActive: false)
+                        filterDelegate!.showSpotsWithSpecificFilter(filterNames,filterState: filterState,isSwitchActive: false)
                     }
 
                 }
