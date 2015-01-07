@@ -35,7 +35,6 @@
 		DEA8C93A1A10F8FA003C5761 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA8C9391A10F8FA003C5761 /* MapController.swift */; };
 		DEA8C93E1A10F90A003C5761 /* LocationEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA8C93D1A10F90A003C5761 /* LocationEditorView.swift */; };
 		DEA8C9421A10F91F003C5761 /* SidebarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA8C9411A10F91F003C5761 /* SidebarController.swift */; };
-		DEA8C9461A10F92D003C5761 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA8C9451A10F92D003C5761 /* SidebarView.swift */; };
 		DEAD7EC31A5B5452007A3A67 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEAD7EC21A5B5452007A3A67 /* Media.xcassets */; };
 		DECF2B621A56A8CD003F2862 /* thm.gpx in Resources */ = {isa = PBXBuildFile; fileRef = DECF2B611A56A8CD003F2862 /* thm.gpx */; };
 /* End PBXBuildFile section */
@@ -83,7 +82,6 @@
 		DEA8C9391A10F8FA003C5761 /* MapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
 		DEA8C93D1A10F90A003C5761 /* LocationEditorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationEditorView.swift; sourceTree = "<group>"; };
 		DEA8C9411A10F91F003C5761 /* SidebarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarController.swift; sourceTree = "<group>"; };
-		DEA8C9451A10F92D003C5761 /* SidebarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		DEAD7EC21A5B5452007A3A67 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Media.xcassets; path = Aloha/Images/Media.xcassets; sourceTree = "<group>"; };
 		DECF2B611A56A8CD003F2862 /* thm.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = thm.gpx; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -157,7 +155,6 @@
 			children = (
 				BCE989761A17A7F60051566F /* UIViewExtension.swift */,
 				DEA8C93D1A10F90A003C5761 /* LocationEditorView.swift */,
-				DEA8C9451A10F92D003C5761 /* SidebarView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -346,7 +343,6 @@
 				DEA8C93E1A10F90A003C5761 /* LocationEditorView.swift in Sources */,
 				DE7B4B261A0D0EF100FF1140 /* AppDelegate.swift in Sources */,
 				DEA8C9421A10F91F003C5761 /* SidebarController.swift in Sources */,
-				DEA8C9461A10F92D003C5761 /* SidebarView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
