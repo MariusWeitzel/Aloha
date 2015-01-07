@@ -11,7 +11,6 @@ import UIKit
 
 protocol SpotFilterDelegate {
     func showSpotsWithSpecificFilter(filterNames:[String], filterState:[Int], isSwitchActive: Bool)
-    
 }
 
 
@@ -75,7 +74,6 @@ class Sidebar: NSObject {
     // Erzeugt die Daten für die Switches
     func getFilterData(){
         var filter = [String]()
-
         
         filter.append("Favorit")
         filter.append("Ja")
@@ -95,20 +93,7 @@ class Sidebar: NSObject {
         }
         filterArray.append(filter)
         filter.removeAll(keepCapacity: false)
-        
-        /*filter.append("Strandart")
-        for var i = 0; i < _dataBeachtype.count; i++ {
-            filter.append(_dataBeachtype[i])
-        }
-        filterArray.append(filter)
-        filter.removeAll(keepCapacity: false)*/
-        
-        /*filter.append("Wellentyp")
-        for var i = 0; i < _dataWaveType.count; i++ {
-            filter.append(_dataWaveType[i])
-        }
-        filterArray.append(filter)
-        filter.removeAll(keepCapacity: false)*/
+ 
         
         filter.append("Wassertiefe")
         for var i = 0; i < _dataWaterDepth.count; i++ {
@@ -123,13 +108,6 @@ class Sidebar: NSObject {
         }
         filterArray.append(filter)
         filter.removeAll(keepCapacity: false)
-        
-        /*filter.append("Wassertyp")
-        for var i = 0; i < _dataWaterType.count; i++ {
-            filter.append(_dataWaterType[i])
-        }
-        filterArray.append(filter)
-        filter.removeAll(keepCapacity: false)*/
     }
     
     // Erzeugt die Switches
