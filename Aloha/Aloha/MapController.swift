@@ -23,19 +23,10 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
     var tempCoord: CLLocationCoordinate2D! // speichert die temporäre Koordinate
     var sidebar:Sidebar = Sidebar()
     
-//    var marker = GMSMarker()
-//    var surfMarker = GMSMarker()
-//    var currentSpotLatitude:Double = 0.0
-//    var currentSpotLongitude:Double = 0.0
     var addressText:String = "Adresse von Map"
-    var getNewAddress:String!{
-        get{
-            return addressText
-        }
-    }
     
     let locationManager = CLLocationManager() // sammelt Information der GPS-Daten der eigenen Position
-    let dataProvider = GoogleDataProvider() // Daten die zur Nutzung von Gmaps nötig sind
+  //  let dataProvider = GoogleDataProvider() // Daten die zur Nutzung von Gmaps nötig sind
     
     
     @IBOutlet weak var searchMarkerSwitch: UISwitch! // kontrolle über aktivierung von Suchpin und Adresslabel
@@ -66,7 +57,6 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
         // erzeugt Marker
         marker.position = CLLocationCoordinate2DMake(-33.86, 151.20)
         marker.snippet = "New Surfspot"
-       // marker.icon = UIImage(named: "icon_me")
         marker.appearAnimation = kGMSMarkerAnimationPop
         marker.map = nil
         
@@ -123,7 +113,7 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
                 
                 if (filterName == "Ja" && filterState[filterCounter] == 1 && localLocations[i].favorite == true){
                     locationState = true
-                } else if (filterName == "Ja" && filterState[filterCounter] == 0 && localLocations[i].favorite == true){
+                } else if (filterName == "Ja" && filterState[filterCounter] == 0 && localLocations[i].favorite == false){
                     locationState = false
                     break
                 }
@@ -226,7 +216,7 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
     // aktualisiert die Marker auf der Map
     @IBAction func refreshPlaces(sender: UIBarButtonItem) {
         loadSurfSpots()
-        fetchNearbyPlaces(mapView.camera.target)
+        refreshMap(mapView.camera.target)
     }
     
     // Ändert die Map Ansicht
@@ -255,7 +245,7 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
        
         geocoder.reverseGeocodeCoordinate(coordinate) { response , error in
             
-            self.adressLabel.unlock() // hier wird das Adressenlabel wieder zur Anzeige freigegen
+        
             
             if let address = response?.firstResult() {
                 
@@ -277,12 +267,7 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
 
         
     }
-    // locked die Adressansicht und macht bei änderung einen visuellen Effekt
-    func mapView(mapView: GMSMapView!, willMove gesture: Bool){
-        adressLabel.lock()
-    }
-    
-    
+        
     // registriert langes drücken zum erzeugen eines neuen Markers
     func mapView(mapView: GMSMapView!, didLongPressAtCoordinate longPressCoordinate: CLLocationCoordinate2D){
         
@@ -295,8 +280,8 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
     }
     
     // Übergang zum nächsten ViewController mittels Segue
-    // IMPORTANT: damit das Surfspot-Icon nachdem Speichern auf der Map angezeigt wird
-    // muss der Übergang mittels einer Segue erfolgen. Der Datentransfer erfolgt über
+    // damit das Surfspot-Icon nachdem Speichern auf der Map angezeigt wird
+    // erfolgt der Übergang mittels einer Segue. Der Datentransfer erfolgt über
     // ein Delegate, das in der LocationEditorView ausgelöst wird.
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "MapToLocSegue"){
@@ -319,7 +304,7 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
         return true
     }
     
-    // IMPORTANT: gehört zum Delegate-Vorgang. Nachdem in der LocationEditorView gespeichert wurde
+    // gehört zum Delegate-Vorgang. Nachdem in der LocationEditorView gespeichert wurde
     // wird diese Funktion ausgeführt die letztendlich das Anzeigen des Surfspots an der entsprechenden 
     // Koordinate übernimmt
     func createNewSurfSpotDidFinish(controller: LocationEditorView, coords: CLLocationCoordinate2D, isFavActive: Bool) {
@@ -373,7 +358,7 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
         }
     
     }
-    
+    // wird ausgeführt wenn in der Editorview auf Löschen gedrückt wurde
     func deleteSurfSpotDidFinish(controller: LocationEditorView, coords: CLLocationCoordinate2D) {
         
             // entferne die LocationEditorView
@@ -385,7 +370,7 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
                        
                         surfPlaces.removeAtIndex(i)
                         loadSurfSpots()
-                        fetchNearbyPlaces(coords)
+                        refreshMap(coords)
                         return
                     }
                 }
@@ -397,17 +382,12 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
         
         if status == .AuthorizedWhenInUse {
             
-//            println("authorisiert")
+
             locationManager.startUpdatingLocation()
             
             mapView.myLocationEnabled = true // erzeugt einen blauen Punkt, wo sich der User befindet
             mapView.settings.myLocationButton = true // erzeugt einen Button auf der Map zum zentrieren der Location
-            
         }
-//        else{
-//            locationManager.delegate = self
-//            locationManager.requestWhenInUseAuthorization()
-//        }
     }
     
     // wird aufgerufen wenn LocationManager neue Lokalisierungsdaten erhalten hat
@@ -420,31 +400,13 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
             
 //            println("lokalisierung abgschlossen")
             locationManager.stopUpdatingLocation()
-            fetchNearbyPlaces(location.coordinate)
+            refreshMap(location.coordinate)
         }
 
     }
     
-    // kalkuliert den sichtbaren Radius der MapView - für die Filterung von Surfspots im Radius
-    var mapRadius: Double {
-        get {
-            let region = mapView.projection.visibleRegion()
-            let center = mapView.camera.target
-            
-            let north = CLLocation(latitude: region.farLeft.latitude, longitude: center.longitude)
-            let south = CLLocation(latitude: region.nearLeft.latitude, longitude: center.longitude)
-            let west = CLLocation(latitude: center.latitude, longitude: region.farLeft.longitude)
-            let east = CLLocation(latitude: center.latitude, longitude: region.farRight.longitude)
-            
-            let verticalDistance = north.distanceFromLocation(south)
-            let horizontalDistance = west.distanceFromLocation(east)
-            return max(horizontalDistance, verticalDistance)*0.5
-        }
-    }
-    
-    // FIXME: Filtersuche muss hier noch gefixt werden, je nach dem wie Surfspotsgespeichert werden, in Array oder Places
-
-    func fetchNearbyPlaces(coordinate: CLLocationCoordinate2D) {
+   
+    func refreshMap(coordinate: CLLocationCoordinate2D) {
         // lösche aller Marker
         mapView.clear()
         marker.map = nil
@@ -452,19 +414,7 @@ class MapController: UIViewController,  CLLocationManagerDelegate,  GMSMapViewDe
         for spot: GMSMarker in surfPlaces{
             spot.map = mapView
         }
-        // sucht in der Nähe nach gefilterten Plätzen
-        
-                /*
-        dataProvider.fetchPlacesNearCoordinate(coordinate, radius:mapRadius, types: searchedTypes) { //surfPlaces in
-            for place: GooglePlace in places {
-                // erzeugt für jeden gefundenen Platz einen Marker an der Stelle
-                let marker = PlaceMaker(place: place)
-                // Anzeige des Markers
-                marker.map = self.mapView
-            }
-        }
-*/
-    }
+         }
     
     
     override func didReceiveMemoryWarning() {

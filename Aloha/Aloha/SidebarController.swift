@@ -77,7 +77,7 @@ class Sidebar: NSObject {
         var filter = [String]()
 
         
-        filter.append("Favorit")
+        filter.append("Alle einblenden")
         filter.append("Ja")
         filterArray.append(filter)
         filter.removeAll(keepCapacity: false)
