@@ -17,9 +17,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_me" translatesAutoresizingMaskIntoConstraints="NO" id="LD1-cT-bWR">
-                                <rect key="frame" x="369" y="485" width="30" height="55"/>
-                            </imageView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yIR-2Y-LO4" customClass="GMSMapView">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -682,7 +679,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="icon_me" width="30" height="55"/>
         <image name="iosChoiceCircle" width="151" height="147"/>
     </resources>
 </document>

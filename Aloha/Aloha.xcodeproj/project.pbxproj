@@ -23,7 +23,6 @@
 		BCE989261A15099D0051566F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE989251A15099D0051566F /* SystemConfiguration.framework */; };
 		BCE9896F1A17A6A80051566F /* GoogleDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE9896D1A17A6A70051566F /* GoogleDataProvider.swift */; };
 		BCE989701A17A6A80051566F /* GooglePlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE9896E1A17A6A80051566F /* GooglePlace.swift */; };
-		BCE989791A17A7F60051566F /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE989761A17A7F60051566F /* UIViewExtension.swift */; };
 		DE54748D1A110BF800AAE49F /* Location_Plist_test.plist in Resources */ = {isa = PBXBuildFile; fileRef = DE54748C1A110BF800AAE49F /* Location_Plist_test.plist */; };
 		DE7B4B261A0D0EF100FF1140 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7B4B251A0D0EF100FF1140 /* AppDelegate.swift */; };
 		DE7B4B2B1A0D0EF100FF1140 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE7B4B291A0D0EF100FF1140 /* Main.storyboard */; };
@@ -66,7 +65,6 @@
 		BCE989251A15099D0051566F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		BCE9896D1A17A6A70051566F /* GoogleDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleDataProvider.swift; sourceTree = "<group>"; };
 		BCE9896E1A17A6A80051566F /* GooglePlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlace.swift; sourceTree = "<group>"; };
-		BCE989761A17A7F60051566F /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		DE54748C1A110BF800AAE49F /* Location_Plist_test.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Location_Plist_test.plist; sourceTree = "<group>"; };
 		DE7B4B201A0D0EF100FF1140 /* Aloha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Aloha.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE7B4B241A0D0EF100FF1140 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -153,7 +151,6 @@
 		BCE989721A17A71E0051566F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				BCE989761A17A7F60051566F /* UIViewExtension.swift */,
 				DEA8C93D1A10F90A003C5761 /* LocationEditorView.swift */,
 			);
 			name = Views;
@@ -337,7 +334,6 @@
 				DEA8C93A1A10F8FA003C5761 /* MapController.swift in Sources */,
 				BCE9896F1A17A6A80051566F /* GoogleDataProvider.swift in Sources */,
 				DEA8C9321A10F8C3003C5761 /* Location.swift in Sources */,
-				BCE989791A17A7F60051566F /* UIViewExtension.swift in Sources */,
 				BCE989701A17A6A80051566F /* GooglePlace.swift in Sources */,
 				DEA8C9341A10F8E1003C5761 /* Vault.swift in Sources */,
 				DEA8C93E1A10F90A003C5761 /* LocationEditorView.swift in Sources */,

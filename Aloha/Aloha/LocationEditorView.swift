@@ -287,6 +287,8 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
         
 // Do any additional setup after loading the view, typically from a nib.
         
+        // setzt die checkbuttons images für die Gefahren nachdem sie einmal gespeichert werden
+        // und aktiviert den löschen button
         
         for var i:Int=0; i < Locations.count; i++ {
             if (Locations[i].lat == self.currentCoordinate.latitude && Locations[i].long == self.currentCoordinate.longitude) {
@@ -487,7 +489,6 @@ class LocationEditorView: UIViewController, UIPickerViewDataSource, UIPickerView
                 self._outAdress.text = newAddress
             }
         }
-//        println(newAddress)
         return newAddress
     }
     
