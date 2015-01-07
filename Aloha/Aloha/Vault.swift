@@ -12,9 +12,6 @@ import Foundation
 let spotSeperator = "#"
 //SpotEigenschaften voneinander trennen
 let spotItemSeperator = "|"
-//einzelne Werte in Arrays trennen
-//FIXME: wahrscheinlich obsolet
-//let itemSeperator = "\n"
 
 var Locations = [Location]()
 
@@ -27,33 +24,27 @@ class Vault: UIViewController {
             Locations.append(punkt!)
         }
         var saveStr = ""
-        
-        println("beim Speichern sind es \(Locations.count) Punkte")
+//        println("beim Speichern sind es \(Locations.count) Punkte")
         
         // Locations auseinander fuddeln
         for spot in Locations {
             saveStr += spot.lat.stringValue + spotItemSeperator
             saveStr += spot.long.stringValue + spotItemSeperator
             
-            println("Name beim speichern: \(spot.name)")
-            //FIXME: spot & itemseperator aus Name und Notizen entfernen -> safe
+//            println("Name beim speichern: \(spot.name)")
+            // spot & itemseperator aus Name entfernen -> safer
             if countElements(spot.name) > 0 {
-            saveStr += spot.name + spotItemSeperator
-            }
-            else {
-                saveStr += " " + spotItemSeperator
-            }
+                var cleanedName = spot.name.stringByReplacingOccurrencesOfString(spotItemSeperator, withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                cleanedName = cleanedName.stringByReplacingOccurrencesOfString(spotSeperator, withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                saveStr += cleanedName + spotItemSeperator }
+            else { saveStr += " " + spotItemSeperator }
 
             if spot.favorite { saveStr += "1" }
             else { saveStr += "0" }
             saveStr += spotItemSeperator
 
-            if countElements(spot.adress) > 0 {
-                saveStr += spot.adress + spotItemSeperator
-            }
-            else {
-                saveStr += " " + spotItemSeperator
-            }
+            if countElements(spot.adress) > 0 { saveStr += spot.adress + spotItemSeperator }
+            else { saveStr += " " + spotItemSeperator }
             
             //waterproperties
             saveStr += String(spot._wavetype) + spotItemSeperator
@@ -88,19 +79,14 @@ class Vault: UIViewController {
             else { saveStr += "0" }
             saveStr += spotItemSeperator
             
-            //TODO: in ner sinnvollenweise umbauen
-            //OFFER: wie bei Favorit nen Switch für Haie & Riffs machen (erstmal)
-            //for item in spot.possibleDangers { saveStr += item + itemSeperator }
-            
-            
             saveStr += String(spot._difficulty) + spotItemSeperator
 
+            // spot & itemseperator aus Notizen entfernen -> safer
             if countElements(spot.notes) > 0 {
-                saveStr += spot.notes + spotItemSeperator
-            }
-            else {
-                saveStr += " " + spotItemSeperator
-            }
+                var cleanedNotes = spot.notes.stringByReplacingOccurrencesOfString(spotItemSeperator, withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                cleanedNotes = cleanedNotes.stringByReplacingOccurrencesOfString(spotSeperator, withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                saveStr += cleanedNotes + spotItemSeperator }
+            else { saveStr += " " + spotItemSeperator }
 
             saveStr += spotSeperator;
         }
@@ -111,7 +97,7 @@ class Vault: UIViewController {
         
         if (path != nil) {
             saveStr.writeToFile(path!, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
-            println("Daten \"\(saveStr)\" geschrieben.")
+//            println("Daten \"\(saveStr)\" geschrieben.")
         }
     }
     
@@ -120,8 +106,7 @@ class Vault: UIViewController {
         let dirs = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
         
         let path = dirs?[0].stringByAppendingPathComponent("locations.csv")
-        
-        println("path: \(path)")
+//        println("path: \(path)")
         
         var checkValidation = NSFileManager.defaultManager()
         
@@ -130,18 +115,15 @@ class Vault: UIViewController {
             
             //FIXME: spotSeperator (die Konstante) wirft an der Stelle nen Fehler!
             let splittedLocations = split(loadedStr, {$0=="#"})
-            println("splitted Locations: \(splittedLocations.count)")
+//            println("splitted Locations: \(splittedLocations.count)")
             for location in splittedLocations {
-                println("StringLocation: \(location)")
+//                println("StringLocation: \(location)")
                 var pointItems = split(location, {$0=="|"})
-                //FIXME: ohne die Zeile crachsts aufm iPad, aber zeigt die Punkte nachm starten nicht mehr an?! o.O
-                // iPad Bugfix - kP warum der Simulator das "überlebt"
                 //DEBUG:
-                println("Anzahl pointItems: \(pointItems.count)")
+//                println("Anzahl pointItems: \(pointItems.count)")
                 if pointItems.count < 19 { continue }
                 var nuPunkt = Location()
                 
-                //FIXME: wenn das schief geht, is halt direkt rum :/
                 nuPunkt.lat = (pointItems[0] as NSString).doubleValue
                 nuPunkt.long = (pointItems[1] as NSString).doubleValue
                 
@@ -179,58 +161,25 @@ class Vault: UIViewController {
                 if pointItems[16].toInt()! == 1 { nuPunkt.cautionZX = true }
                 else { nuPunkt.cautionZX = false }
             
-
                 nuPunkt._difficulty = pointItems[17].toInt()!
                 
                 nuPunkt.notes = pointItems[18]
                 
-                println("\(nuPunkt.name)")
+//                println("\(nuPunkt.name)")
                 
                 Locations.append(nuPunkt)
             }
-            
-            
 //            println("\"\(loadedStr)\" geladen");
         }
         else {
             println("Laden fehlgeschlagen")
         }
         
-        println(Locations.count)
+//        println(Locations.count)
         
-        for x in Locations {
-            println(x.name)
-        }
-        
-        //FIXME: waaaaaas?
-        //loadedStr.componentsSeparatedByString(spotSeperator)
-        //TODO: String aus gespeicherter Datei wieder aufsplitten
-        
-        // Locations auseinander fuddeln & als Array speichern
-        /*for spot in Locations {
-        saveStr += spot.name + spotItemSeperator
-        
-        if spot.favorite { saveStr += "1" }
-        else { saveStr += "0" }
-        saveStr = spotItemSeperator
-        
-        saveStr += spot.adress
-        
-        for item in spot.tags { saveStr += item + itemSeperator }
-        
-        for item in spot.waterproperties { saveStr += item + itemSeperator }
-        
-        for item in spot.coastproperties { saveStr += item + itemSeperator }
-        
-        saveStr += spot.notes
-        
-        for item in spot.possibleDangers { saveStr += item + itemSeperator }
-        
-        saveStr += spot.difficulty
-        }*/
-        
-        
-
+//        for x in Locations {
+//            println(x.name)
+//        }
     }
     
     class func getLocations() -> [Location] {

@@ -35,13 +35,9 @@
 		DE7B4B3C1A0D0EF100FF1140 /* AlohaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7B4B3B1A0D0EF100FF1140 /* AlohaTests.swift */; };
 		DEA8C9321A10F8C3003C5761 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA8C9311A10F8C3003C5761 /* Location.swift */; };
 		DEA8C9341A10F8E1003C5761 /* Vault.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA8C9331A10F8E1003C5761 /* Vault.swift */; };
-		DEA8C9361A10F8E7003C5761 /* MapModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA8C9351A10F8E7003C5761 /* MapModel.swift */; };
 		DEA8C93A1A10F8FA003C5761 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA8C9391A10F8FA003C5761 /* MapController.swift */; };
-		DEA8C93C1A10F903003C5761 /* LocationEditorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA8C93B1A10F903003C5761 /* LocationEditorController.swift */; };
 		DEA8C93E1A10F90A003C5761 /* LocationEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA8C93D1A10F90A003C5761 /* LocationEditorView.swift */; };
-		DEA8C9401A10F914003C5761 /* LocationEditorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA8C93F1A10F914003C5761 /* LocationEditorModel.swift */; };
 		DEA8C9421A10F91F003C5761 /* SidebarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA8C9411A10F91F003C5761 /* SidebarController.swift */; };
-		DEA8C9441A10F928003C5761 /* SiderbarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA8C9431A10F928003C5761 /* SiderbarModel.swift */; };
 		DEA8C9461A10F92D003C5761 /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA8C9451A10F92D003C5761 /* SidebarView.swift */; };
 		DEAD7EC31A5B5452007A3A67 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEAD7EC21A5B5452007A3A67 /* Media.xcassets */; };
 		DECF2B621A56A8CD003F2862 /* thm.gpx in Resources */ = {isa = PBXBuildFile; fileRef = DECF2B611A56A8CD003F2862 /* thm.gpx */; };
@@ -90,13 +86,9 @@
 		DE7B4B3B1A0D0EF100FF1140 /* AlohaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlohaTests.swift; sourceTree = "<group>"; };
 		DEA8C9311A10F8C3003C5761 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		DEA8C9331A10F8E1003C5761 /* Vault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vault.swift; sourceTree = "<group>"; };
-		DEA8C9351A10F8E7003C5761 /* MapModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapModel.swift; sourceTree = "<group>"; };
 		DEA8C9391A10F8FA003C5761 /* MapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
-		DEA8C93B1A10F903003C5761 /* LocationEditorController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationEditorController.swift; sourceTree = "<group>"; };
 		DEA8C93D1A10F90A003C5761 /* LocationEditorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationEditorView.swift; sourceTree = "<group>"; };
-		DEA8C93F1A10F914003C5761 /* LocationEditorModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationEditorModel.swift; sourceTree = "<group>"; };
 		DEA8C9411A10F91F003C5761 /* SidebarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarController.swift; sourceTree = "<group>"; };
-		DEA8C9431A10F928003C5761 /* SiderbarModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SiderbarModel.swift; sourceTree = "<group>"; };
 		DEA8C9451A10F92D003C5761 /* SidebarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		DEAD7EC21A5B5452007A3A67 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Media.xcassets; path = Aloha/Images/Media.xcassets; sourceTree = "<group>"; };
 		DECF2B611A56A8CD003F2862 /* thm.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = thm.gpx; sourceTree = "<group>"; };
@@ -162,9 +154,6 @@
 				DEA8C9331A10F8E1003C5761 /* Vault.swift */,
 				BCE9896D1A17A6A70051566F /* GoogleDataProvider.swift */,
 				BCE9896E1A17A6A80051566F /* GooglePlace.swift */,
-				DEA8C9351A10F8E7003C5761 /* MapModel.swift */,
-				DEA8C93F1A10F914003C5761 /* LocationEditorModel.swift */,
-				DEA8C9431A10F928003C5761 /* SiderbarModel.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -184,7 +173,6 @@
 		BCE989731A17A7260051566F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				DEA8C93B1A10F903003C5761 /* LocationEditorController.swift */,
 				DEA8C9411A10F91F003C5761 /* SidebarController.swift */,
 				DEA8C9391A10F8FA003C5761 /* MapController.swift */,
 			);
@@ -361,20 +349,16 @@
 			files = (
 				BCCEA4671A1973D300338362 /* PlaceMaker.swift in Sources */,
 				DEA8C93A1A10F8FA003C5761 /* MapController.swift in Sources */,
-				DEA8C9361A10F8E7003C5761 /* MapModel.swift in Sources */,
 				BCE9896F1A17A6A80051566F /* GoogleDataProvider.swift in Sources */,
 				DEA8C9321A10F8C3003C5761 /* Location.swift in Sources */,
-				DEA8C93C1A10F903003C5761 /* LocationEditorController.swift in Sources */,
 				BCE989791A17A7F60051566F /* UIViewExtension.swift in Sources */,
 				BCE989701A17A6A80051566F /* GooglePlace.swift in Sources */,
 				DEA8C9341A10F8E1003C5761 /* Vault.swift in Sources */,
-				DEA8C9441A10F928003C5761 /* SiderbarModel.swift in Sources */,
 				DEA8C93E1A10F90A003C5761 /* LocationEditorView.swift in Sources */,
 				BCE989771A17A7F60051566F /* MarkerInfoView.swift in Sources */,
 				DE7B4B261A0D0EF100FF1140 /* AppDelegate.swift in Sources */,
 				DEA8C9421A10F91F003C5761 /* SidebarController.swift in Sources */,
 				DEA8C9461A10F92D003C5761 /* SidebarView.swift in Sources */,
-				DEA8C9401A10F914003C5761 /* LocationEditorModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -32,8 +32,6 @@ public struct Location {
     //freie Notizen zu diesem Punkt
     var notes: String
     
-    //FIXME: welche Form hat das genau?
-//    var possibleDangers: [String]
     var sharks: Bool
     var riffs: Bool
     var jellyfisch: Bool
@@ -41,7 +39,7 @@ public struct Location {
     var cautionXY: Bool
     var cautionZX: Bool
     
-    //Index für ausgewähltes struct difficulty
+    //Index für ausgewählte Schwierigkeit aus dem difficulty struct analog zu den waterproperties
     var _difficulty: Int
     
     init() {
@@ -50,13 +48,10 @@ public struct Location {
         name = ""
         favorite = false
         adress = ""
-//        tags = []
-        //Standardwerte annehmend
         _wavetype = 0
         _waterdepth = 0
         _watertemperature = 0
         _watertype = 0
-        //Standardwert (Flachküste) annehmend
         _coastproperties = 0
         _beachtype = 0
         notes = " "
@@ -83,9 +78,7 @@ public struct coastproperties {
         get {
             return coastproperties[index]
         }
-        
     }
-
 }
 
 public struct difficulty {
@@ -172,8 +165,6 @@ public struct watertype {
             // perform a suitable setting action here
         }
     }
-    
-
 }
 
 public struct beachtype {
@@ -187,7 +178,6 @@ public struct beachtype {
         get {
             return beachtype[index]
         }
-        
     }
 }
 
